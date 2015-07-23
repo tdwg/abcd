@@ -19,4 +19,4 @@ Apart from the GBIF and BioCASE networks, the potential for the application of A
 
 ## Preferred citation
 
-> Access to Biological Collections Data task group. 2007. Access to Biological Collection Data (ABCD), Release 2.06. Biodiversity Information Standards (TDWG) http://www.tdwg.org/standards/115
+> Access to Biological Collections Data task group. 2007. Access to Biological Collection Data (ABCD), Version 2.06. Biodiversity Information Standards (TDWG) http://www.tdwg.org/standards/115

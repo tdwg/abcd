@@ -1,6 +1,6 @@
 # Access to Biological Collection Data (ABCD)
 
-* **Download**: [Download](ABCD_v206.html)
+* **Download**: [Download](https://github.com/tdwg/abcd/archive/master.zip)
 * **Status**: TDWG current (2005) standard
 * **Category**: Technical specification
 * **Permanent URL**: http://www.tdwg.org/standards/115

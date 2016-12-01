@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.tdwg.org/schemas/abcd/dev" targetNamespace="http://www.tdwg.org/schemas/abcd/dev" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="ABCD_TypeLibrary.xsd"/>
+	<xs:complexType name="BotanicalGardenUnit">
+		<xs:annotation>
+			<xs:documentation>Elements specific to units from botanical gardens</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AccessionSpecimenNumbers" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Minimum numbers of individuals the garden is holding under the UnitID.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AccessionStatus" type="xs:byte" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Current status (current or not current) of the accession in the garden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LocationInGarden" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Current location of the living plant in the botanical garden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AccessionMaterialType" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of material the current living accession is composed of.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Hardiness" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A flag indicating that the accession is grown outdoors in the botanical garden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProvenanceCategory" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A code to indicate the provenance of the accession  [ITF-2].</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PropagationHistoryCode" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A code to indicate the nature of the production of the plant material being accessioned, for use in association with the element ProvenanceCategory [ITF-2]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AccessionLineage" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The purpose of this element is to trace the lineage of an accession to either one or two immediate parent unit ID's.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DonorCategory" type="xs:byte" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A code to indicate the type of the immediate donor from which the accession was obtained. This may not be necessarily the original collector of wild material. [ITF-2]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Cultivation" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Allows for cultivation information to be passed as free text in order to help the receiving garden care for the transferred accession [ITF-2] or to record the garden's experience made with this accession.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PlantingDate" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date the plant was planted at its current location in the botanical garden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Propagation" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Allows for information about any propagation requirements to be passed as free text in order to help the receiving garden propagate the transferred accession [ITF-2] or to record the garden's experience made with this accession.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Perennation" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A code to indicate the means of perennation, providing a means of noting living plant accessions that require regular curatorial monitoring [ITF-2].</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BreedingSystem" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A code to indicate the breeding system of the accession [ITF-2].</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IPEN" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unique number given to plant materials accessioned in conformance with the rules of the International Plant Exchange Network (see http://www.bgci.org/abs/ipen_numbers.html).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

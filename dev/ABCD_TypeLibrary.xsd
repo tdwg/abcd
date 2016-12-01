@@ -1,0 +1,506 @@
+<!-- edited with XMLSpy v2005 sp2 U (http://www.altova.com) by Walter Berendsohn (Freie Universität Berlin) -->
+<!-- edited with XMLSPY v2004 rel. 4 U (http://www.xmlspy.com) by Walter Berendsohn (Freie Universität Berlin) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.tdwg.org/schemas/abcd/dev" targetNamespace="http://www.tdwg.org/schemas/abcd/dev" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">Types that may be used for different domains (descriptions, taxonomy, specimen collections, etc.):</xs:documentation>
+	</xs:annotation>
+	<xs:annotation>
+		<xs:documentation>Many of the types or elements within the types are resulting from attemtps to standardize usage between ABCD and SDD and many originate from Gregor Hagedorn's work on the UBIF schema.  </xs:documentation>
+	</xs:annotation>
+	<xs:annotation>
+		<xs:documentation>However, note that this is work in progress, so there may be considerable differences between types with the same names in UBIF/SDD and ABCD. </xs:documentation>
+	</xs:annotation>
+	<xs:annotation>
+		<xs:documentation>==============================================================================</xs:documentation>
+	</xs:annotation>
+	<xs:annotation>
+		<xs:documentation xml:lang="en">Basic generic types</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="String">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-us">normalized string required to contain at least 1 character (this removes the xml string anomaly, i. e. either element/attribute may be optional, but if they are required the content may not be an empty string)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:normalizedString">
+			<xs:minLength value="1" fixed="false"/>
+			<xs:whiteSpace value="collapse" fixed="false"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String50">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-us">normalized string restricted to 1..50 character length to be used for abbreviations (the recommended length of abbreviations is usually much shorter, but 50 characters should be a </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:normalizedString">
+			<xs:minLength value="1" fixed="true"/>
+			<xs:maxLength value="50" fixed="true"/>
+			<xs:whiteSpace value="collapse" fixed="false"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String255">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-us">normalized string restricted to 1..255 character length (i. e. required, may not be empty string)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:normalizedString">
+			<xs:minLength value="1" fixed="true"/>
+			<xs:maxLength value="255" fixed="true"/>
+			<xs:whiteSpace value="collapse" fixed="false"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:annotation>
+		<xs:documentation xml:lang="en">Complex types that add attributes language or preferred to the simple types String, String255, anyURI:</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="StringL">
+		<xs:annotation>
+			<xs:documentation>String (i. e. xs:string with minimum length=1) extended with language attribute</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="String">
+				<xs:attribute name="language" type="xs:language" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StringL255">
+		<xs:annotation>
+			<xs:documentation>String255 (i.e. xs:string with length 1-255), extended with language attribute</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="String">
+				<xs:attribute name="language" type="xs:language" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StringP">
+		<xs:annotation>
+			<xs:documentation>String (i. e. xs:string with minimum length=1) extended with preferred attribute</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="String">
+				<xs:attribute name="preferred" type="xs:boolean" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StringP255">
+		<xs:annotation>
+			<xs:documentation>String255 (i.e. xs:string with length 1-255), extended with preferred attribute</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="String255">
+				<xs:attribute name="preferred" type="xs:boolean" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StringLP">
+		<xs:annotation>
+			<xs:documentation>String (i. e. xs:string with minimum length=1) extended with language and preferred attribute</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="String">
+				<xs:attribute name="language" type="xs:language" use="optional"/>
+				<xs:attribute name="preferred" type="xs:boolean" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StringLP255">
+		<xs:annotation>
+			<xs:documentation>String255 (i.e. xs:string with length 1-255), extended with language and preferred attribute</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="String255">
+				<xs:attribute name="language" type="xs:language" use="optional"/>
+				<xs:attribute name="preferred" type="xs:boolean" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="anyUriP">
+		<xs:annotation>
+			<xs:documentation>xs:anyURI extended with Preferred attribute</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:anyURI">
+				<xs:attribute name="preferred" type="xs:boolean" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:annotation>
+		<xs:documentation>Date and Time</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="DateTimeISO">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The date and time expressed in a way conforming to a subset of ISO 8601</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d\d\d\d(\-(0[1-9]|1[012])(\-((0[1-9])|1\d|2\d|3[01])(T(0\d|1\d|2[0-3])(:[0-5]\d){0,2})?)?)?|\-\-(0[1-9]|1[012])(\-(0[1-9]|1\d|2\d|3[01]))?|\-\-\-(0[1-9]|1\d|2\d|3[01])"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DateTime">
+		<xs:annotation>
+			<xs:documentation>Temporal aspects of an event or activity.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:annotation>
+				<xs:documentation/>
+			</xs:annotation>
+			<xs:element name="DateText" type="String" id="datetext" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The date in text format</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TimeZone" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The time zone to which the time-of-day data refer </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ISODateTimeBegin" type="DateTimeISO" id="isodate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The exact date (and time) or beginning of a period, expressed in a modified ISO/ANSI 8601 standard structured format</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DayNumberBegin" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Julian day number in the year for the exact date or for the beginning day of a period</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TimeOfDayBegin" type="xs:time" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Time of day in hours from midnight for an exact point in time or for the beginning of a time period. This is also covered by ISODateTimeBegin, except in cases when the date is not known</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ISODateTimeEnd" type="DateTimeISO" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The end of a period expressed in a modified ISO/ANSI 8601 standard structured format</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DayNumberEnd" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Julian day number of the last day in a period.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TimeOfDayEnd" type="xs:time" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Time of day in hours from midnight for the end of a time period. This is also covered by ISODateTimeEnd, except in cases when the date is not known.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PeriodExplicit" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Set to True if the event takes place for the period indicated, set to false if it occurs at some point of time during the period, not filled if unknown or no period specified.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:annotation>
+		<xs:documentation>Intellectual Property Rights (IPR)</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="Statement">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-us">Text, optional Details (both free-form text) and optional URI.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Text" type="String">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">A concise representation of a statement, recommended to be as short as possible, but actual length is unconstrained.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Details" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Optional text of unconstrained length, elaborating details of the ShortText</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URI" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">An optional resource on the net providing details on the statement (may be used as an alternative to the long text).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="language" type="xs:language" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="IPRStatements">
+		<xs:annotation>
+			<xs:documentation>A sequence of statements related to Intellectual Property Rights, credit and acknoledgement. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IPRDeclarations" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for one to several statements, normally representing different language representations of the same content. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IPRDeclaration" type="Statement" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Used where the IPR declaration cannot be parsed into the specific items or for forms of IPR declaration not yet covered  (e.g. database rights),</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Copyrights" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for one to several statements, normally representing different language representations of the same content. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Copyright" type="Statement" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Copyright may include the information that the data has been released to the public domain.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Licenses" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for one to several statements, normally representing different language representations of the same content. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="License" type="Statement" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>To be used if data are placed under a public license (GPL, GFDL, OpenDocument). Placing data under a public license while maintaining copyright is recommended!</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TermsOfUseStatements" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for one to several statements, normally representing different language representations of the same content. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TermsOfUse" type="Statement" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Defines conditions under which the data may be analised, distributed or changed. "Terms of use" includes concepts like "Usage conditions" and "Specific Restrictions". For consistency, this should better be named "TermsOfUseStatement".</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Disclaimers" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for one to several statements, normally representing different language representations of the same content. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Disclaimer" type="Statement" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Disclaimer statement, e. g. concerning responsibility for data quality or legal implications.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Acknowledgements" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for one to several statements, normally representing different language representations of the same content. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Acknowledgement" type="Statement" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A free form text acknowledging support (e. g. grant money, help, permission to reuse published material, etc.)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Citations" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for one to several statements, normally representing different language representations of the same content. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Citation" type="Statement" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Indicates how this dataset or record should be attributed if used [OBIF 1.0]</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:annotation>
+		<xs:documentation>Multimedia</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="MultiMediaObject">
+		<xs:annotation>
+			<xs:documentation>Elements to describe digital images, sound recordings, etc. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identifier for the multimedia object. May be a filename.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FileURI" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Universal Resource Identifier of the underlying multimedia file, i.e. "naked" path to electronic source of multimedia object (e.g. web address). </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ProductURI" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Universal Resource Identifier  of an electronic source of multimedia object including HTML, Javascript or similar means deliver rendered output.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Context" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The context of the object in relation to the specimen or observation. E.g. image of entire specimen, sound recording the observation is based on, image of original valid publication, etc. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Format" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Code or descriptive term for file or object format e.g. jpg, pcx, tiff for digital images; 16mm, beta video, AVI, mpg for moving images; transparency, print for photographs etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ImageSize" type="ImageSize" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Image size in pixels x pixels.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ImageResolution" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Resolution expressed in dots per inch. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FileSize" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Size in Kb of the file referred to by URI or filename.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IPR" type="IPRStatements" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Intellectual Property Rights relating specifically to the image.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comment" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text of formatted text (rtf) description of the feature - not controlled length e.g. often a memo field</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CreatedDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date the object was created.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Creator" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identifier, e.g. name or other id, of (technical) personnel who has taken the image. Does not imply copyrights or other rights.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CaptureEquipment" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Equipment used to create this multimedia object.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ImageColorSpace" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>## Element under discussion ## See Bob Morris' comments under http://efgblade.cs.umb.edu/twiki/bin/view/BDEI/ColorManagement    </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Profile_Name" type="String" minOccurs="0"/>
+						<xs:element name="Profile_Ref" type="xs:anyURI" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ImageSize">
+		<xs:sequence>
+			<xs:element name="Width" type="xs:positiveInteger">
+				<xs:annotation>
+					<xs:documentation>Picture width in pixel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Height" type="xs:positiveInteger">
+				<xs:annotation>
+					<xs:documentation>Picture height in pixel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:annotation>
+		<xs:documentation>Various</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="InstitutionCode">
+		<xs:annotation>
+			<xs:documentation>An abbreviated designation of an institution.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="RecordBasisEnum">
+		<xs:annotation>
+			<xs:documentation>A standard designator for the nature of the object of the record.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:Name">
+			<xs:enumeration value="PreservedSpecimen"/>
+			<xs:enumeration value="LivingSpecimen"/>
+			<xs:enumeration value="FossileSpecimen"/>
+			<xs:enumeration value="OtherSpecimen"/>
+			<xs:enumeration value="HumanObservation"/>
+			<xs:enumeration value="MachineObservation"/>
+			<xs:enumeration value="DrawingOrPhotograph"/>
+			<xs:enumeration value="MultimediaObject"/>
+			<xs:enumeration value="AbsenceObservation"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SexCodeEnum">
+		<xs:annotation>
+			<xs:documentation> Sex of the organism (Male, Female, Unknown, Not applicable (e.g. for a fungus in a herbarium), MiXed.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:Name">
+			<xs:enumeration value="M"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="U"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="X"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="positiveDouble">
+		<xs:annotation>
+			<xs:documentation>from http://rs.tdwg.org/dwc/basetypes.xsd to support compatibility with DwC Spatial Extensions</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double">
+			<xs:minExclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="decimalLatitudeDataType">
+		<xs:annotation>
+			<xs:documentation>from http://rs.tdwg.org/dwc/basetypes.xsd to support compatibility with DwC Spatial Extensions</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="-90"/>
+			<xs:maxInclusive value="90"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="decimalLongitudeDataType">
+		<xs:annotation>
+			<xs:documentation>from http://rs.tdwg.org/dwc/basetypes.xsd to support compatibility with DwC Spatial Extensions</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="-180"/>
+			<xs:maxInclusive value="180"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="spatialFitDataType">
+		<xs:annotation>
+			<xs:documentation>from http://rs.tdwg.org/dwc/basetypes.xsd to support compatibility with DwC Spatial Extensions</xs:documentation>
+		</xs:annotation>
+		<xs:union>
+			<xs:simpleType>
+				<xs:restriction base="xs:double">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="0"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:double">
+					<xs:minInclusive value="1"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="undefined"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+</xs:schema>

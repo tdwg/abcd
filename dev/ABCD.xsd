@@ -1,0 +1,1493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns="http://www.tdwg.org/schemas/abcd/dev" 
+	targetNamespace="http://www.tdwg.org/schemas/abcd/dev" 
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified" 
+	version="2.06DEV">
+
+<!--
+
+   WARNING !!!
+   
+   This is a developer version of ABCD.
+   It's work in progress and therefore subject to changes at any time.  
+   For production usage please use an officially released version of ABCD which can be found at
+
+   http://rs.tdwg.org/abcd/
+
+   Current ongoing work is in preparation of v. 2.06c from the (unreleased) v. 2.06b
+   For changes made as against the TDWG standard version 2.06 see http://ww3.bgbm.org/abcddocs/InterimVersion206a
+   These changes HAVE NOT been documented in the CVS under RS.TDWG.ORG.ABCD.DEV!
+
+-->
+	<xs:include schemaLocation="ABCD_TypeLibrary.xsd"/>
+	<xs:include schemaLocation="Bibliography.xsd"/>
+	<xs:include schemaLocation="Contacts.xsd"/>
+	<xs:include schemaLocation="Metadata.xsd"/>
+	<xs:include schemaLocation="Geography.xsd"/>
+	<xs:include schemaLocation="MeasurementsAndFacts.xsd"/>
+	<xs:include schemaLocation="Taxonomy.xsd"/>
+	<xs:include schemaLocation="ExtensionCulture.xsd"/>
+	<xs:include schemaLocation="ExtensionMycological.xsd"/>
+	<xs:include schemaLocation="ExtensionHerbarium.xsd"/>
+	<xs:include schemaLocation="ExtensionBotanicalGarden.xsd"/>
+	<xs:include schemaLocation="ExtensionPGR.xsd"/>
+	<xs:include schemaLocation="ExtensionZoological.xsd"/>
+	<xs:include schemaLocation="ExtensionPalaeontological.xsd"/>
+	<xs:element name="DataSets">
+		<xs:annotation>
+			<xs:documentation>TDWG root element: container for one or more DataSets.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DataSet" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>A dataset containing unit data and their shared metadata elements.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DatasetGUID" type="String" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>A globally unique identifier for the entire data collection the present dataset was derived from. The exact format and/or semantics are still under discussion. </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="TechnicalContacts" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Deprecated element, do not use. (Originally thought to provide GBIF UDDI registry entry, but UDDI does not store dataset level information. Submit the respective contact (and title) at time of registration of the BioCASe provider. For TAPIR providers it is included in the metadata section of the protocol).</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="TechnicalContact" type="MicroAgentP" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ContentContacts">
+								<xs:annotation>
+									<xs:documentation>Questions and feedback about data, or restrictions on use of the data should be directed here. This contact normally represents the agent acting as the original supplier or custodian of the dataset. If a content contact is given on the unit-level, that one should be used for end-user purposes. The element is unbounded to provide for alternative contacts (vacation etc.).  </xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ContentContact" type="MicroAgentP" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="OtherProviders" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Other known on-line providers of this dataset.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="OtherProvider" type="String" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>The UUID (identifier in the UDDI registry) of another data provider known to serve this dataset.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Metadata" type="ContentMetadata">
+								<xs:annotation>
+									<xs:documentation xml:lang="en-us">Metadata referring to the principal source of the entire data collection (the metadata scope may be wider than the objects actually contained in the data set). In its current form, this collection represents a mixture of elements useful for resource discovery (e.g. scope) with metadata actually pertaining to the received (partial) dataset. </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Units">
+								<xs:annotation>
+									<xs:documentation>A container for one or more unit data records from the gathering</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Unit" type="Unit" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>A container for all data referring to a unit (specimen or observation record)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="DataSetExtension" type="xs:anyType" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>The extension is temporary and serves to accommodate urgent inter-version additions to the dataset-level metadata. </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="Gathering">
+		<xs:annotation>
+			<xs:documentation>Elements describing the event and  site of collecting or observing a unit.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Code" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A string that identifies all material or records that resulted from a collecting or observation event.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateTime" type="DateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date(s) and time(s) of the collecting or observation event</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Agents" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A container element for the agent(s) responsible for collecting or recording.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="GatheringAgent" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>The person, or one of the persons or team(s) or organization(s) responsible for collecting or recording. Attributes: a flag indicating the primary collector, and a sequence number.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="AgentText" type="String" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Free text alternative for individual Agent.</xs:documentation>
+											<xs:documentation>Free text details for Agent.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Organisation" type="Organisation" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Agent organization name and code(s).</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Person" type="PersonName" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Agent Person details.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="primarycollector" type="xs:boolean" use="optional"/>
+								<xs:attribute name="sequence" type="xs:int" use="optional"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="GatheringAgentsText" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text representation or concatenated version of those responsible for collecting or recording.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Permits" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A container element for references to (or texts of) permits related to the gathering. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Permit" type="StringL" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Project" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Project information concerning the gathering event.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ProjectTitle" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Title of collection project</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Contact" type="Contact" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Contact details for Project Officer or other person with knowledge of the project.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PlatformName" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The 'platform' from which observations or collections were made,  e.g. the name of a research vessel or a remote operated vehicle.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Method" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The method (including technical means) used to make the collection or observation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValidDistributionFlag" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A flag ("true" or "false") that indicates whether the locality information represents a valid distribution occurrence for a specimen. Specimens taken from captivity and showing the captive location should use the value "false". [DwC 1.4 Concept List r33.]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EstablishmentMeans" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The historical relationship of the occurrence to the cited time and place of collection or observation. Examples: 'wild', 'captive', 'cultivated', 'cultivated ex wild', 'persisting from cultivation' [DwC discussion]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LocalityText" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Original locality data as appearing on a label or in an original entry.  This includes all geographic elements so that "Like" query operations on this element will search for a substring that might be in any of the geography elements. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Country" type="Country" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Details of the country. Separate from NamedArea for compatibility reasons.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NamedAreas" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Atomised place names as applied to the collection or observation site; with possibility for hierarchical structuring and categorization. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="NamedArea" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Atomised place name with possibility for hierarchical structuring. Attribute for sequence.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="NamedArea">
+										<xs:attribute name="sequence" type="xs:int" use="optional"/>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NearNamedPlaces" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specified relationship to a named place that does not directly apply to the site of collection or observation, e. g. 10 Km South of Mytown. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="NamedPlaceRelation" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Attribute DerivedFlag is deprecated.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="NearNamedPlace" type="StringL" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>A named place near to the collection or observation location</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="NearNamedPlaceRelationTo" type="StringL" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Distance and directional point.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="DerivedFlag" type="xs:boolean" default="false"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AreaDetail" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description of further details pertaining to the observation, sampling, or collection locality which which did not fit into the previous elements.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GML" type="xs:anyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Spaceholder for GML-conformant schema extension to express the spatial representation of the gathering locality including coordinates, footprint, and uncertainties in GML (Geographical Markup Language). The GML application schema developed by the BioGeomancer Project (see http:\\www.biogeomancer.org) can be used here. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WFS" type="xs:anyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Retrieval of a boundary polygon or centroid spatial reference relating to the gathering site. URL (GET) or POST text, for Web Feature Service (OpenGIS Consortium Specification 01-023) reference. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WMSURL" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>URI (e.g. web address) for the location of a boundary polygon or centroid spatial reference relating to a gathering site, according to the Web Map Services (WMS) specification of the Open GIS Consortium</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SiteCoordinateSets" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for multiple sets of  coordinates indicating the site of collection or observation. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SiteCoordinates" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Attributes for Original data and for begin and end of sequence . Composite element to allow  recording multiple coordinates or same coordinate in different systems</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="CoordinateMethod" type="String" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Coordinates measuring system e.g. GPS, field map reference, inferred map reference. Equivalent to "GeoreferenceProtocol" in DwC Geospatial Extension 1.4.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="GeoreferenceSources" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>[DwC Geospatial Extension v. 1.4:] A list of maps, gazetteers or other resources used to georeference the locality. The content of this concept is meant to be specific enough to allow anyone in the future to use the same resource to georeference the same locality. Example: "USGS 1:24000 Florence Montana Quad".</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="GeoreferenceVerificationStatus" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>[DwC Geospatial Extension v. 1.4:] A categorical description of the extent to which the georeference has been verified to represent the location where the specimen or observation was collected. This element should be vocabulary-controlled. Examples: "requires verification", "verified by collector", "verified by curator".</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="GeoreferenceRemarks" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>[DwC Geospatial Extension v. 1.4:]  	Comments about the spatial description determination, explaining assumptions made in addition or opposition to the those formalized in the method referred to in GeoreferenceProtocol.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="CoordinatesUTM" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation/>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="UTMZone" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>The numerical Zone corresponding to the central meridian and origin upon which the UTMEasting is based.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="UTMSubzone" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>The Subzone letter corresponding to one of the 20 North-South divisions of the UTM grid system.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="UTMNS" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>The hemisphere to which the UTMNorthing refers.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="UTMZoneFull" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>An alternative composite text to capture a zone expressed as a combination of UTMZone and UTMSubzone.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="UTMEasting" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>The distance in meters east of the origin of the UTMZone.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="UTMNorthing" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>The distance in meters north of the origin for the UTMSubzone.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="UTMDatum" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Mathematical surface on which the mapping and coordinate system used for the geocodes of the record are based.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="UTMText" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>A alternative composite text to capture unatomized UTM coordinate data.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="CoordinatesGrid" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Geospatial coordinates recorded using a grid system</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="GridCellSystem" type="String">
+													<xs:annotation>
+														<xs:documentation>Grid system name e.g. "GB OS"</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="GridCellCode" type="String">
+													<xs:annotation>
+														<xs:documentation/>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="GridQualifier" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Grid reference precision qualifier</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="CoordinatesLatLong" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Element that allows the recording of the latitude and longitude of a recording or collecting position. </xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="LongitudeDecimal" type="xs:decimal" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Maps to Darwin Core 2: Longitude. Express in decimal degrees. Equivalent to "DecimalLongitude" in DwC Geospatial Extension v. 1.4 but without restrictions.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="VerbatimLongitude" type="xs:string" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Equivalent to the respective element in DwC Geospatial Extension v.1.4.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="LatitudeDecimal" type="xs:decimal" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Maps to Darwin Core 2: Latitude. Express in decimal degrees. Equivalent to "DecimalLatitude" in DwC Geospatial Extension 1.4 but without restrictions.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="VerbatimLatitude" type="xs:string" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Equivalent to the respective element in DwC Geospatial Extension v.1.4.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="SpatialDatum" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Mathematical surface on which the mapping and coordinate system used for the geocodes of the record are based. Equivalent to "GeodeticDatum" in DwC Geospatial Extension v.1.4.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="AccuracyStatement" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Free text statement of degree of accuracy. May include indication that accuracy has deliberately been generalised, e.g. to protect sensitive data about protected species.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="CoordinateErrorDistanceInMeters" type="xs:decimal" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Maps to Darwin Core 2: Coordinate Precision. An estimate of how tightly the collecting locality was specified; expressed as a distance in meters corresponding to a radius around the Lat/Long coordinates. Use NULL where precision is unknown, cannot be estimated or is not applicable. Equivalent to "CoordinateUncertaintyInMeters" in DwC Geospatial Extension v. 1.4. </xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="CoordinateErrorMethod" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Verbatim statement of how the Coordinate Error was determined.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="PointRadiusSpatialFit" type="spatialFitDataType" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>[DwC Geospatial Extension v. 1.4: ] A measure of how well the circle defined by the coordinates and uncertainty match the original spatial representation, as a ratio of the area of the circle to the area of the original spatial representation. Legal values are 0, greater than or equal to 1, or undefined. A value of 1 is an exact match or 100% overlap. A value of 0 should be used if the given georeference does not completely contain the original representation. The PointRadiusSpatialFit is undefined if the original representation is a point without uncertainty and the given georeference is not that same point (without uncertainty). If both the original an the given georeference are the same point, the PointRadiusSpatialFit is 1. Detailed explanations with graphical examples can be found in the Guide to Best Practices for Georeferencing (Chapman and Wieczorek, eds. 2006). </xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="CoordinatesText" type="String" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Equivalent to "VerbatimCoordinates" in DwC Geospatial Extension v.1.4.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="original" type="xs:boolean" use="optional"/>
+								<xs:attribute name="begin" type="xs:boolean" use="optional"/>
+								<xs:attribute name="end" type="xs:boolean" use="optional"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Altitude" type="MeasurementOrFact" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The altitude of the gathering site land or floor level given as distance above (positive) or below mean sea level.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Depth" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Vertical distance point or range measurement in relation to a ground datum such as water level, or level of the sea floor for benthic samples.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="MeasurementOrFact">
+							<xs:attribute name="datum" type="String"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Height" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Vertical distance measure or range in relation to a ground datum, e.g. ground level.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="MeasurementOrFact">
+							<xs:attribute name="datum" type="String"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SiteMeasurementsOrFacts" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Further measurements or facts taken at the collection locality at the time of collection, e.g. (water-) temperature, slope, weather conditions, etc. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SiteMeasurementOrFact" type="MeasurementOrFact" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SiteImages" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Images taken at the Gathering site</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SiteImage" type="MultiMediaObject" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Stratigraphy" type="Stratigraphy" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A container for geological dating and rock unit names related to the site or sample locations</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Biotope" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An container element for citing biotope type terms (e.g. classification terms) and measurements  (e.g. vegetation height, salinity, slope) related to the unit's gathering site</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ClassificationScheme" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Attribute for classification system used.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Name" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Attribute for type designating ShortName, Long name, Code, or BiotopeText</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Text" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text field for informal recording of Biotope</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MeasurementsOrFacts" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A container allowing to linking any biotope-related measurement to the site description (please use the unbounded element for content).</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="MeasurementOrFact">
+										<xs:sequence>
+											<xs:element name="MeasurementOrFact" type="MeasurementOrFact" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Synecology" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Relationship of the unit gathered with other taxa at the gathering site</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Syntaxon" type="String" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A syntaxon name and category assigned to the gathering site.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Comment" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text comment on synecological features of the gathering site.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="AssociatedTaxa" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Other taxa observed at the gathering site</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="TaxonIdentified" type="TaxonIdentified" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Other taxon found at the gathering site</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Aspect" type="Aspect" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Facing direction (aspect) of whole site or sample point.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Notes" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Further text referring to the gathering event that does not fit one of the elements specified. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FootprintWKT" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>[DwC Geospacial Extension Schema v. 0.3]. A Well-Known Text (WKT; see http://en.wikipedia.org/wiki/Well-known_text) representation of the the shape (footprint) that defines the location of the occurrence. Example: the one-degree box with opposite corners at (longitude=10, latitude=20)  and (longitude=11, latitude=21) would be expressed in well-known text as POLYGON ((10 20, 11 20, 11 21, 10 21, 10 20))</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FootprintSpatialFit" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>[DwC Geospacial Extension Schema v. 0.3] A measure of how well the geometry expressed in the footprint match the original spatial representation, as a ratio of the area of the footprint given to the area of the original spatial representation. Legal values are 0, greater than or equal to 1, or undefined. A value of 1 is an exact match or 100% overlap. A value of 0 should be used if the given georeference does not completely contain the original representation. The FootprintSpatialFit is undefined if the original representation is a point without uncertainty and the given georeference is not that same point (without uncertainty). If both the original and the given georeference are the same point, the FootprintSpatialFit is 1. Detailed explanations with graphical examples can be found in the Guide to Best Practices for Georeferencing (Chapman and Wieczorek, eds. 2006)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Identification">
+		<xs:annotation>
+			<xs:documentation>The application of a name (or concept), i.e. the data pertaining to an identification event and the result of the identification itself.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Result">
+				<xs:annotation>
+					<xs:documentation>The result of the identification, currently either a material (substrate) or a taxon name, but in the future to be extended to include other types of identifications used in natural history collections and surveys. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="TaxonIdentified" type="TaxonIdentified" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The Taxon (concept) or Taxonomic name assigned to the unit (or excluded, "non") in the Identification.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MaterialIdentified" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A material identified as the result of the identification event (e.g. a non-organismic substrate of a microorganism)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Extension" type="xs:anyType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A placeholder for a temporary extension to include identification results not yet covered by the schema. This serves  to accommodate urgent inter-version additions to the unit-object schema. </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PreferredFlag" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>True to designate current identification.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NonFlag" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>True to designate negative identifications. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StoredUnderFlag" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>True to designate the idenfication under which the entire unit is stored (in a physical collection) or otherwise preferrably referenced. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ResultRole" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Used to designate the role of the identification result (e.g. substrate, isolate, host, parasite, etc.)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Identifiers" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Identifier" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Atomized record of individual, team member, or organization that made the identification.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="PersonName" type="PersonName" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Atomised data for the parts of the Identifier's name.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Organisation" type="Organisation" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>The Organisation the Identifier is affiliated with, or the Organisation (institution) acting as the identifier.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="IdentifiersText" type="String" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Alternatve text indicating the person, person team, or Organization that made the identification.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IdentificationSource" type="Reference" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A reference which has provided the identification (and - if present - the identifier's name and/or organisation). The entire identification event was taken from the literature or comparable source given here. Note that this is not the literature (e.g. key) used to obtain the result (see IdentificationReferences). </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IdentifierRole" type="String" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Indication of the nature of the taxonomic verification; e.g. "conf." or "det." </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="References" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>References that were used by the identifier to provide the identification (e.g. by means of providing a key or a description of a taxon). It circumscribes a particular taxon concept (also referred to as a potential taxon) for a given taxonomic name. Note: this is not the citation from which and identification was taken, see under Identifier/IdentificationSource. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Reference" type="Reference" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A reference (e.g. an article or monograph) that was used as the base for the identifier's taxon identification (e.g. by means of providing a key or a description of the taxon). It circumscribes the taxon identified (and thus can act as a potential taxon's sec. reference). Note: this is not the citation from which and identification was taken, see under Identifier/IdentificationSource. </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Date" type="DateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date of the identification event.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Method" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The method by which the identification was obtained, e.g. details of molecular analysis or acoustical procedures.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Notes" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Supplementary remarks about the identification.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VerificationLevel" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The level to which the identification has been verified. Different standards may use different values here. See ITF-2 for an example.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NamedArea">
+		<xs:annotation>
+			<xs:documentation>The name and category of an administrative or geoecological area.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AreaClass" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Allows recording of categories for local or national subdivision levels, geomorphological units, protected areas, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AreaName" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name of a geographic, geomorphological, geoecological, or administrative area.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AreaCodeStandard" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Standard coding scheme the AreaCode adheres to.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AreaCode" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Abbreviation or code for area names</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DataSource" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation/>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Unit">
+		<xs:annotation>
+			<xs:documentation>Elements for all unit-level data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UnitGUID" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A globally unique identifier for the unit (i.e. the physical specimen or original observation). Following DwC, in the absence of a persistent global unique identifier, this should be constructed in the form "URN:catalog:[InstitutionCode]:[CollectionCode]:[CatalogNumber]".</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceInstitutionID" type="InstitutionCode">
+				<xs:annotation>
+					<xs:documentation>Unique identifier (code or name) of the institution holding the original data source (first part of record identifier). In specimen collections, this is normally the institution or private holder of the collection itself. For herbaria and botanical gardens, the standard abbreviations should be used.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceID" type="String">
+				<xs:annotation>
+					<xs:documentation>Name or code of the data source (unique within the institution, second part of the record identifier)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnitID" type="String">
+				<xs:annotation>
+					<xs:documentation>A unique identifier for the unit record within the data source. Preferrably, the ID should be stable in the database, so that it also can be used to find the same record again (e.g. for data exchange purposes). Third part of the record identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnitIDNumeric" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Numeric catalogue number. Facilitates soriting of numbers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LastEditor" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name or other indication of the person or team that created or last edited this record.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateLastEdited" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date of creation or last change of this unit record.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Owner" type="Contact" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The legal owner of the unit record. Note that ownership of physical specimens is handled under SpecimenUnit. If present, overrides the equivalent Owners element on the level of dataset.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IPRStatements" type="IPRStatements" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specific rights, terms and other conditions pertaining to the individual record. If present, override the equivalent statements on the level of dataset.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnitContentContacts" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for one to many content contacts for the unit record. If present, overrides the equivalent ContentContact on the level of dataset.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UnitContentContact" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Questions and feedback about data, or restrictions on use of the data should be directed to the contact given here. If present, overrides the equivalent ContentContact on the level of dataset.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="Contact">
+										<xs:attribute name="preferred" type="xs:boolean"/>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="InformationWithheld" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Brief descriptions of additional information that may exist, but that has not been made public. Information about obtaining the withheld information should be sought from the ContentCcontact. (=DwC.InformationWithheld). If present here, the information given should override the respective dataset-level statement.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceReference" type="Reference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reference that is the source of the information about the unit given in the record.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnitReferences" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for references citing the unit See SourceReference for the case that the record is based on a publication.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UnitReference" type="Reference" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Published reference citing this unit. </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Identifications" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for identification events, i.e. the circumstances and result of assigning a name to the unit. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Identification" type="Identification" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>In cases where more than one name applies to a single unit, several identifications should be formed and flagged as preferred. Relationships between differently identified sub-units of the unit can be specified by means of the IdentificationRole. </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IdentificationHistory" type="String" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>This is a free text field for use when extracting data from datasources where the identification or verification history (or part of it)  is a free text field. In normal circumstances the history can be constructed by sorting identification events by date and reference to the preferred identification flag</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RecordBasis" type="RecordBasisEnum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An indication of what the unit record describes. Note that the element SourceReference provides for the case that the record is based on a publication.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KindOfUnit" type="StringL" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Part(s) of organism or class of materials represented by this unit.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:annotation>
+					<xs:documentation>Physical state-specific subtypes of the unit record</xs:documentation>
+				</xs:annotation>
+				<xs:element name="SpecimenUnit" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>A Unit subtype containing data elements specific to specimens (living, fossil, or preserved).</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Owner" type="Contact" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>The legal owner or holder of the physical specimen </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Acquisition" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Acquisition date, source and type.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="AcquisitionDate" type="String" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Textual statement of the  date of acquisition of the specimen by the institution</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="AcquisitionSourceText" type="StringL" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Free text field for informal recording of acquisition source details.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="AcquisitionType" type="StringL" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Type of acquisition.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="AcquiredFrom" type="Contact" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Name of person and/or organisation the unit was acquired from (e.g. depositor of a strain).</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Accessions" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Accession details.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Repeatable triple to accommodate accession number in multiple catalogues.</xs:documentation>
+										</xs:annotation>
+										<xs:element name="AccessionDate" type="String" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Textual statement of the date on which the accession was recorded.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="AccessionCatalogue" type="String" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Identifier of an accessions catalogue or numbering scheme which contains the SpecimenUnit</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="AccessionNumber" type="String" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>The institutional number applied to an accession and recorded in the accessions register.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Preparations" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Specimen preparation details, possibly a sequence of preparation steps</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Preparation" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Specimen preparation details.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="PreparationType" type="StringL" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Description of preparation type.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="PreparationProcess" type="StringL" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Process used in preparing the specimen.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="PreparationMaterials" type="StringL" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Materials and chemicals used in the preparation of the specimen.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="PreparationAgent" type="Contact" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Person and/or institution responsible for or effecting the preparation.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="sequence" type="xs:int" use="optional"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="PreparationsText" type="StringL" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Textual account of preparations, </xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Marks" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Mark" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Label text(s), writing or inscription(s).</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="MarkType" type="StringL" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Label or inscription</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="MarkText" type="StringL" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Text transcription of an inscription</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="PositionOnObject" type="StringL" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Position of inscription, writing or mark.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="MarkAuthor" type="String" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Name of person who created the label, writing or inscription.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="MarkComment" type="StringL" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Summary, interpretation or opinion of the text.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="Images" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>References to an image or images of the label or inscription</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="ImageID" type="String">
+																	<xs:annotation>
+																		<xs:documentation>The ID of a multimedia object representing the image of the mark</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="History" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>A wrapper for previous units.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="PreviousUnits" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="PreviousUnit" maxOccurs="unbounded">
+														<xs:annotation>
+															<xs:documentation>A container for past ID and location of this specimen.</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="PreviousUnitGUID" type="String" minOccurs="0"/>
+																<xs:element name="PreviousSourceInstitutionID" type="String" minOccurs="0"/>
+																<xs:element name="PreviousSourceID" type="String" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Name or code of collection previously holding this specimen.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="PreviousUnitID" type="String" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Identifier of specimen in previous collection.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="Date" type="DateTime" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Dates that the specimen was held in previous collection.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="Comment" type="StringL" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>Any further information about this specimen in its previous collection.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="PreviousUnitText" type="StringL" minOccurs="0">
+																	<xs:annotation>
+																		<xs:documentation>An alternative text identifying the previous unit when no ABCD standard ID s can be assigned.</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="sequence" type="xs:int" use="optional"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="PreviousUnitsText" type="String" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>An alternative text identifying the previous units.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="NomenclaturalTypeDesignations" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="NomenclaturalTypeDesignation" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Information on the type status of the specimen.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="TypifiedName" type="ScientificName" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>The name based on the specimen.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="NomenclaturalReference" type="Reference" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Published reference.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="TypeStatus" type="String" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Full term designating the status.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="CodeAssessment" type="String" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Indication whether the type is conserved or rejected/suppressed by the Code or is proposed for conservation or suppression/rejection</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="DoubtfulFlag" type="String" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Indicator for unverified type status (kind and fact).</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="Verifier" type="PersonName" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>The person assigning or verifying the type status of the specimen.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="VerificationDate" type="xs:date" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Date of verification.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="VerificationNotes" type="StringL" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Further information about the verification process.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="NomenclaturalTypeText" type="StringL" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>A note detailing possible or verified type information related to the specimen.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="DuplicatesDistributedTo" type="String" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>A free text field to note the known other recipients of a duplicate of the unit, preferrably in the form of a delimited list of SourceInstitionIDs. </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Disposition" type="StringL" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>DwC curatorial extension r. 14: 'The current disposition of the cataloged item. Examples: "in collection", "missing", "voucher elsewhere", "duplicates elsewhere".'</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ObservationUnit" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Data elements specific to observation (recording) units. Note that most observation data items are site related and thus covered under Gathering.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ObservationUnitIdentifiers" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ObservationUnitIdentifier" type="StringP" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Numbers or other registration mark associated with an observation record. Attribute for PreferredFlag. Separated from the equivalent AccessionNumber of specimen collections because of the more standardised approaches taken in physical collections.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:sequence>
+				<xs:annotation>
+					<xs:documentation>Collection type and/or taxonomic domain-specific schema extensions (subtypes of the unit record).</xs:documentation>
+				</xs:annotation>
+				<xs:element name="CultureCollectionUnit" type="CultureCollectionUnit" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Data specific to microbial and similar culture methods.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="MycologicalUnit" type="MycologicalUnit" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Data specific to mycological and lichenological units.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="HerbariumUnit" type="HerbariumUnit" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Data specific to herbarium specimens (incl. mycological specimens).</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="BotanicalGardenUnit" type="BotanicalGardenUnit" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Data specific to units in botanical live (horticultural) collections.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="PlantGeneticResourcesUnit" type="PGRUnit" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Data specific to units in plant genetic resource collections, e.g. gene banks.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ZoologicalUnit" type="ZoologicalUnit" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Data specific to zoological units.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="PalaeontologicalUnit" type="PalaeontologicalUnit" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Data specific to palaeontological units.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			<xs:element name="MultiMediaObjects" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Multimedia objects such as images, movies, etc. relating to (or forming) the unit. Note that RecordBasis should be set accordingly if the multimedia object actually is the unit in the collection (e.g. collections of images taken in the field, sound recordings, etc.). </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MultiMediaObject" type="MultiMediaObject" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Associations" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Relationships of this unit with other unit for which a record in ABCD conformant dataset(s) existis.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UnitAssociation" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A binary relationship or association of units.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="UnitGUID" type="String" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Globally unique identifier of the related unit.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="AssociatedUnitSourceInstitutionCode" type="String">
+										<xs:annotation>
+											<xs:documentation>First part of a fully qualified identifier of a related item's dataset.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="AssociatedUnitSourceName" type="String">
+										<xs:annotation>
+											<xs:documentation>Second part of a fully qualified identifier of a related item's dataset.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="AssociatedUnitID" type="String">
+										<xs:annotation>
+											<xs:documentation>Fully qualified identifier of the related item within the specified dataset.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="AssociationType" type="StringL">
+										<xs:annotation>
+											<xs:documentation>Description of the association.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Comment" type="StringL" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Further information about an association.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Assemblages" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A container for groupings of this unit with other units for which a record existes in this dataset by means of an additional ID.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UnitAssemblage" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>A unit assemblage handles symmetric relationships between several units.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="AssemblageID" type="String">
+										<xs:annotation>
+											<xs:documentation>Identifier for assemblage.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="AssemblageName" type="StringL" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Name of assemblage.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NamedCollectionsOrSurveys" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unit may belong to one or several collections or survey projects which have distinctive names and do not correspond to the SourceName. Note that this element refers to the name accepted by the specimen or data holding institution, this may or may not be different from the  project name given under Gathering.   </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="NamedCollectionOrSurvey" type="StringL" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Gathering" type="Gathering" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Elements describing the field events that created the unit and their location.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CollectorsFieldNumber" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A number assigned to the unit by the collector or observer. Note that the respective collector's name is found under gathering (GatheringAgents).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FieldNotes" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>DwC curatorial extension: "A flag ("true" or "false") marking the existence of, or a reference to, notes taken in the field for the object or observation."</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MeasurementsOrFacts" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A container for quantitative and categorical measurements (including observations) refering to the unit, e.g. counts, size measurements, colours, etc.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MeasurementOrFact" type="MeasurementOrFact" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Quantitative or categorical measurement refering to the unit.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Sex" type="SexCodeEnum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Maps to Darwin Core 2: Sex. Refers to the entire unit, which may be mixed. Note that counts can be provided in the Unit's MeasurementsOrFacts section.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Age" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Age of the organism at the time of collection or observation. Note that counts for different age classes can be provied in the Unit's MeasurementsOrFacts section.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Sequences" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for medata on sequences derived from this unit.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Sequence" type="Sequence" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Notes" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Miscellaneous notes referring to the unit that do not fit elsewhere.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RecordURI" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides a way to access a page where more information on this particular unit (not on the entire dataset) can be found. [OBIS]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EAnnotations" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Annotations in electronic form not (yet) added to the structured unit record.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Annotation">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="AnnotationText" type="StringL"/>
+									<xs:element name="Annotator" type="String" minOccurs="0"/>
+									<xs:element name="AnnotationDate" type="String" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="UnitExtension" type="xs:anyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The extension is temporary and serves only to accommodate urgent inter-version additions to the unit-object schema [in future to the the various schemas/objects used in ABCD]. For example, if a specific community (e.g. culture collections) discover that there are elements missing in the current version of ABCD (as they did for 1.2), they communicate that to the group responsible for schema development, where it will be discussed if these elements are already accommodated in the schema, if not, if they can and should be generalized and where they should end up in the schema. IF the culture collection community needs to move rapidly (e.g. due to project pressures), they can add these elements to the  current version as an extension schema under a structure that follows SDD's CustomExtensions element (CustomExtensions-CustomExtension-Any ##other). In future modular versions of ABCD, such a structure should exist in the root of every object/schema. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Sequence">
+		<xs:annotation>
+			<xs:documentation>A first proposal for this type of data. Note that this is used in the context of a collection unit and thus automatically refers to that unit.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Database" type="StringL">
+				<xs:annotation>
+					<xs:documentation>E.g. GenBank, SwissProt, etc. Use "Internal" for unpublished sequence.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ID-in-Database" type="String">
+				<xs:annotation>
+					<xs:documentation>E.g. GenBank accession number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URI" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>URI to access the sequence data.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Method" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A description of the method used to achive the sequence.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SequencedPart" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of the actually sequenced material (DNA/RNA/Protein, Gene or part of gene, completeness, etc.), </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Reference" type="Reference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reference where the sequence was published.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SequencingAgent" type="Contact" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The person and/or organisation responisible and/or effecting the sequencing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Length" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Length of the sequence in basepairs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

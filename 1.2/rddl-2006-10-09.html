@@ -1,0 +1,68 @@
+<!-- <!DOCTYPE html PUBLIC "-//XML-DEV//DTD XHTML RDDL 1.0//EN" "http://www.rddl.org/rddl-xhtml.dtd">-->
+<!-- Note: DOCTYPE is commented out in the RDDL example RDDL itself; perhaps otherwise some html clients cause problems. -->
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:xlink="http://www.w3.org/1999/xlink"
+		xmlns:rddl="http://www.rddl.org/"
+    xml:base="http://rs.tdwg.org/abcd/1.2"
+    xml:lang="en-US">
+<head>
+	<title>Resource Directory (RDDL) for ACBD 1.20</title>
+  <link href="http://www.rddl.org/xrd.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+
+<h1>Resource Directory (RDDL) for ACBD 1.20</h1>
+<div class="head">
+<p>
+<a href="http://rs.tdwg.org/abcd/1.2/rddl-2006-10-09.html">This version</a> (2006-10-09)<br />
+<a href="http://rs.tdwg.org/abcd/1.2">Latest Version</a>
+</p>
+</div>
+
+<div id="overview">
+<h2>Overview</h2>
+<p>This is ABCD version 1.2. For more information on ABCD in general please see the <a href="..">general ABCD resource directory</a>.
+</p>
+
+<p>Note: While this document is human-readable, RDDL-aware processors may use it to automatically retrieve resources such as different schema versions for validating documents. See <a href="http://www.rddl.org">http://www.rddl.org</a> for further information.</p>
+
+</div>
+
+<h2>Resources</h2>
+<div id="resources" class="resource">
+<ul class="compact"><!-- Note: instead of role="http://www.w3.org/1999/xhtml" a more general URI is: http://www.isi.edu/in-notes/iana/assignments/media-types/text/html -->
+
+<rddl:resource xlink:type="simple" id="home"
+	xlink:title="ABCD Home Page"
+	xlink:role="http://www.w3.org/1999/xhtml"
+	xlink:arcrole="http://www.rddl.org/purposes#non-normative-reference"
+	xlink:href="http://www.bgbm.org/TDWG/CODATA/ABCD-FirstReferenceImplementation.htm">
+	<li><a href="http://www.bgbm.org/TDWG/CODATA/ABCD-FirstReferenceImplementation.htm">ABCD 1.2 Home Page</a></li>
+</rddl:resource>
+ 
+<rddl:resource xlink:type="simple" id="xsd"
+	   xlink:title="W3C XML Schema for document validation (normative)"
+	   xlink:role="http://www.w3.org/2000/10/XMLSchema"
+	   xlink:arcrole="http://www.rddl.org/purposes#schema-validation"
+	   xlink:href="http://www.bgbm.org/TDWG/CODATA/Schema/ABCD-1.20.xsd">
+	<li><a href="http://www.bgbm.org/TDWG/CODATA/Schema/ABCD-1.20.xsd">W3C XML Schema for validation (normative)</a>
+  		<ul class="compact">
+  		 <li>Note 1: Although RDDL-aware processors may automatically detect a schema location, most processors require an explicit location. 
+  		 ABCD instance documents intended for validation should therefore contain the following attributes in the "Datasets" root element: <br />
+  			<code>xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" <br />
+  			xsi:schemaLocation="http://www.tdwg.org/schemas/1.2 http://www.bgbm.org/TDWG/CODATA/Schema/ABCD-1.20.xsd"</code>.
+  		 </li>
+  		</ul>
+  	</li>
+</rddl:resource>
+
+
+</ul>
+</div>
+
+<div id="footer">
+<p>Copyright (c) TDWG, October 2006</p>
+</div>
+
+</body>
+</html>

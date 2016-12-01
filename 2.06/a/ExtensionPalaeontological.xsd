@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.tdwg.org/schemas/abcd/2.06" targetNamespace="http://www.tdwg.org/schemas/abcd/2.06" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="ABCD_TypeLibrary.xsd"/>
+	<xs:include schemaLocation="MeasurementsAndFacts.xsd"/>
+	<xs:complexType name="PalaeontologicalUnit">
+		<xs:annotation>
+			<xs:documentation>Elements only used for palaeontological units</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Preservation" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of the fossil preservation of the specimen.</xs:documentation>
+					
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Completeness" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation/>
+								
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Form" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Original, mould, cast etc</xs:documentation>
+								
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Matrix" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The sediment or mineral matrix enclosing the fossil</xs:documentation>
+								
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Mineralisation" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Form of mineralisation</xs:documentation>
+								
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Taphonomy" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Life position, allochthonous death assemblage, post mortem history details etc.</xs:documentation>
+								
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TimeRange" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Known or assumed time range of a fossil</xs:documentation>
+					
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Stratigraphy">
+		<xs:annotation>
+			<xs:documentation>Elements expressing stratigraphy at the gathering site.</xs:documentation>
+			
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ChronostratigraphicTerms" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ChronostratigraphicTerm" type="LookupL" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Chronostratigraphic dating term e.g. Jurassic Period</xs:documentation>
+								
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="BiostratigraphicTerms" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="BiostratigraphicTerm" type="LookupL" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>biostratigraphic zonation term e.g. Psiloceras planorbis zone</xs:documentation>
+								
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="LithostratigraphicTerms" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="LithostratigraphicTerm" type="LookupL" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>lithostratigraphic term describing geology e.g. Mercia Mudstone Group</xs:documentation>
+								
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="StratigraphyText" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text field for informal recording of field contents</xs:documentation>
+					
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

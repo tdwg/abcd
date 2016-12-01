@@ -1,0 +1,1560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Proposed collection of global elements and extensions for Earth Sciences extension to the ABCD Schema -->
+<xs:schema version="1.00_DEV" 
+	targetNamespace="http://rs.tdwg.org/abcd/efg/DEV" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:efg="http://rs.tdwg.org/abcd/efg/DEV" 
+	xmlns:abcd="http://www.tdwg.org/schemas/abcd/2.06" 
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.tdwg.org/schemas/abcd/2.06" schemaLocation="http://www.bgbm.org/TDWG/CODATA/Schema/ABCD_2.06/ABCD_2.06.XSD"/>
+	<!--  -->
+	<!--Elements extending ABCD Unit-->
+	<!--  -->
+	<xs:element name="EarthScienceSpecimen" type="efg:EarthScienceSpecimenType"/>
+	
+	<xs:element name="RockUnit" type="efg:RockUnitType"/>
+	
+	<xs:element name="PalaeontologicalUnit" type="efg:PalaeontologicalUnitType"/>
+	
+	<xs:element name="MineralogicalUnit" type="efg:MineralogicalUnitType"/>
+	
+	<xs:element name="AllocthonousMaterial" type="efg:AllocthonousMaterialType"/>
+	
+	<xs:element name="UnitHostRock" type="efg:UnitHostRockType"/>
+	
+	<xs:element name="Alteration" type="efg:AlterationType"/>
+	
+	<!--  -->
+	<!--Elements extending ABCD Unit/Identifications/Identification/Result-->
+	<!--  -->
+	<xs:element name="MineralRockIdentified" type="efg:MineralRockIdentifiedType"/>
+	<xs:element name="IdentificationAnalysis" type="efg:IdentificationAnalysisType">
+		<xs:annotation>
+			<xs:documentation>container for analytical techniques employed for identifying a mineral or rock. Note that this differs from the existing Measurement element in that it allows for multiple values to be obtained from a single analysis e.g. percentage values of elements in a mineral.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--  -->
+	<!--Elements extending ABCD Gathering-->
+	<!--  -->
+	<xs:element name="NamedGeologicalFeature" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The name for a geologic feature that is not a placename e.g. 'The Great Whin Sill', 'Bodmin Granite' or 'The Great Glen Fault'. Many landscape scale geologic and geomorphic features have names.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--  -->
+	<!--LIBRARY of GLOBAL TYPES used by the global elements-->
+	<!--  -->
+	<!--Types extending ABCD Unit--><xs:complexType name="EarthScienceSpecimenType">
+		<xs:annotation>
+			<xs:documentation>Container for details that generally relate to the management of earth science specimens and their individual stratigraphic age (which may be different or more specific than that recorderd for the gathering site or the host rock.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UnitSize" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text fiekd for describing the overall size of the specimen - frequently used information and therefore placed here as a summary. Details should be entered under MeasurementOrFact complex type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnitWeight" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text field to enter gross weight of geological specimens.  -  frequently used information and used here as a summary. Details should be entered under MeasurementOrFact complex type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Hazard" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for describing hazards that may be associated with the specimen e.g. radioactive, toxic, carcinogens etc.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="HazardText" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text describing any hazards that may be associated with the specimen/unit e.g. is it radioactive, poisonous, carcinogenic?</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="HazardKeywords" maxOccurs="unbounded">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="acidic"/>
+									<xs:enumeration value="caustic"/>
+									<xs:enumeration value="carcinogenic"/>
+									<xs:enumeration value="heavy"/>
+									<xs:enumeration value="neurotoxin"/>
+									<xs:enumeration value="radioactive"/>
+									<xs:enumeration value="sharp edges/points"/>
+									<xs:enumeration value="toxic"/>
+									<xs:enumeration value="unknown"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RockMineralUsage" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of the use to which this mineral or rock has been put e.g. building stone, ore, sculpture, cut gemstone.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnitStratigraphicDetermination" type="efg:StratigraphicAttributionsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Formal stratigraphic date or correlation for an individual earth science unit (e.g. a single fossil specimen). Use efgGathering for site-related stratigraphy. This allows for individual specimens to be given an exact stratigraphic date and the wider stratigraphy of the site to also be listed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StratigraphicDateComment" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text element to allow discussion of geological age of a specimen or observed feature</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:complexType name="RockUnitType">
+		<xs:annotation>
+			<xs:documentation>Container for descriptive elements related to rock units</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="RockType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>For simple classification e.g. igneous, metamorphic, sedimentary or meteorite - enumeration list is provisional!</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="carbonaceous"/>
+						<xs:enumeration value="carbonate"/>
+						<xs:enumeration value="clastic"/>
+						<xs:enumeration value="evaporite"/>
+						<xs:enumeration value="fault rock"/>
+						<xs:enumeration value="gneiss"/>
+						<xs:enumeration value="high-grade metamorphic"/>
+						<xs:enumeration value="hornfels"/>
+						<xs:enumeration value="igneous"/>
+						<xs:enumeration value="igneous extrusive"/>
+						<xs:enumeration value="igneous intrusive"/>
+						<xs:enumeration value="low-grade metamorphic"/>
+						<xs:enumeration value="metamorphic"/>
+						<xs:enumeration value="metasomatic"/>
+						<xs:enumeration value="meteorite"/>
+						<xs:enumeration value="migmatite"/>
+						<xs:enumeration value="mylomite"/>
+						<xs:enumeration value="plutonic intrusive"/>
+						<xs:enumeration value="sedimentary"/>
+						<xs:enumeration value="schist"/>
+						<xs:enumeration value="slate"/>
+						<xs:enumeration value="vein / pegmatite"/>
+						<xs:enumeration value="volcaniclastic"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="RockPhysicalCharacteristics" type="abcd:MeasurementOrFact" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Container for descriptive terms and measurements related to rocks e.g. grain size, grain sphericity, crystal sizes and orientations, laminations etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Petrology" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for petrographic descriptions related to a rock or mineral unit</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PetrologyDescriptiveText" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text element for petrographic description of the associated rock or mineral unit.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Petrologicalanalyses" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Container element for one or morre sets of analytical results relating to the petrogenesis of a rock unit.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="PetrologicalAnalysis" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Container for a single analysis related to the petrogenesis of a rock unit</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="PerologicalAnalysisComment" type="xs:string" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Free text element describing a petrological analysis or its results</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="PetrologicalAnalysisAtomised" type="efg:AnalysisAtomisedType" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="AssociatedMineralAssemblage" type="efg:AssociatedMineralAssemblageType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AssociatedFossilAssemblage" type="efg:AssociatedFossilAssemblageType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for describing fossil assemblage associated with the rock or mineral unit </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DepositionalEnvironment" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for describing the original environment in which thr rock was deposited or the mineral formed e.g. hypersaline lagoon, lacustrine, intertidal etc.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="DepositionalEnvironmentText" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>free text describing the original environment in which thr rock was deposited or the mineral formed e.g. hypersaline lagoon, lacustrine, intertidal etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DepositionalEnvironmentType" type="efg:DepositionalEnvironmentEnumExtensionType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>keywords from enumerated list for indexing of depositional environments</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="DepositionalEnvironmentEnumExtensionType">
+		<xs:union memberTypes="efg:DepositionalEnvironmentEnumType xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="DepositionalEnvironmentEnumType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="alluvial fan"/>
+			<xs:enumeration value="basinal carbonate"/>
+			<xs:enumeration value="basinal siliceous"/>
+			<xs:enumeration value="carbonate"/>
+			<xs:enumeration value="cave"/>
+			<xs:enumeration value="channel"/>
+			<xs:enumeration value="channel lag"/>
+			<xs:enumeration value="coarse channel fill"/>
+			<xs:enumeration value="coastal"/>
+			<xs:enumeration value="crater lake"/>
+			<xs:enumeration value="crevasse splay"/>
+			<xs:enumeration value="deep subtidal"/>
+			<xs:enumeration value="deep subtidal ramp"/>
+			<xs:enumeration value="deep subtidal shelf"/>
+			<xs:enumeration value="deltaic"/>
+			<xs:enumeration value="delta front"/>
+			<xs:enumeration value="delta plain"/>
+			<xs:enumeration value="dry floodplain"/>
+			<xs:enumeration value="dune"/>
+			<xs:enumeration value="estuarine"/>
+			<xs:enumeration value="eolian"/>
+			<xs:enumeration value="fissure fill"/>
+			<xs:enumeration value="floodplain"/>
+			<xs:enumeration value="fluvial"/>
+			<xs:enumeration value="fluvial-deltaic"/>
+			<xs:enumeration value="fluvial-lacustrine"/>
+			<xs:enumeration value="foreshore"/>
+			<xs:enumeration value="glacial"/>
+			<xs:enumeration value="interdistributary bay"/>
+			<xs:enumeration value="interdune"/>
+			<xs:enumeration value="karst"/>
+			<xs:enumeration value="lacustrine"/>
+			<xs:enumeration value="lagoonal"/>
+			<xs:enumeration value="levee"/>
+			<xs:enumeration value="loess"/>
+			<xs:enumeration value="marginal marine"/>
+			<xs:enumeration value="marine"/>
+			<xs:enumeration value="offshore"/>
+			<xs:enumeration value="offshore ramp"/>
+			<xs:enumeration value="offshore shelf"/>
+			<xs:enumeration value="open shallow subtidal"/>
+			<xs:enumeration value="paralic"/>
+			<xs:enumeration value="peritidal"/>
+			<xs:enumeration value="pond"/>
+			<xs:enumeration value="prodelta"/>
+			<xs:enumeration value="reef or bioherm"/>
+			<xs:enumeration value="shallow subtidal"/>
+			<xs:enumeration value="shoreface"/>
+			<xs:enumeration value="shore transition zone"/>
+			<xs:enumeration value="sinkhole"/>
+			<xs:enumeration value="slope"/>
+			<xs:enumeration value="swamp"/>
+			<xs:enumeration value="restricted shallow subtidal"/>
+			<xs:enumeration value="sand shoal"/>
+			<xs:enumeration value="tar"/>
+			<xs:enumeration value="terrestrial"/>
+			<xs:enumeration value="wet floodplain"/>
+		</xs:restriction>
+	</xs:simpleType>	
+	<xs:complexType name="PalaeontologicalUnitType">
+		<xs:annotation>
+			<xs:documentation>Container for descriptive elements related to palaeontological material</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PartOfOrganism" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description relating to the part or parts of the organism that have been preserved e.g. shell, skeleton, skull, soft tissue etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Completeness" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text descrbing the degree of completeness of the specimen e.g. complete, cephalon only, but may describe completeness of a part e.g. complete skull</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Articulation" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description of the articulation in the preserved specimen - applies to invertebrate shells and exoskeletons as well as vertebrate skeletons. e.g. articulated, dis-articulated, single valves etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FeedingPredationTraces" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description relating to aspects of feeding and predation e.g. ammonite with bite mark from plesiosaur,  shell drilled by predatory gastropod etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Bioerosion" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description of damage due to biological action, such as, boring worms and sponges.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Encrustation" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description of biological encrustations, such as oysters and tube worms.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Orientation" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description of the orientation of the fossil remains in the host rock e.g. unknown, life position, toppled etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AssemblageOrigin" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description relating to the mode of origin of the assemblage e.g. unknown, allocthonous, autocthonous, paraautocthonous etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostBurialTransportation" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text relating to any post burial transport of fossil material e.g. river transport, scree slope etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PreservationQuality" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text describing the preservation quality e.g. poor, medium, good, excellent. Includes preservation of anatomical detail and softparts.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PreservationMode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for preservation mode description and keywords</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PreservationModeText" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text for describing the mode of preservation e.g. is the specimen a cast or mold,are soft parts preserved or mineralised etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="PreservationModeKeywords" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>keywords for how fossil material has been preserved e.g. body, cast, mold, trace fossil, soft parts mineralised etc.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="adpression/compression"/>
+									<xs:enumeration value="body"/>
+									<xs:enumeration value="cast"/>
+									<xs:enumeration value="charcoalification"/>
+									<xs:enumeration value="coalified"/>
+									<xs:enumeration value="concretion"/>
+									<xs:enumeration value="dissolution traces"/>
+									<xs:enumeration value="mold/impression"/>
+									<xs:enumeration value="permineralised"/>
+									<xs:enumeration value="recrystallised"/>
+									<xs:enumeration value="soft parts"/>
+									<xs:enumeration value="trace"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="PreservationSpecialMode" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Keyword for any special mode of preservation e.g. preserved in amber or frozen in tundra, tar pit etc.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="amber"/>
+									<xs:enumeration value="anthropogenic"/>
+									<xs:enumeration value="bone collector"/>
+									<xs:enumeration value="concretion"/>
+									<xs:enumeration value="coprolite"/>
+									<xs:enumeration value="frozen soil"/>
+									<xs:enumeration value="hypersaline"/>
+									<xs:enumeration value="midden"/>
+									<xs:enumeration value="peat"/>
+									<xs:enumeration value="tar pit"/>
+									<xs:enumeration value="other"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PreservationAlteration" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for description of preservation and alsteration of specimen</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PreservationAlterationText" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text relating to mineralogical changes in preserved specimens e.g. original shell material preserved, replacement minerals, re-crystallisation, silicification etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="OriginalBiominerals" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>List of original organcis or biomaterial preserved in the specimen</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="aragonite"/>
+									<xs:enumeration value="carbon"/>
+									<xs:enumeration value="calcite"/>
+									<xs:enumeration value="cellulose"/>
+									<xs:enumeration value="chitin"/>
+									<xs:enumeration value="phosphate"/>
+									<xs:enumeration value="silica"/>
+									<xs:enumeration value="sporopollenin"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="ReplacementMinerals" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>List of replacement minerals in the specimen e.g. silica</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="calcite"/>
+									<xs:enumeration value="carbon"/>
+									<xs:enumeration value="dolomite"/>
+									<xs:enumeration value="haematite"/>
+									<xs:enumeration value="limonite"/>
+									<xs:enumeration value="opal"/>
+									<xs:enumeration value="phosphate"/>
+									<xs:enumeration value="pyrite"/>
+									<xs:enumeration value="siderite"/>
+									<xs:enumeration value="silica"/>
+									<xs:enumeration value="unknown"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:complexType name="MineralogicalUnitType">
+		<xs:annotation>
+			<xs:documentation>Container for descriptive elements related to mineral units</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MineralHabit" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description of the mineral habit. Minerals occur in a variety of forms, which mayor may not be directly dependent on their crystalline structure e.g. nodular, columnar, radiating, mamillated, botryoidal, granular etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MineralColour" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of coloration of the mineral</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CrystalForm" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container element for describing the crystal form of a mineral unit.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Twinning" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text to describe any twinning features dispalyed by a mineral unit. Types include interpenetrant, rotation and geniculate.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Pseudomorph" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text to describe any pseudomorph features associated with a mineral or rock unit. Types include substitution, encrustation and infill</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="CrystalMeasurements" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>container for measurements of crystal physical and chemical characteristics</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="CrystalMeasurement" type="abcd:MeasurementOrFact" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Individual measurement or fact related to a crystal unit - container for standard MeasurementOrFact complex type from main schema</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="CrystalFormText" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text description of crystal form</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="MineralMeasurementsOrFacts" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for measurements or facts related to physical properties of mineral e.g. streak, cleavage, specific gravity etc.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MineralMeasurementOrFact" type="abcd:MeasurementOrFact" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Container for a single physical measurement or fact related to mineral</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="MineralDescriptionText" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description of mineral unit which may include observations on its form and occurrence, origin or other associated facts</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:complexType name="AllocthonousMaterialType">
+		<xs:annotation>
+			<xs:documentation>Container for descriptive elements related to transported material ranging from glacial erratics to meteorites</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PlaceOfOrigin" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The place of origin for material that has been transported during its history e.g. glacial erratics and meteorites</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ModeOfTransport" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>How the material was transported e.g. glacier, turbidity current, meteorite etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OriginalStratigraphy" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The original stratigraphic associations of allocthonous material e.g. a Devonian erratic obtained from a Pleistocene tillite.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="StratigraphicComment" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text comments relating to the straigraphy</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="StratigraphicAttributions" type="efg:StratigraphicAttributionsType"/>
+						<xs:element name="StratigraphicReferences" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Container for any documentary references relating to the stratigraphy</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="StratigraphicReference" type="abcd:Reference" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Details of individual documentary references to the straigraphy </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:complexType name="UnitHostRockType">
+		<xs:annotation>
+			<xs:documentation>Container relating to the host rock for units primarily described for their palaeontological or mineralogical interest</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="LithologyHostRock" type="efg:MineralRockIdentifiedType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The type of rock representing the host rock e.g. sandstone, mudstone, limestone etc </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LithificationHostRock" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The degree of lithification of the host rock e.g. unlithified, poorly lthified, lithified etc.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="unlithified"/>
+						<xs:enumeration value="poorly lithified"/>
+						<xs:enumeration value="lithified"/>
+						<xs:enumeration value="metamorphosed"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="LithologyAttributesHostRock" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Lithological  description of host rock e.g. cross-bedded,  finely laminated etc. could use an enumeration or lookup list</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="HostRockText" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text element for general description of host rock</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="HostRockStratigraphy" type="efg:StratigraphicAttributionsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for any stratigraphic determination specific to the host rock. For instance the gathering site may include a range of stratigraphic horizons whilst the unit host rock may represent just one. The unit itself might be different if it is allocthonous in origin. Minerals may be of a different age from their host rock.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType><xs:complexType name="AlterationType">
+		<xs:annotation>
+			<xs:documentation>Container for describing metasomatic, metamorphic or diagentic changes to units</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AlterationType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Free text describing the type of change that has taken place e.g. chloritisation, migmatisation, cataclastic brecciation etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AlterationDegree" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text describing the degree of alteration or metamorphic phase that has affected a rock. [This element may need to be split into hydrothermal mineralogical change and metamorphic phases]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ShockMetamorphicGrade" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text for describing the type of alteration caused by impact, as in meteorites. Also called shock stage.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DiageneticChange" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text for describing any physical and chemical changes that took place in a sediment during the lithification process e.g. compaction, cementation, recrystallisation, dolomitisation and replacement.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Types extending ABCD Identification/Result-->
+	<xs:complexType name="MineralRockIdentifiedType">
+		<xs:annotation>
+			<xs:documentation>Container for mineral and rock identifications. Equivalent of TaxonIdentified in main schema. This global should be added as an extension to the abcd identification - result</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MineralRockGroup" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Equivalent to higher taxon for plants and animals. Container for multiple higher groupings for minerals (e.g. silicates, inosilicates) and rocks (e.g. sedimentary, clastic, igneous, extrusive etc.) </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MineralRockGroupName" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>A single instance of a higher 'taxon' for minerals e.g. Silicates or for rocks e.g. Pyroclstic or meteorites e.g. Carbonaceous Chondrite</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MineralRockClassification" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Classification to which the group name belongs e.g. Dana, Strunz etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ClassifiedName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The formal name for the rock or mineral according to a given classification scheme</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FullScientificNameString" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Full formal name string as used in 'Taxon Identified' in main schema</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MineralRockNameAtomised" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Container for formal name elements for rocks, minerals and meteorites</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ScientificNameString" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>Equivalent of Scientific Name but minerals and rocks do not use binomials e.g. Quartz, Fluorite etc.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="AuthorTeamAndYear" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>who named the mineral or rock and when</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="MineralRockClassification" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>The classification from which this mineral or rockname has been taken</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="InformalNameString" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Common name or language variant of formal mineral or rock name e.g. Fluor Spar.  Includes attribute for language.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="VarietalNameString" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name given to a variety of the mineral, usually based on its colour or form e.g. Saphire is a blue form of Corundum, Moss Agate and Carnelian are varieties of cryptocrystalline Quartz. Marston Marble is a varietal trade name for a biomicrite from Lower Jurassic. Includes attribute for language.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NameAddendum" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>element from TaxonIdentified complex type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IdentificationQualifier" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Element as used in TaxonIdentified</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="efg:Certainty" minOccurs="0"/>
+			<xs:element name="NameComments" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text relating to the identification of the mineral or rock</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Types extending ABCD Gathering-->
+	<xs:complexType name="SiteStratigraphyType">
+		<xs:annotation>
+			<xs:documentation>Container for information relating to stratigraphy and the identification of absolute and relative dates and correlations. This complex type extends Gathering, covering the location, the geology of the site.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SiteStratigraphicAttributions" type="efg:StratigraphicAttributionsType">
+				<xs:annotation>
+					<xs:documentation>Individual stratigraphic determinations related to the Gathering site - not measured sections.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StratigraphyComment" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text for describing the stratigraphic context, correlation or similar notes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StratigraphicReferences" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for complex type Reference. There may be more than one reference describing the stratigraphy.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="StratigraphicReference" type="abcd:Reference" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Complex type for individual reference pertaining to stratigraphy uses abcd:Reference type</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TectonicSetting" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text description of the relationship of the observed stratigraphy to its tectonic context e.g. sequence stratigraphy related to basin development and eustatic change, syn-tectonic stratigraphy related to plate movements and orogenesis.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SequenceStratigraphicSetting" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Keyword for position in sequence stratigraphy setting. Enumerated list.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="highstand systems tract"/>
+						<xs:enumeration value="lowstand systems tract"/>
+						<xs:enumeration value="maximum flooding surface"/>
+						<xs:enumeration value="parasequence boundary"/>
+						<xs:enumeration value="regressive"/>
+						<xs:enumeration value="sequence boundary"/>
+						<xs:enumeration value="transgressive"/>
+						<xs:enumeration value="transgressive surface"/>
+						<xs:enumeration value="transgressive systems tract"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SiteSections" type="efg:StratigraphicSectionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Measured section or borehole record associated with the gathering site.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!--  -->
+	<!--library of other reused types, elements, etc.-->
+	<!--  -->
+	<!--Stratigraphy related types-->
+	<xs:complexType name="StratigraphicAttributionsType">
+		<xs:annotation>
+			<xs:documentation>Container for statements relating to the absolute and relative dating and correlation of geological units and gathering sites. Equivalent to 'Result' in Taxon Identification schema. Where a range of dates is associated with a unit, use multiple entries for attibution e.g. if a named unit definitely includes lower raricostatum zone set to certain but may range up into spinatum zone, use one record for raricostatum zone set to certain and another for spinatum zone set to uncertain. If necessary include all intermediate horizons at same or higher level terms that encompass range, to ensure proper indexing.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ChronostratigraphicAttributions" type="efg:ChronostratigraphicAttributionsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Allows for multiple and range declarations of chronostratigraphic terms. This element combines both chronostratigraphic and geochronologic terms with preference for chronostratigraphic. (Zalasiewicz et al. 2004)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LithostratigraphicAttributions" type="efg:LithostratigraphicAttributionsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Allows for multiple identifications of any named lithostratigraphic units (e.g. Penarth Group, Langport Member, Rhaetic Bone Bed)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BiostratigraphicAttributions" type="efg:BiostratigraphicAttributionsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for optional multiple references to fossil zones e.g. where a range of zones and subzones might be represented.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MagnetostratigraphicDeterminations" type="efg:MagnetostratigraphicDeterminationsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for details of any magnetostratigraphic evidence cited to support the dating of rocks. Magnetostratigraphy uses a range of readings over a sequence of rocks to provide a pattern that is correlated with known dated sequences. It includes its own series of divisions including superchrons, chrons and subchrons.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsotopeStratigraphicDeterminations" type="efg:IsotopeStratigraphicDeterminationsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for detail referring to any isotope concentration study. Isotope stratigraphy uses a range of readings over a sequence of rocks to create profiles that are correlated with dated sequences.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RadiometricDates" type="efg:RadiometricDatesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for absolute dates obtained from radiometric analysis.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PositionInSequence" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The position this stratigraphic 'unit' has in the sequence for the site. e.g. a bed number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChronostratigraphicAttributionsType">
+		<xs:annotation>
+			<xs:documentation>container for one or more identified chronostratigraphic dates</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ChronostratigraphicAttribution" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A single declaration of an identifed chronostratigraphic date</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ChronoStratigraphicDivision" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Classification level for the term e.g. eon, system, stage etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ChronostratigraphicName" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>The formal  geo/chrono chronologic name e.g. Jurassic, Kimmeridgian etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="efg:DatingQualifier" minOccurs="0"/>
+						<xs:element ref="efg:Certainty" minOccurs="0"/>
+						<xs:element name="RangePosition" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>text field to mark if this date is the earlest in a possible range, midway or the latest. May need to be used if there is a possibility of a range of dates.</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string"/>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Identifiers" type="efg:IdentifiersType" minOccurs="0"/>
+						<xs:element ref="efg:StratigraphicMeasurementsOrFacts" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LithostratigraphicAttributionsType">
+		<xs:annotation>
+			<xs:documentation>Container for one or more identications or attributions of lithostratigraphic units</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="LithostratigraphicAttribution" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>An individual identification of a named lithostratigraphic unit e.g. The Hotwells Limestone Group.  The higher lithostratigraphic terms are also allowed to cover the possibility of rock name homonyms and indexing in the absence of  a complete dictionary of rock names.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Supergroup" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Highest level of lithostratigraphic classification</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Group" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Lithostratigraphic unit consisting of two or more formations</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Formation" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The primary lithostratigraphic unit characterised by its lithologic features although it may be diachronous. </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Member" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A sub-division of a formation which may be local in extent or exhibits a distinctive lithology</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Bed" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The smallest division of a named stratified series normally with well defined division from adjacent deposits.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="InformalLithostratigraphicName" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>An informal lithostratigraphic name (ie. one not yet characterised as a formation or member or an old name still in general use e.g. Schaumkalk as part of the Muschelkalk or Keuper Marl as a synonym of the Mercia Mudstone Group. includes language as an attribute.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="efg:Certainty" minOccurs="0"/>
+						<xs:element ref="efg:DatingQualifier" minOccurs="0"/>
+						<xs:element name="Identifiers" type="efg:IdentifiersType" minOccurs="0"/>
+						<xs:element ref="efg:StratigraphicMeasurementsOrFacts" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BiostratigraphicAttributionsType">
+		<xs:annotation>
+			<xs:documentation>Container for one or more attributions  or identifications of fossil time zones</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BiostratigraphicAttribution" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A single declaration of a fossil zone or subzone.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ZonalFossilType" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>What sort of biozone is being recorded? e.g. what animal or plant group is it based on? (ammonite, brachiopod,coral, plant, foram, nanoplankton etc.)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="FossilZoneName" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>The actual name of the biozone. Ideally this should be in its expanded form although common usage tends to abbreviate the generic epithet.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="FossilSubzoneName" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The subzone name, if any, this should ideally be in expanded form rather than abbreviated.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="efg:Certainty" minOccurs="0"/>
+						<xs:element name="RangePosition" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Range position if this attribution is the earliest, midway or latest in a possible range. e.g.  It is not always clear what zone a particular taxon belongs to and therefore a range may be needed.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="efg:DatingQualifier" minOccurs="0"/>
+						<xs:element name="Identifiers" type="efg:IdentifiersType" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element ref="efg:StratigraphicMeasurementsOrFacts" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MagnetostratigraphicDeterminationsType">
+		<xs:annotation>
+			<xs:documentation>Container for one or more  magnetostratigraphic determinations</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MagnetostratigraphicDetermination" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Single record of magnetostratigraphic dating</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PolaritySuperchron" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>largest division of magnetostratigraphic terms</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="PolarityChron" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Reference to numerical scheme for labelling time divisions based on magnetic anomalies and reversals</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="PolaritySubchron" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Any named subdivision of a Polarity Chron</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MagnetostratigraphicDetail" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text describing the use of magnetostratigraphic correlation. </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="efg:AnalysisDateTime" minOccurs="0"/>
+						<xs:element ref="efg:Certainty" minOccurs="0"/>
+						<xs:element ref="efg:DatingQualifier" minOccurs="0"/>
+						<xs:element name="Identifiers" type="efg:IdentifiersType" minOccurs="0"/>
+						<xs:element ref="efg:AnalysisReferences" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IsotopeStratigraphicDeterminationsType">
+		<xs:annotation>
+			<xs:documentation>Container for one or more isotope stratigraphic determinations</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IsotopeStratigraphicDetermination" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Single record of an isotope stratigraphic determination</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IsotopesMeasured" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>What isotopes were used for this correlation e.g. Oxygen, Strontium, Carbon or more specific (O18/O16)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IsotopeStratigraphicDetail" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Free text describing the isotope correlation result.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="efg:AnalysisDateTime" minOccurs="0"/>
+						<xs:element ref="efg:Certainty" minOccurs="0"/>
+						<xs:element ref="efg:DatingQualifier" minOccurs="0"/>
+						<xs:element name="Identifiers" type="efg:IdentifiersType" minOccurs="0"/>
+						<xs:element ref="efg:AnalysisReferences" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RadiometricDatesType">
+		<xs:annotation>
+			<xs:documentation>Container for one or more radiometric date determinations</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="RadiometricDate" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Container for a single radiometric date analysis</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="RadiometricDatingMethod" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Method, analysis technique used to determine date e.g. radiocarbon, Potassium-Argon etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MaterialDated" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>What was actually dated? e.g. Glauconite grains in a sandstone, wood from peat-core etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="EarliestDate" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>The earliest date in a date range suggested by the analysis or the single date if only one is given</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="LatestDate" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The latest date where a range of values is given</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="TimeUnit" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>The time units being measured or how the numbers are expressed e.g. millions of years B.P. or thousands of years B.C.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DatingAccuracy" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The degree of certainty or likely accuracy of the dating analysis e.g. +/- 1 m.y.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DatingComment" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text description of the anlysis or its result.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="efg:AnalysisDateTime" minOccurs="0"/>
+						<xs:element name="Identifiers" type="efg:IdentifiersType" minOccurs="0"/>
+						<xs:element ref="efg:AnalysisReferences" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DatingQualifier" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Allows for qualification of date terms e.g. early/lower, middle, late/upper</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="StratigraphicSectionType">
+		<xs:annotation>
+			<xs:documentation>Container for layer by layer description of stratigraphic sections, boreholes and wells.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SectionName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The name for the section e.g. Vallis Vale, Hapsford Bridge Section or it could be a borehole unique name. This may be different from the locality name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SectionIDNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unique identifying code or number for this section, borehole or well</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TotalLengthOfSection" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The length of the named section in meters</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TotalThicknessMeasured" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The total thickness of strata or rock exposed in the section or borehole</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SectionLog">
+				<xs:annotation>
+					<xs:documentation>Container for the layer by layer description of the section, borehole or well. The layers or subdivisions are referred as SectionUnits - these represent layers, strata, beds, ore bodies, intrusive bodies etc. that might be recorded in a section or borehole. A SectionUnit or layer is also regarded as that which is recorded as a coherent sub-unit of the whole section or borehole. It may therefore be a single bed, a series of beds with similar characteristics or an unlayered body such as an igneous intrusion.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SectionUnitNumber" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Either a numerical identifier used for sorting the sequence or a UnitFieldNumber. A sectionunit could be a bed, a layer, an intrusive body or anything else encountered in a section or borehole.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="NumberOfSubUnits" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Where the described sectionunit or  'layer' is represented by more than one similar unit e.g. a sequence of thin limestone beds with shale intercalations recorded as a single unit (layer) </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="SectionUnitDescriptiveText" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text description of the layer, stratum or rock body </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DipDegrees" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The dip in degrees of laminae or stratal surfaces in this layer</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Strike" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Direction of strike measured on stratal surface</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MeasureFromBaseline" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Container for recording eith the distance (in metres) from a fixed baseline e.g. top of a borehole or bottom of a measured section</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="SectionUnitDatum" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>Text for where the measurement is taken e.g. top of bed or bottom of bed.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="BaselineDatum" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>Text - what is the baseline e.g. top of borehole or base of measured section</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="DistanceFromBaseline" type="xs:float">
+										<xs:annotation>
+											<xs:documentation>Number representing distance measured</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="MeasurementUnit" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>Units that DistanceFromBaseline are measured in e.g. metres</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="RockUnit" type="efg:RockUnitType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Container element for attributes restricted to rocks</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="TopSurface" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Container for details of top surface of a layer or stratum and it relationship with overlying layers</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="TopSurfaceFeature" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Text description of features  e.g. top surface is a hardground or rockground</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="RelationshipToOverlyingLayer" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Free text to record any observed relationship with overlying layer e.g. groove casts infilled by overlying sediment.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="BottomSurface" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Container for details of bottom surface of layer or stratum</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="BottomSurfaceFeature" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Text describing features at the base of a layer or stratum</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="RelationshipToUnderlyingLayer" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Free text to describe relationship to underlying strata/layer e.g. unconformable and cross cuts strata or base of bed includes clasts of underlying sediment</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="SectionUnitStratigraphy" type="efg:StratigraphicAttributionsType" minOccurs="0"/>
+						<xs:element name="SectionUnitSamples" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Container for samples taken from this layer. This should just list ABCD unit GUIDs to detailed unit/sample records but could be extended to use global types to create a standalone schema</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="SectionUnitSample" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>Container for a single sample taken from this layer</xs:documentation>
+										</xs:annotation>
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="SampleGUID" type="xs:string" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>A unique identifier for another Unit Record in ABCD</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="SampleRef" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Identifier for this sample e.g. field log sample number, registration number or similar</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="SampleType">
+													<xs:annotation>
+														<xs:documentation>What sort of sample this is. Could be an enumerated list</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												<xs:element name="SampleText" type="xs:string" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Short description of sample  - longer descriptions should be treated under separate unit records.</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="SectionUnitImages" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Container for images related to this bed, layer or body within the measured section or borehole.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="SectionUnitImage" type="abcd:MultiMediaObject">
+										<xs:annotation>
+											<xs:documentation>Placeholder for multimedia complex type from main ABCD schema</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Borehole" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for details specific to boreholes and wells. Does not contain spatial reference as this and details of platform etc. are under Gathering in main ABCD schema - but they could be copied to make an independent schema.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="DrillMethod" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>How the borehole or well was drilled e.g. reverse circulation drilling, diamond coring, percussion drilling, auger drilling, rotary/barber drilling etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="TypeOfBit" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>What type bit was used in the drilling / cutting process - can include diameter and type code</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="HoleDiameter" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Diameter of the borehole in milliimetres</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="HoleDirection" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Direction and inclination of the borehole or well</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="TotalDepth" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The total depth in metres that was bored or dug</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="OverburdenThickness" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Thickness in metres of non-logged over-burden before solid or logged material was reached.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Contractor" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The drilling contractor who carried out the work</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="NumberOfCoreBoxes" type="xs:integer" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>How many core boxes were collected from the borehole or well - integer</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="TotalCoreRecovery" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>What percentage of the drilled material was recovered?</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="CommissionedBy" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Company or organisation who commissioned the borehole or well</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Geologists" type="efg:IdentifiersType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The geologist(s) and or organisation responsible for logging the borehole and or maintaining the borehole record.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="StratigraphicSectionImages" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for images of the stratigraphic section or borehole and related media.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="StratigraphicSectionImage" type="abcd:MultiMediaObject" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>This is a placeholder for MultiMedia complex type from the main ABCD schema</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="StratigraphicMeasurementsOrFacts">
+		<xs:annotation>
+			<xs:documentation>Container element for multiple measurements (e.g. thickness, dip etc.) or facts (e.g. this bed was first identified by Charles Moore as the Reptile and Fish Bed from which he obtained Nothosaurus). This element contains the standard schema complex type MeasurementOrFact.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="StratigraphicMeasurementOrFact" type="abcd:MeasurementOrFact" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Container for single instance of complex type MeasurementOrFact</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--Identification related types-->
+	<xs:complexType name="IdentifiersType">
+		<xs:annotation>
+			<xs:documentation>Container for names of persons and organisations involved in the identification of rocks and minerals</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Person" type="abcd:PersonName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Person type from the abcd schema</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Organisation" type="abcd:Organisation" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Organisation type from the abcd schema</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IdentificationAnalysisType">
+		<xs:annotation>
+			<xs:documentation>Container for one or more analysis events linked to identification of unit</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IdentificationAnalysisAtomised" type="efg:AnalysisAtomisedType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AnalysisAtomisedType">
+		<xs:annotation>
+			<xs:documentation>Container for elements describing an analysis such as a chemical analysis of a mineral</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AnalysisMethod" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Analytical method used e.g. x-ray diffraction, electron probe, chemical analysis or thin section.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="efg:AnalysisDateTime" minOccurs="0"/>
+			<xs:element name="AnalysisBy" type="efg:IdentifiersType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Persons or organisations carrying out the analysis </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AnalysisText" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text to describe the analysis. This may be of value, for instance, if the mineral has been confirmed by x-ray diffraction but no actual analysis data are given in the analytical results.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="efg:AnalysisReferences" minOccurs="0"/>
+			<xs:element name="AnalysisResults">
+				<xs:annotation>
+					<xs:documentation>Container for multiple values obtained by analysis e.g. percentages of different elements present</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AnalysisResult" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Individual measurement made during an analysis e.g. the chemical composition of a mineral</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Parameter" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>What the given value refers to e.g. amount of an individual element present in a crystalline structure or it could be chemical formula</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="AppliesTo" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Used to qualify the measurement parameter</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="UnitOfMeasurement" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>The scale used for measurements in the analysis e.g. % for amounts or RI for refractive index.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="LowerValue" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>Lower value of a range or single value. This can be expressed as a measured value e.g. 45% or as a chemical formula e.g. NaCl</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="UpperValue" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Higher value or upper limit of range of values</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Accuracy" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>experimental degree of eror e.g. +/- 5%</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="AnalysisResultComment" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>Free text comment relating to the analysis results</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AnalysisDateTime">
+		<xs:annotation>
+			<xs:documentation>When the analysis was carried out</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ExactDate" type="abcd:DateTime" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Uses DateTime element from ABCD</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="DateText" type="xs:string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Free text to allow for vague dates or description of analysis period.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AnalysisReferences">
+		<xs:annotation>
+			<xs:documentation>Container for 1 or more references related to the analysis</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="AnalysisReference" type="abcd:Reference" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Individual documentary reference linked to an analysis. Uses abcd:Reference Type</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--Other types -->
+	<xs:complexType name="AssociatedFossilAssemblageType">
+		<xs:annotation>
+			<xs:documentation>Container for list of fossils that form an assemblage. Detailed accounts of any individual taxon should be dealt with under different units.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AssociatedFossilList" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Container for one or more fossil taxa (including ichnotaxa) that constitute the fossil assemblage associated with the unit being described. Note that highly detailed information on identification or description of the taxa in the assemblage should be treated as separate but related units.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AssociatedFossilName" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>A single taxon name at any level e.g. trilobite or Dalmanites myops</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="AssociatedFossilComment" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text for describing occurrence of this particular taxon or any of its features.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AssociatedFossilAssemblageText" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text for describing the occurrence, form or other features associated with this fossil assemblage e.g. fore-reef community, condensed reworked assemblage, serpulid bioherm with high concentration of gastropods etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssociatedMineralAssemblageType">
+		<xs:annotation>
+			<xs:documentation>Reusable type for listing minerals associated with a unit or layer</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AssociatedMineralList" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AssociatedMineralName" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>A single mineral name at any level of accuracy e.g. feldspar, pyroxene etc. or orthoclase, olivine, horneblende etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="AssociatedMineralComment" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Free text for describing the occurrence of this particular mineral or any of its features.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AssociatedMineralAssemblageText" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text for describing the features or characteristics of the overall mineral assemblage e.g.typical North Yorkshire primary copper-rich sulphide assemblage with complex secondary alteration products</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Certainty" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Degree of certainty associated with the date determination e.g. unknown, certain, uncertain, possibly, known wrong.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

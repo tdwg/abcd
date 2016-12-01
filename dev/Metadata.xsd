@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.tdwg.org/schemas/abcd/dev" targetNamespace="http://www.tdwg.org/schemas/abcd/dev" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="ABCD_TypeLibrary.xsd"/>
+	<xs:include schemaLocation="Contacts.xsd"/>
+	<xs:complexType name="ContentMetadata">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-us">Metadata referring to the principal source of the entire data collection (thus the metadata scope may be wider than the objects actually contained in the data set). If a history of the data collection (revised or expanded in various projects or at different institutions) exist, this must be reflected in the IPR statements and possibly in the list of Owners.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Description">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Dublin Core conformant elements describing the content of the data source queried, representation in different languages possible</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Representation" type="MetadataDescriptionRepr" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">The description in a specified language. Only one representation should be delivered for each language. [ATTR: language]</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IconURI" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">The URI of an icon/logo symbolizing the project.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Scope" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Keyword lists of geographical, taxonomic, etc. scopes. In the case of projects in progress, 'scope' may define the planned or intended, rather than the achieved scope (or coverage). If scope is given, the content available should be entirely within scope, because this item is for resource discovery purposes. Compare also Coverage in DC.Description (which is language-specific). (Items from Scope may be added to DC.Coverage)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="GeoecologicalTerms" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A collection of terms describing the geoecological scope of the source queried by means of area names (e.g. 'Worldl', 'Germany', 'Atlantic Ocean', 'Andes', 'Mountains'. A list of recommended terms should be developed.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="GeoEcologicalTerm" type="StringL255" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="TaxonomicTerms" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A collection of taxon names of higher rank describing the taxonomic scope of the source queried. A list of recommended terms should be developed.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="TaxonomicTerm" type="StringL255" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Version" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Number and date of current version (particularly for citing purposes)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Major" type="xs:nonNegativeInteger">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">The major version number ('1' in 1.2) as defined by the content creators OR the only version number given.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Minor" type="xs:nonNegativeInteger" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">An optional minor version number ('2' in 1.2)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Modifier" type="String255" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">Unconstrained text specifying status + optional number, e. g., 'beta', 'alpha', 'rc/release candidate', 'internal'. If missing, release status is assumed.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DateIssued" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">Source for Dublin-Core standard element Date.Issued: Citable 'publication date' of the current version (comp. RevisionData/DateCreated and DateModified for version- independent dates). This date should be missing if the current version is not yet published! </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RevisionData" type="RevisionData">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Creators, Revision status, and dates of the entire data collection from which the current dataset is derived.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Owners" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Entities having legal possession of the data collection content. Here defined for the entire data collection, not for individual units. If an owner statement is present on the unit level, it should override this dataset-level statement.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Owner" type="Contact" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">Entitiy having legal possession of the data collection content. </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IPRStatements" type="IPRStatements" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Copyright, terms of use, license and other IPR-related statements like disclaimer or acknowledgement. Giving a copyright statement and a (if possible public) licence is highly recommended! (=DC.Rights)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InformationWithheld" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Brief descriptions of additional information that may exist, but that has not been made public. Information about obtaining the withheld information should be sought from the ContentCcontact. (=DwC.InformationWithheld). If the respective information  is present on the unit level, it should override this dataset-level statement.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DirectAccessURI" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An electronic source of the dataset (e.g. web address of query interface or download site).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MetadataDescriptionRepr">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-us">Language-specific content metadata (title, description, etc.) with *required* Language attribute added.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Title" type="String255">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Source for Dublin-Core standard element "Title": A short, concise title.</xs:documentation>
+					<xs:documentation xml:lang="en-us">General Note on DublinCore translation: In addition to those that can bee transformed from UBIF metadata, an additional DC.Type='dataset' should be added.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Details" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Source for Dublin-Core standard element "Description": Free-form text containing a longer description of the project.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Coverage" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Source for Dublin-Core standard element "Coverage": Free-form text describing geographic, taxonomic, or other coverage aspects of terminology or descriptions available in the current project.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URI" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">URL pointing to an online source related to the current project, which may or may not serve an updated version of the description data.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="language" type="xs:language" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="RevisionData">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-us">RevisionData (creators, dates, revision) for the entire project/data set or individual objects.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Creators" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Source for Dublin-Core standard element "Creators", i.e. Author or editor.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Contributors" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Source for Dublin-Core standard element"Contributors": General contributors, or translators.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateCreated" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Source for Dublin-Core standard element "Date.Created": Date/time when the intellectual content (project, term, description, etc.) was created. Applications may initially set this to the system date for new data objects, but authors must be able to change it to an earlier date if necessary. If for legacy data this is imprecisely known, it may be missing here. Earlier versions in other data formats should then be mentioned in the copyright or acknowl. statements.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateModified" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Source for Dublin-Core standard element Date.Modified: Date/time when the last modification of the object was made. If in online data sources the provider can not assess this, the current date/time may be substituted. For legacy data this may be set to the file date of imported data, or estimated. Note that experience shows that the information provided here is often unreliable, because providers tend to disregard updating this information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

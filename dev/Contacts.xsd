@@ -1,0 +1,275 @@
+<!-- edited with XMLSpy v2005 sp2 U (http://www.altova.com) by Walter Berendsohn (Freie Universität Berlin) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.tdwg.org/schemas/abcd/dev" targetNamespace="http://www.tdwg.org/schemas/abcd/dev" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="ABCD_TypeLibrary.xsd"/>
+	<xs:complexType name="MicroAgent">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-us">Provides a minimalized local Agent definition.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="String255">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Person, person team, or role name (e. g., 'head of departement')</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Email" type="String255" minOccurs="0"/>
+			<xs:element name="Phone" type="String255" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">(voice phone)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Address" type="String255" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MicroAgentP">
+		<xs:annotation>
+			<xs:documentation>Minimalised local Agent definition with preferred flag</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="MicroAgent">
+				<xs:attribute name="preferred" type="xs:boolean" use="optional" default="false"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:annotation>
+		<xs:documentation xml:lang="en">Contact Type and types used therein:</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="Contact">
+		<xs:annotation>
+			<xs:documentation>Contact details.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Organisation" type="Organisation" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Organisation to contact</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Person" type="PersonName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Person to contact</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Roles" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Role" type="StringL" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Analogue to vCard:Role: Functional contact name, e.g. "Database administrator", "The Director", etc.  </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Addresses" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Contact addresses (one preferred, different languages possible)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Address" type="StringLP" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Contact address as string. </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TelephoneNumbers" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Telephone and fax numbers</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TelephoneNumber" type="TelephoneNumber" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Telephone or fax number</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="EmailAddresses" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>E-mail addresses</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EmailAddress" type="StringP255" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>E-mail address for contact</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="URIs" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>URIs for person or organisation</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="URL" type="anyUriP" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Spelling error in v. 2.06, deprecated (do not use)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="URI" type="anyUriP" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>URI for person or organisation</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="LogoURI" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>URL of a logo image.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Organisation">
+		<xs:sequence>
+			<xs:element name="OrganisationGUID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A globally unique identifier for the organisation or organisational unit</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="Label">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Full organization or corporate name in multiple languages (en: 'Botanical Garden of ...', de: 'Botanischer Garten von ...'). vCard:Org.OrgName). The Label mechanism also supports acronyms / abbreviations (no vCard equivalent!). </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrgUnits" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">If the contact contains no person definition: the unit within the organization the agent represents; else a list of the various organisational units to which a person may belong. (vCard:OrgUnit)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="OrgUnit" type="StringL" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">(vCard:OrgUnit)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Label">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-us">Collection of language-specific label representations</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Representation" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Language-specific label representation
+[ATTR: language]</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="LabelRepr"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LabelRepr">
+		<xs:annotation>
+			<xs:documentation xml:lang="en-us">Language-specific simple label, using simple formatted text</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Text" type="String255">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Label text in a specific language.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Abbreviation" type="String50" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en-us">Restricted to 50 characters maximum length, including blanks (recommended to be shorter!). Label abbreviations are especially important when displaying information in a tabular format.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="language" type="xs:language" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="PersonName">
+		<xs:annotation>
+			<xs:documentation>Name of an individual person</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FullName" type="String255">
+				<xs:annotation>
+					<xs:documentation>Preferred form of personal name for display as a string.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SortingName" type="String255" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The full name with the elements in preferred sorting sequence (vCard: Sort-String).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AtomisedName" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="InheritedName" type="String255">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">Family names, generational names, clan name, parents/grandparents personal names, etc. This (= last name in western cultures) may be compound ('Fischer von Waldheim', 'da Selva', 'Silvano Morales'). Depending on culture it is not necessarily the name of the parents nor common to the married couple and children, thus 'family name' should be avoided even though used in vCard.  (vCard:N.Family)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Prefix" type="String255" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">Prefix to inherited name that should be output before name, but is usually not included in sorting. Examples: 'von', 'Lord'. Compare Title for 'Prof', 'Dr.' (vCard:N.Prefix)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Suffix" type="String255" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">Suffix to name that should be output after name, regardless whether it is in sorting sequence (Inherited, Given) or not. Examples: 'Jun.', 'III.'. (vCard:N.Suffix)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="GivenNames" type="String255" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">The name given to a person as a personal name (= first or christian name in western cultures, including 'middle initials') may contain several words ('Ana Maria', 'Jerry B.'). Applicable only to persons. (vCard:N.Given + vCard:N.Middle)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="PreferredName" type="String255" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation xml:lang="en-us">May differ from the first given name: second given name, nickname ('Bob' for 'Robert'), etc. (vCard:Nickname)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TelephoneDevice">
+		<xs:annotation>
+			<xs:documentation>Type of device reached by telephone number, e.g. voice, fax, voice/fax</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:Name"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TelephoneNumber">
+		<xs:annotation>
+			<xs:documentation>Telephone or Fax number</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Number" type="String255">
+				<xs:annotation>
+					<xs:documentation>Full number in standard international format</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Device" type="TelephoneDevice" minOccurs="0"/>
+			<xs:element name="UsageNotes" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text for constraints on use e.g. "weekdays only" or "home number"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="preferred" type="xs:boolean" use="optional" default="false"/>
+	</xs:complexType>
+	<xs:simpleType name="Role">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The role of an agent or contact.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+</xs:schema>

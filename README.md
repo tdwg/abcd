@@ -4,7 +4,7 @@
 * **Status**: TDWG current (2005) standard
 * **Category**: Technical specification
 * **Permanent URL**: http://www.tdwg.org/standards/115
-* **TDWG task group**: Access to Biological Collections Data
+* **TDWG interest group**: Access to Biological Collections Data
 * **Date submitted**: 2006-11-24
 * **Date published**: 2005-09-16
 * **Last modified**: 2007-08-21

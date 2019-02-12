@@ -1,4 +1,4 @@
-###  Task Group Charter [*Draft!*]
+###  Task Group Charter
 # Extension for Geosciences Task Group 
 
 #### Convenor

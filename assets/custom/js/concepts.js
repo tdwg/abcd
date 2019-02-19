@@ -173,7 +173,7 @@ new Vue({
       });*/
       $.ajax({
         type: "GET",
-        url: '/terms/classes_and_properties.json',
+        url: '/terms/concepts.json',
         async: false,
         success: function (json) {
           

@@ -1,67 +1,95 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:xlink="http://www.w3.org/1999/xlink"
-xmlns:rddl="http://www.rddl.org/"
-xml:base="http://rs.tdwg.org/abcd"
-xml:lang="en-US">
-<head>
-    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-    <META HTTP-EQUIV="EXPIRES" CONTENT="0">
-		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-		<!-- <!DOCTYPE html PUBLIC "-//XML-DEV//DTD XHTML RDDL 1.0//EN" "http://www.rddl.org/rddl-xhtml.dtd">-->
-<!-- Note: DOCTYPE is commented out in the RDDL example RDDL itself; perhaps otherwise some html clients cause problems. -->
-<title>Resource Directory (RDDL) for ABCD</title>
-  <link href="http://www.rddl.org/xrd.css" type="text/css" rel="stylesheet"/>
-</head>
-<body>
-
-<h1>Resource Directory (RDDL) for ABCD</h1>
-
-<div id="overview">
-	<h2>Overview</h2>
-	<p>The ABCD root namespace (<code>http://rs.tdwg.org/abcd/</code>) is currently only used together with appended major versions. 
-	Multiple minor versions of a standard may use the same namespace if they prove to be backwards compatible.
-	</p>
-
-<rddl:resource xlink:type="simple" id="home"
-	xlink:title="ABCD Home Page"
-	xlink:role="http://www.w3.org/1999/xhtml"
-	xlink:arcrole="http://www.rddl.org/purposes#non-normative-reference"
-	xlink:href="http://www.bgbm.org/TDWG/CODATA/Schema/default.htm">
-	<li><a href="http://www.bgbm.org/TDWG/CODATA/Schema/default.htm">ABCD Home Page</a></li>
-</rddl:resource>
-
-</div>
-
-<h2>Resources</h2>
-<div id="resources" class="resource">
-	<ul class="compact">
-        <rddl:resource xlink:type="simple" id="ABCD1.20"
-        	xlink:role="http://www.rddl.org/"
-        	xlink:arcrole="http://www.rddl.org/purposes#directory"
-        	xlink:href="http://rs.tdwg.org/abcd/1.2"
-        	xlink:title="RDDL Subdirectory for ABCD version 1.2: http://rs.tdwg.org/abcd/1.2" >
-        	<li><a href="http://rs.tdwg.org/abcd/1.2">RDDL Subdirectory for ABCD version 1.2: http://rs.tdwg.org/abcd/1.2</a></li>
-        </rddl:resource>
-
-        <rddl:resource xlink:type="simple" id="ABCD2.06"
-        	xlink:role="http://www.rddl.org/"
-        	xlink:arcrole="http://www.rddl.org/purposes#directory"
-        	xlink:href="http://rs.tdwg.org/abcd/2.06"
-        	xlink:title="RDDL Subdirectory for ABCD version 2.06: http://rs.tdwg.org/abcd/2.06" >
-        	<li><a href="http://rs.tdwg.org/abcd/2.06">RDDL Subdirectory for ABCD version 2.06: http://rs.tdwg.org/abcd/2.06</a></li>
-        </rddl:resource>      
-
-        <rddl:resource xlink:type="simple" id="ABCD_DEV"
-        	xlink:role="http://www.rddl.org/"
-        	xlink:arcrole="http://www.rddl.org/purposes#directory"
-        	xlink:href="http://rs.tdwg.org/abcd/dev"
-        	xlink:title="RDDL Subdirectory for the latest unreleased ABCD working version" >
-        	<li><a href="http://rs.tdwg.org/abcd/dev">RDDL Subdirectory for the latest unreleased ABCD working version</a></li>
-        </rddl:resource>      
-
-	</ul>
-</div>
-
-<p>Copyright (c) TDWG, November 2006</p>
-
-</body></html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>ABCD - Access to Biological Collection Data</title>
+    <link href="http://rs.tdwg.org/dwc/" rel="schema.DwC">
+    <meta content="ABCD - Access to Biological Collection Data" name="DC.title">
+    <meta content="The ABCD landing page." name="DC.description">
+    <meta content="biodiversity, standards" name="DC.subject">
+    <meta content="ABCD 3.0 Project" name="DC.creator">
+    <meta content="Fabian Reimeier (BGBM)" name="DC.contributor">
+    <meta content="David Fichtmüller (BGBM)" name="DC.contributor">
+    <meta content="" name="DC.dateAccepted">
+    <meta content="" name="DC.replaces">
+    <meta content="2019" name="DC.modified">
+    <meta content="http://rs.tdwg.org/abcd" name="DC.identifier">
+    <meta content="text/html" name="DC.format">
+    <meta content="ABCD 3.0 Project Group" name="DC.publisher">
+    <meta content="http://creativecommons.org/licenses/by/4.0/legalcode" name="DC.license">
+    <meta content="public" name="DC.accessRights">
+    <meta content="ABCD Landing Page. 2019" name="DC.bibliographicCitation">
+    <meta content="en" name="DC.language">
+    <link href="http://www.tdwg.org/" rel="meta">
+    <link type="text/css" rel="stylesheet" href="/assets/materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/assets/custom/css/abcd.css"  media="screen,projection"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+  <body>
+    <header id="navigation-app">
+      <navigation title="Access to Biological Collections Data (ABCD)"></navigation>
+    </header>
+    <main id="main-app">
+      <div class="container v-pre">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <div class="section">
+              <table class="meta-table">
+                <tbody>
+                  <tr>
+                    <td><strong>Name of the Standard</strong></td>
+                    <td>Access to Biological Collections Data (ABCD)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Standard IRI</strong></td>
+                    <td><a href="http://www.tdwg.org/standards/115">http://www.tdwg.org/standards/115</a></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Download</strong></td>
+                    <td><a href="https://github.com/tdwg/abcd/archive/master.zip">https://github.com/tdwg/abcd/archive/master.zip</a></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Publisher</strong></td>
+                    <td>Access to Biological Collections Data TDWG Task Group</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Status</strong></td>
+                    <td>TDWG current (2005) standard</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Category</strong></td>
+                    <td>Technical specification</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Date submitted</strong></td>
+                    <td><tt>2006-11-24</tt></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Date published</strong></td>
+                    <td><tt>2005-09-16</tt></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Last modified</strong></td>
+                    <td><tt>2019-01-31</tt></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="section">
+              <h4>Abstract</h4>
+              <p>The Access to Biological Collections Data (ABCD) Schema is an evolving comprehensive standard for the access to and exchange of data about specimens and observations (a.k.a. primary biodiversity data).</p>
+              <p>The ABCD Schema attempts to be comprehensive and highly structured, supporting data from a wide variety of databases. It is compatible with several existing data standards. Parallel structures exist so that either (or both) atomised data and free-text can be accommodated. Versions 1.2 and 2.06 are currently in use with the <a href="http://www.gbif.org">GBIF</a> (Global Biodiversity Information Facility) and <a href="http://www.biocase.org">BioCASe</a> (Biological Collection Access Service for Europe) networks.</p>
+              <p>Apart from the GBIF and BioCASe networks, the potential for the application of ABCD extends to internal networks, or in-house legacy data access (e.g. datasets from external sources that shall not be converted and integrated into an institution's own data, but be kept separately, though easily accessible). By defining relations between terms, ABCD is a step towards an ontology for biological collections.</p>
+              <h4>Preferred citation</h4>
+              <p>Access to Biological Collections Data task group. 2007. Access to Biological Collection Data (ABCD), Version 2.06. Biodiversity Information Standards (TDWG) <a href="http://www.tdwg.org/standards/115">http://www.tdwg.org/standards/115</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/vue/vue.min.js"></script>
+    <script type="text/javascript" src="/assets/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/assets/custom/js/navigation.js"></script>
+  </body>
+</html>

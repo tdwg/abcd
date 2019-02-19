@@ -1,0 +1,189 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:xlink="http://www.w3.org/1999/xlink" 
+	  xmlns:rddl="http://www.rddl.org/" 
+	  xml:base="http://rs.tdwg.org/UBIF/2006" 
+	  xml:lang="en-US">
+	   
+<head>
+<!-- <!DOCTYPE html PUBLIC "-//XML-DEV//DTD XHTML RDDL 1.0//EN" "http://www.rddl.org/rddl-xhtml.dtd">--><!-- Note: DOCTYPE is commented out in the RDDL example RDDL itself; perhaps otherwise some html clients cause problems. -->
+  <title>Access to Biological Collections Data (ABCD) Standard 2.06</title>
+  
+  <style type="text/css">
+.ednote {color: red; font-size: 80%; font-style: italic; }
+div.toc ul {list-style: none }
+.new {color: blue}
+pre.example { color: green; font-family: monospace; font-weight: bold; margin-left: 0px; margin-right: 0px; white-space: pre}
+pre.dtd {font-family: monospace; font-weight: normal; margin-left: 0px; margin-right: 0px; white-space: pre}
+div.toc, div.subtoc {background-color: #ccccff;border: none;margin-right: 5%;}
+code {color: #660099; font-family: monospace; font-weight: bold}
+.ref {font-weight: bold}
+.normref {font-weight: bold}
+div.navbar {text-align: center}
+.center {text-align: center}
+.alphalist {list-style: upper-alpha}
+.codelist {}
+dl.codelist dt {color: #660099; font-family: mono; font-style: normal;font-weight: normal}
+.termlist {}
+dl.termlist dt {color: #330000; font-weight: bold}
+a.entity {color: red}
+a.element {color: green}
+a.attribute {	color: red}
+.elements {	color: green; font-family: mono; font-weight: bold}
+.attributes {	color: red; font-family: mono; font-weight: bold}
+.content {	color: blue; font-family: mono; font-weight: bold}
+.dfn {	color: #400040; font-style: italic; font-weight: bold}
+tt {	color: #4000af}
+dl.desc {	margin-left: 5%; margin-right: 5%}
+.sect2 {	margin-left: 5%; margin-right: 5%}
+.element {	color: #f00000; font-weight: bold}
+.attlist {	color: #f06000; font-weight: bold}
+.pentity {	color: #000080}
+span.attlistid {	color: gray; font-size: smaller; vertical-align: super}
+span.elementid {	color: gray; font-size: 80%; vertical-align: super}
+span.fixme {	color: red}
+table.moduledef {	border-bottom: red solid; border-left: red solid;	border-right: red solid; border-top: red solid; width: 100%}
+.tm, .reg {	vertical-align: super; font-size: smaller}
+div.head {	display: block;	border-width: 0;	border-bottom-width: thin;	border-style: groove;	padding-bottom: 2em;}
+div.note {	margin-left: +5%;	font-size: 80%;}
+body {margin: 2em 1em 2em 70px;font-family: sans-serif;color: black;background: white;background-position: top left; background-attachment: fixed; background-repeat: no-repeat;}
+th, td { /* ns 4 */ font-family: sans-serif; }
+h1, h2, h3, h4, h5, h6 { text-align: left }
+h1, h2, h3 { color: #005A9C }
+h1 { font: 170% sans-serif }
+h2 { font: 140% sans-serif }
+h3 { font: 120% sans-serif }
+h4 { font: bold 100% sans-serif }
+h5 { font: italic 100% sans-serif }
+h6 { font: small-caps 100% sans-serif }
+.hide { display: none }
+div.head { margin-bottom: 1em }
+div.head h1 { margin-top: 2em; clear: both }
+div.head table { margin-left: 2em; margin-top: 2em }
+div.head img { color: white; border: none } /* remove border from top image */
+p.copyright { font-size: small }
+p.copyright small { font-size: small }
+@media screen {  /* hide from IE3 */ a:hover { background: #ffa } }
+pre { margin-left: 2em }
+dt, dd { margin-top: 0; margin-bottom: 0 } /* opera 3.50 */
+dt { font-weight: bold }
+pre, code { font-family: monospace } /* navigator 4 requires this */
+ul.toc {
+  list-style: disc;		/* Mac NS has problem with 'none' */
+  list-style: none;
+}
+@media aural {  
+  h1, h2, h3 { stress: 20; richness: 90 }
+  .hide { speak: none }
+  p.copyright { volume: x-soft; speech-rate: x-fast }
+  dt { pause-before: 20% }
+  pre { speak-punctuation: code } 
+}
+/* Things (icons) that should only show up in projection mode */
+.projection { display: none }
+@media projection { .projection { display: inline } }
+body {}
+code           { font-family: monospace; }
+div.constraint, div.issue, div.note, div.notice     { margin-left: 2em; }
+dt.label { display: run-in; } 
+li p           { margin-top: 0.3em; margin-bottom: 0.3em; }
+.pentity {color: #0000FF}
+div.issue { color: red; }
+div.resource {	display: block;	border-width: 2;	border-style: groove;	padding-bottom: 2em;	background-color: #FFFFDD;}
+div.resource code { color: #005A9C }
+a.back { color: #FFFFFF;}
+table.eg { background-color:#99ffff; width: 100%; border-width: 2; border-style : ridge; }
+  </style>
+</head>
+
+<body>
+<h1>Access to Biological Collections Data (ABCD) Standard 2.06</h1>
+<div class="head">
+<p>
+<a href="http://rs.tdwg.org/abcd/2.06/rddl-2007-06-13.html">This version on-line</a> (2007-06-13)<br />
+
+<a href="http://rs.tdwg.org/abcd/2.06">Latest Version</a>
+</p>
+</div>
+
+<div id="overview">
+<h2>Overview</h2>
+<p>This is ABCD version 2.06. For more information on ABCD in general please see the <a href="http://rs.tdwg.org/abcd/">general ABCD resource directory</a>. Several minor updates have been done to ABCD2.06, the ratified TDWG standard, that are backwards compatible and do not require a change in the namespace. For more details see <a href="http://rs.tdwg.org/abcd/2.06/rddl-2007-06-13.html">Updates to ABCD2.06</a>.
+</p>
+
+<p>Note: While this document is human-readable, RDDL-aware processors may use it to automatically retrieve resources such as different schema versions for validating documents. See <a href="http://www.rddl.org">http://www.rddl.org</a> for further information.</p>
+
+</div>
+
+<h2>Resources</h2>
+<div id="resources" class="resource">
+<ul class="compact">
+
+<rddl:resource xlink:type="simple" id="home"
+	xlink:title="ABCD Home Page"
+	xlink:role="http://www.w3.org/1999/xhtml"
+	xlink:arcrole="http://www.rddl.org/purposes#non-normative-reference"
+	xlink:href="http://www.tdwg.org/activities/abcd">
+	<li><a href="http://www.tdwg.org/activities/abcd">ABCD Home Page</a></li>
+</rddl:resource>
+<rddl:resource xlink:type="simple" id="documentation"
+	xlink:title="ABCD v2 Documentation Wiki"
+	xlink:role="http://www.w3.org/1999/xhtml"
+	xlink:arcrole="http://www.rddl.org/purposes#non-normative-reference"
+	xlink:href="http://wiki.tdwg.org/abcd/"
+	>
+	<li><a href="http://wiki.tdwg.org/ABCD/">ABCD v2 Documentation Wiki</a></li>
+
+</rddl:resource>
+<rddl:resource xlink:type="simple" id="primer" 
+	xlink:title="ABCD Primer"
+	xlink:role="http://www.w3.org/1999/xhtml"
+	xlink:arcrole="http://www.rddl.org/purposes#non-normative-reference"
+	xlink:href="http://wiki.tdwg.org/twiki/bin/view/ABCD/AbcdPrimer"
+	>
+	<li><a href="http://wiki.tdwg.org/twiki/bin/view/ABCD/AbcdPrimer">ABCD Primer</a></li>
+</rddl:resource>
+ 
+<rddl:resource xlink:type="simple" id="xsd"
+	   xlink:title="W3C XML Schema for document validation (normative)"
+	   xlink:role="http://www.w3.org/2000/10/XMLSchema"
+	   xlink:arcrole="http://www.rddl.org/purposes#schema-validation"
+	   xlink:href="http://rs.tdwg.org/abcd/2.06/ABCD_2.06.xsd">
+	<li><a href="http://rs.tdwg.org/abcd/2.06/ABCD_2.06.xsd">ABCD2.06: XML Schema for validation (normative)</a>
+  		<ul class="compact">
+  		 <li>Note 1: Although RDDL-aware processors may automatically detect a schema location, most processors require an explicit location. 
+  		 ABCD instance documents intended for validation should therefore contain the following attributes in the "Datasets" root element: <br />
+  			<code>xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" <br />
+
+  			xsi:schemaLocation="http://www.tdwg.org/schemas/abcd/2.06 http://rs.tdwg.org/abcd/2.06/ABCD_2.06.xsd"</code>.
+  		 </li>
+  		</ul>
+  	</li>
+</rddl:resource>
+
+
+<rddl:resource xlink:type="simple" id="zip"
+	   xlink:title="W3C XML Schema, zipped for download"
+     xlink:role="http://www.isi.edu/in-notes/iana/assignments/media-types/application/zip"
+     xlink:arcrole="http://www.rddl.org/purposes#software-package"
+	   xlink:href="http://rs.tdwg.org/abcd/2.06/ABCD_2.06.zip"
+	   >
+	<li><a href="http://rs.tdwg.org/abcd/2.06/ABCD_2.06.zip">ABCD2.06: Zipped archive with XML Schema plus accessory documentations files for downloading</a></li>
+</rddl:resource>
+
+<ul>
+<p>See also the <a href="http://rs.tdwg.org/abcd/2.06/rddl-2007-06-13.html">Updates to ABCD2.06</a> since its ratification that are backwards compatible and share the same namespace</p>
+
+</ul>
+
+</ul>
+
+
+</div>
+
+<div id="footer">
+<p>Copyright (c) TDWG, June 2007</p>
+</div>
+
+</body>
+
+</html>

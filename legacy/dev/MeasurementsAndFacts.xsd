@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.tdwg.org/schemas/abcd/dev" targetNamespace="http://www.tdwg.org/schemas/abcd/dev" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="ABCD_TypeLibrary.xsd"/>
+	<xs:include schemaLocation="Bibliography.xsd"/>
+	<xs:complexType name="MeasurementOrFact">
+		<xs:annotation>
+			<xs:documentation>General purpose measurement and fact (descriptor) recording.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MeasurementOrFactAtomised" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MeasuredBy" type="String" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Attribution of the measurement to a Person</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MeasurementDateTime" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Date and/or Time the measurement was taken</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Duration" type="String" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Duration of measurement in time.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Method" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Method used to make measurement.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Parameter" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Describes type of measurement or fact, such as width, abundance, circumference, temperature etc. or color etc. </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="AppliesTo" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Depending on the use of the type, this can further specify the actual part measured. For example, a measurement of temperature may be a surface, air or sub-surface measurement.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="LowerValue" type="StringL">
+							<xs:annotation>
+								<xs:documentation>Lower or only value or fact text.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="UpperValue" type="StringL" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Upper value where there is a range.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="UnitOfMeasurement" type="String" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Unit of measurement.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Accuracy" type="String" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Statement of accuracy of measurement.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MeasurementOrFactReference" type="Reference" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Reference (publication) where this measurement was taken from</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="IsQuantitative" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Flag indicating if the value represents the numerical result of a quantitative measurement (TRUE) or a descriptor with textual or categorical result (FALSE).</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="MeasurementOrFactText" type="StringL" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text alternative to atomised version.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Lookup">
+		<xs:annotation>
+			<xs:documentation>Descriptive term. May be taken from a controlled vocabulary maintained by a third party.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Domain" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Subject area of the term list.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Term" type="String">
+				<xs:annotation>
+					<xs:documentation>Descriptive term.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceName" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the term has been drawn from a named term list or thesaurus, its name is recorded here.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SourceNameVersion" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Version or date of the term list or thesaurus from which the term is drawn.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Comment" type="String" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Free text comment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LookupL">
+		<xs:annotation>
+			<xs:documentation>LookupType extended with language attribute (please do not use the deprecated "Language" attribute - all attributes should be lowercase). </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Lookup">
+				<xs:attribute name="Language" type="xs:language"/>
+				<xs:attribute name="language" type="xs:language"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

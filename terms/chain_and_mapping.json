@@ -1,0 +1,2760 @@
+{
+    "rdf:RDF": {
+        "@xmlns:rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+        "@xmlns:rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "@xmlns:owl": "http://www.w3.org/2002/07/owl#",
+        "@xmlns:xsd": "http://www.w3.org/2001/XMLSchema#",
+        "@xmlns:dc": "http://purl.org/dc/elements/1.1/",
+        "@xmlns:abcd": "http://rs.tdwg.org/abcd/terms/",
+        "@xmlns:skos": "http://www.w3.org/2004/02/skos/core#",
+        "@xmlns:dwcattributes": "http://rs.tdwg.org/dwc/terms/attributes/",
+        "@xmlns:vann": "http://purl.org/vocab/vann/",
+        "@xmlns:dcterms": "http://purl.org/dc/terms/",
+        "@xmlns": "http://rs.tdwg.org/abcd/terms/",
+        "@xml:base": "http://rs.tdwg.org/abcd-mini-test/terms/",
+        "owl:Ontology": {
+            "@rdf:about": "http://rs.tdwg.org/abcd/terms/",
+            "dc:title": "ABCD Mini Test Ontology",
+            "dc:creator": "David Fichtmueller",
+            "dc:publisher": "ABCD 3.0 Project",
+            "dcterms:issued": "2018-01-18",
+            "dcterms:modified": null,
+            "dc:description": "An ontology describing exemplary concepts from an ABCD Mini Test Standard.",
+            "owl:versionInfo": "0.1",
+            "rdfs:comment": "DO NOT USE FOR PRODUCTION! This is just a for testing the transformation process for the ABCD standard towards an ontology."
+        },
+        "rdf:Description": [
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasDate"
+                        },
+                        {
+                            "@rdf:resource": "hasAccession"
+                        }
+                    ],
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Accession-Date"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "resourceURI"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAccession"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Accession-URI"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAcquisitionDate"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Acquisition-Date"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "text"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAnnotation"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Annotation-Text"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAssemblage"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "id"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Assemblage-ID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "name"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAssemblage"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Assemblage-Name"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "resourceURI"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAssemblage"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Assemblage-ResourceURI"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "directAccessURL"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAssociation"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Association-DirectAccessURL"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "guid"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAssociation"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Association-GUID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAssociation"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "id"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Association-ID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAssociation"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "kindOfUnit"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Association-KindOfUnit"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAssociation"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Association-Notes"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "resourceURI"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAssociation"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Association-ResourceURI"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAssociation"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "sourceID"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Association-SourceID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasAssociation"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "sourceInstitutionID"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Association-SourceInstitutionID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "name"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasBiotope"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Biotope-Name"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "text"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasBiotope"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Biotope-Text"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasBlockedUntilDate"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "BlockedUntil"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "resourceURI"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasContact"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Contact-ResourceURI"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasContact"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Contact-UnformattedValue"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasContact"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "websiteURL"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Contact-WebsiteURL"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "accuracy"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasCoordinates"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Coordinates-Accuracy"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "method"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasCoordinates"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Coordinates-Method"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasCoordinates"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Coordinates-Notes"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasCoordinates"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "CoordinatesText"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "name"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasCountry"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Country-Name"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "timeSpanBegin"
+                    },
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasDateModified"
+                        },
+                        {
+                            "@rdf:resource": "hasDataSet"
+                        }
+                    ]
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DataSet-DateModified"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasDataSet"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DataSet-Details"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "directAccessURL"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasDataSet"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DataSet-DirectAccessURL"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "guid"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasDataSet"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DataSet-GUID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "id"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasDataSet"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DataSet-ID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "informationWithheld"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasDataSet"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DataSet-InformationWithheld"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "logoURL"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasDataSet"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DataSet-LogoURL"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "resourceURI"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasDataSet"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DataSet-ResourceURI"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "title"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasDataSet"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DataSet-Title"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "websiteURL"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasDataSet"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DataSet-WebsiteURL"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "timeSpanBegin"
+                    },
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasDateCreated"
+                        },
+                        {
+                            "@rdf:resource": "hasDataSet"
+                        }
+                    ]
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DateCreated"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasDate"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "DateTime-DateText"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "fullName"
+                    },
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasGatheringAgent"
+                        },
+                        {
+                            "@rdf:resource": "hasFieldNumber"
+                        }
+                    ]
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "FieldNumber-CollectorName"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "id"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasFieldNumber"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "FieldNumber-ID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasVersion"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "FileFormatVersion"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "details"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasGathering"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Gathering-Details"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasGathering"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "id"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Gathering-ID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "method"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasGathering"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Gathering-Method"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasGathering"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Gathering-Notes"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasGatheringAgent"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "GatheringAgentsText"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "temperatureValue"
+                    },
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasTemperature"
+                        },
+                        {
+                            "@rdf:resource": "hasGrowthCondition"
+                        }
+                    ]
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "GrowthCondition-Temperature"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "fullScientificName"
+                    },
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasHigherTaxon"
+                        },
+                        {
+                            "@rdf:resource": "hasScientificName"
+                        }
+                    ]
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "HigherTaxonName"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "method"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasIdentification"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Identification-Method"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasIdentification"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Identification-Notes"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "role"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasIdentifier"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "IdentifierRole"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "timeSpanBegin"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasLoanDate"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "LoanDate"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "timeSpanBegin"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasLoanReturnDate"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "LoanReturnDate"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasMark"
+                        },
+                        {
+                            "@rdf:resource": "hasMultimediaObject"
+                        }
+                    ],
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "id"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Mark-ImageID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasMark"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Mark-Notes"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "fullName"
+                    },
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasMark"
+                        },
+                        {
+                            "@rdf:resource": "hasAuthor"
+                        }
+                    ]
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "MarkAuthor"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasMark"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "verbatimText"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "MarkText"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "fullName"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasMeasuringAgent"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "MeasuredBy"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "accuracy"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasMeasurementOrFact"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "MeasurementOrFact-Accuracy"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "method"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasMeasurementOrFact"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "MeasurementOrFact-Method"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasMeasurementOrFact"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "MeasurementOrFactText"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasMultimediaObject"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "id"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "MultimediaObject-ID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasMultimediaObject"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "MultimediaObject-Notes"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "temperatureValue"
+                    },
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasTemperature"
+                        },
+                        {
+                            "@rdf:resource": "hasMultimediaObject"
+                        }
+                    ]
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "MultimediaObject-Temperature"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "title"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasMultimediaObject"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "MultimediaObject-Title"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "name"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasNamedArea"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "NamedArea-Name"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "guid"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasOrganization"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Organization-GUID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "logoURL"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasOrganization"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Organization-LogoURL"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "name"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasOrganization"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Organization-Name"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "details"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasPermit"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Permit-Details"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "resourceURI"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasPermit"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Permit-ResourceURI"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "text"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasPermit"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Permit-Text"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasPermit"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "websiteURL"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Permit-WebsiteURL"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasPlantingDate"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "PlantingDate"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasDate"
+                        },
+                        {
+                            "@rdf:resource": "hasPreparation"
+                        }
+                    ],
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "PreparationDate"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "method"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasPreparation"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "PreparationMethod"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasPreservation"
+                        },
+                        {
+                            "@rdf:resource": "hasTemperature"
+                        }
+                    ],
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "temperatureValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Preservation-Temperature"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasDate"
+                        },
+                        {
+                            "@rdf:resource": "hasPreservation"
+                        }
+                    ],
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "PreservationDateBegin"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasPreviousUnit"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "sourceID"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "PreviousSourceID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasPreviousUnit"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "sourceInstitutionID"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "PreviousSourceInstitutionID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasPreviousUnit"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "PreviousUnit-Notes"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "guid"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasPreviousUnit"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "PreviousUnitGUID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasPreviousUnit"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "id"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "PreviousUnitID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "resourceURI"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasProject"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Project-ResourceURI"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "title"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasProject"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Project-Title"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasProject"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "websiteURL"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Project-WebsiteURL"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "details"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasReference"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Reference-Details"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "guid"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasReference"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Reference-GUID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "resourceURI"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasReference"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Reference-ResourceURI"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "text"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasReference"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Reference-Text"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasReference"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "websiteURL"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Reference-WebsiteURL"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "directAccessURL"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasSequence"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Sequence-DirectAccessURL"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasSequence"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "id"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Sequence-ID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "method"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasSequence"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Sequence-Method"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasSynecology"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Synecology-Notes"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasIdentifiedTaxon"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "TaxonIdentified-NameComments"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasStratigraphicTerm"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Term-Notes"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "timeSpanBegin"
+                    },
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasUnit"
+                        },
+                        {
+                            "@rdf:resource": "hasDateModified"
+                        }
+                    ]
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Unit-DateModified"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "guid"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasUnit"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Unit-GUID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasUnit"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "id"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Unit-ID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasUnit"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "informationWithheld"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Unit-InformationWithheld"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasUnit"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "kindOfUnit"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Unit-KindOfUnit"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasUnit"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Unit-Notes"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "resourceURI"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasUnit"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Unit-ResourceURI"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasUnit"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "sourceID"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Unit-SourceID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasUnit"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "sourceInstitutionID"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Unit-SourceInstitutionID"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasUnit"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "websiteURL"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Unit-WebsiteURL"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "timeSpanBegin"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasVerificationDate"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "VerificationDate"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "notes"
+                    },
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasNomenclaturalTypeDesignation"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "VerificationNotes"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": [
+                        {
+                            "@rdf:resource": "hasVersion"
+                        },
+                        {
+                            "@rdf:resource": "hasDateCreated"
+                        }
+                    ],
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "timeSpanBegin"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "Version-DateCreated"
+                }
+            },
+            {
+                "owl:propertyChain": {
+                    "@rdf:parseType": "Collection",
+                    "owl:ObjectProperty": {
+                        "@rdf:resource": "hasVersion"
+                    },
+                    "owl:DatatypeProperty": {
+                        "@rdf:resource": "unformattedValue"
+                    }
+                },
+                "rdfs:subPropertyOf": {
+                    "@rdf:resource": "VersionText"
+                }
+            }
+        ],
+        "owl:Class": [
+            {
+                "@rdf:about": "AcquiredFrom",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Contact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "wasPreviousOwnerOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Acknowledgement",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Legal Statement"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isAcknowledgementOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Altitude",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Measurement Or Fact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isAltitudeOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Annotation-Date",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Date"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isDateOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Annotation"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Annotator",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Contact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isAnnotatorOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Aspect",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Measurement Or Fact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isAspectOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "BiostratigraphicTerm",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Stratigraphic Term"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isBiostratigraphicTermOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Biotope-MeasurementOrFact",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Measurement Or Fact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isMeasurementOrFactOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Biotope"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "ChronostratigraphicTerm",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Stratigraphic Term"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isChronostratigraphicTermOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Coordinates-Reference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Coordinates"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "CultureCollectionUnit-Reference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "CultureCollectionUnit"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "ContentContact",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Contact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isContentContactOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "DataSet-ContentContact",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Contact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isContentContactOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "DataSet"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Owner",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Contact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isOwnerOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "DataSet-Owner",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Contact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isOwnerOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "DataSet"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "DataSet-Version",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Version"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isVersionOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "DataSet"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "DateCreated",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Date"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isDateCreatedOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "DataSet-DateCreated",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Date"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isDateCreatedOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "DataSet"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "DateModified",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Date"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isDateModifiedOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Depth",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Measurement Or Fact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isDepthOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "FieldNotesReference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isFieldNoteReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Gathering-Date",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Date"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isDateOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Gathering"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "GatheringAgent",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Person"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isGatheringAgentOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Gathering-MeasurementOrFact",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Measurement Or Fact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isMeasurementOrFactOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Gathering"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Gathering-MultimediaObject",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Multimedia Object"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isMultimediaObjectOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Gathering"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "GrowthCondition-MeasurementOrFact",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Measurement Or Fact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isMeasurementOrFactOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "GrowthCondition"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "GrowthCondition-Reference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "GrowthCondition"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Height",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Measurement Or Fact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isHeightOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Identification-Date",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Date"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "hasDate"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Identification"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Identification-Reference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Identification"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "IdentificationSource",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isIdentificationSourceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Identification"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Identifier",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Person"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isIdentifierOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "LastEditor",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Person"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isLastEditorOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "License",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Legal Statement"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isLicenseOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "LithostratigraphicTerm",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Stratigraphic Term"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isLithostratigraphicTermOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "MeasurementOrFact-Date",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Date"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isDateOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "MeasurementOrFact"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "MeasurementOrFact-Reference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "MeasurementOrFact"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "MultimediaObject-Source",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isSourceReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "MultimediaObject"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "MultimediaObject-DateCreated",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Date"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isDateCreatedOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "MultimediaObject"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "MultimediaObject-DateModified",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Date"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isDateModifiedOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "MultimediaObject"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "NamedArea-Reference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "NamedArea"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "NomenclaturalTypeDesignation-Reference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "NomenclaturalTypeDesignation"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "OtherLegalStatement",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Legal Statement"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isOtherLegalStatementOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Preparation-Reference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Preparation"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "PreparationAgent",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Person"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isPreparationAgentOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "PreviousUnit-Date",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Date"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isDateOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "PreviousUnit"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Project-Contact",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Contact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isContactOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Project"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Sequence-Reference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Sequence"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "SequencingAgent",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Person"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isSequencingAgentOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "SpecimenUnit-MeasurementOrFact",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Measurement Or Fact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isMeasurementOrFactOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "SpecimenUnit"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "SpecimenUnit-Owner",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Contact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isOwnerOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "SpecimenUnit"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "StratigraphicTerm-Source",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isSourceReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "StratigraphicTerm"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "SuggestedCitation",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Legal Statement"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isSuggestedCitationOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Synecology-AssociatedTaxon",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Identified Taxon"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isIdentifiedTaxonOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Synecology"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "TaxonInBackground",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Identified Taxon"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isTaxonInBackgroundOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "MultimediaObject"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "TechnicalContact",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Contact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isTechnicalContactOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "TypifiedName",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Scientific Name"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isTypifiedNameOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "NomenclaturalTypeDesignation"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Unit-ContentContact",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Contact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isContentContactOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Unit"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Unit-Identification",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Identification"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isIdentificationOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Unit"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Unit-MeasurementOrFact",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Measurement Or Fact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isMeasurementOrFactOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Unit"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Unit-MultimediaObject",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Multimedia Object"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isMultimediaObjectOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Unit"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Unit-Owner",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Contact"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isOwnerOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Unit"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Unit-Reference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Unit"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Unit-SourceReference",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Reference"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isSourceReferenceOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "Unit"
+                        }
+                    }
+                }
+            },
+            {
+                "@rdf:about": "Verifier",
+                "owl:intersectionOf": {
+                    "@rdf:parseType": "Collection",
+                    "owl:Class": {
+                        "@rdf:about": "Person"
+                    },
+                    "owl:Restriction": {
+                        "owl:onProperty": {
+                            "@rdf:resource": "isVerifierOf"
+                        },
+                        "owl:hasValue": {
+                            "@rdf:resource": "http://www.w3.org/2002/07/owl#Thing"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

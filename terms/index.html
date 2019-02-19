@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>ABCD - Base Ontology Terms</title>
+    <link href="http://rs.tdwg.org/abcd/" rel="schema.abcd">
+    <meta content="ABCD - Base Ontology Terms" name="DC.title">
+    <meta content="The ABCD base ontology terms." name="DC.description">
+    <meta content="biodiversity, standards" name="DC.subject">
+    <meta content="ABCD 3.0 Project" name="DC.creator">
+    <meta content="Fabian Reimeier (BGBM)" name="DC.contributor">
+    <meta content="David Fichtmüller (BGBM)" name="DC.contributor">
+    <meta content="" name="DC.dateAccepted">
+    <meta content="" name="DC.replaces">
+    <meta content="2019" name="DC.modified">
+    <meta content="http://rs.tdwg.org/abcd" name="DC.identifier">
+    <meta content="text/html" name="DC.format">
+    <meta content="ABCD 3.0 Project Group" name="DC.publisher">
+    <meta content="http://creativecommons.org/licenses/by/4.0/legalcode" name="DC.license">
+    <meta content="public" name="DC.accessRights">
+    <meta content="ABCD Base Ontology Terms. 2019" name="DC.bibliographicCitation">
+    <meta content="en" name="DC.language">
+    <meta content="http://rs.tdwg.org/abcd/terms" name="namespaceURI">
+    <meta content="abcd" name="preferredNamespaceAbbreviation">
+    <link href="http://www.tdwg.org/" rel="meta">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link type="text/css" rel="stylesheet" href="/assets/materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/assets/custom/css/abcd.css"  media="screen,projection"/>
+  </head>
+  <body>
+    <header id="navigation-app">
+      <navigation title="Terms"></navigation>
+    </header>
+    <main id="main-app">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m10 offset-m1 xl8 offset-xl1">
+            <div id="info-section" class="section flow-text">
+              <div>
+                This is the normative list of terms contained in the ABCD Base Ontology.
+                <blockquote>
+                  <span>Namespace URI: <tt style="display: block;">http://rs.tdwg.org/abcd/terms/</tt></span>
+                  <span>Preferred namespace abbreviation: <tt style="display:block;">abcd</tt></span>
+                </blockquote>
+              </div>
+            </div>
+            <div id="search-section" class="section">
+              <div class="concept-search">
+                <div class="search-wrapper"><input type="text" v-model="conceptSearchInput" placeholder="Search for Concepts"><i class="material-icons">search</i></div>
+              </div>
+            </div>
+            <div id="loading-section" v-if="concepts.length == 0" class="section">
+              <h3>Loading ...</h3>
+            </div>
+            <div id="concept-section" v-if="filteredConcepts.length > 0" class="section">
+              <div v-for="conceptGroup in conceptGroups"  v-bind:id="'group-'+conceptGroup.replace(/\s/g,'')" track-by="conceptGroup" class="scrollsection">
+                <div class="concept-group-title">
+                  <h3>{{ conceptGroup }}</h3>
+                </div>
+                <!--<concept-list v-bind:concepts="getConceptGroup(conceptGroup)"></concept-list>-->
+                <concept-card v-for="concept in getConceptGroup(conceptGroup)['owl:Class']" track-by="@rdf:about" v-bind:concept="concept" v-bind:owltype="'owl:Class'"></concept-card>
+                <concept-card v-for="concept in getConceptGroup(conceptGroup)['owl:ObjectProperty']" track-by="@rdf:about" v-bind:concept="concept" v-bind:owltype="'owl:ObjectProperty'"></concept-card>
+                <concept-card v-for="concept in getConceptGroup(conceptGroup)['owl:DatatypeProperty']" track-by="@rdf:about" v-bind:concept="concept" v-bind:owltype="'owl:DatatypeProperty'"></concept-card>
+                <concept-card v-for="concept in getConceptGroup(conceptGroup)['owl:NamedIndividual']" track-by="@rdf:about" v-bind:concept="concept" v-bind:owltype="'owl:NamedIndividual'"></concept-card>
+              </div>
+            </div>
+          </div>
+          <div class="col show-on-large xl3">
+            <div class="toc-wrapper pushpin" data-target="main-app">
+              <div class="concept-search">
+                <div class="search-wrapper"><input type="text" v-model="conceptSearchInput" placeholder="Search for Concepts"><i class="material-icons">search</i></div>
+              </div>
+              <ul class="section table-of-contents">
+                <li v-for="conceptGroup in conceptGroups"><a v-bind:href="'#group-' + conceptGroup.replace(/\s/g,'')">{{ conceptGroup }}</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/vue/vue.min.js"></script>
+    <script type="text/javascript" src="/assets/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/assets/fuse/fuse.min.js"></script>
+    <script type="text/javascript" src="/assets/lodash/lodash.js"></script>
+    <script type="text/javascript" src="/assets/custom/js/navigation.js"></script>
+    <script type="text/javascript" src="/assets/custom/js/concepts.js"></script>
+  </body>
+</html>

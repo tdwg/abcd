@@ -76,13 +76,6 @@ nav.top-nav h1 {
   word-wrap: break-word;
 }
 
-@media only screen and (max-width: 400px) {
-  nav.top-nav h1 {
-    font-size: 1.700em;
-    line-height: 1.700em;
-  }
-}
-
 .sidenav {
   box-shadow: none;
   border-right: 1px solid rgba(0,0,0,0.14);

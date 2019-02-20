@@ -20,6 +20,10 @@ main {
   padding-bottom: 20px;
 }
 
+tt {
+  word-break: break-word;
+}
+
 td > a {
   word-wrap: break-word;
   word-break: break-all;
@@ -74,15 +78,8 @@ nav.top-nav h1 {
 
 @media only screen and (max-width: 400px) {
   nav.top-nav h1 {
-    font-size: 1.500em;
-    line-height: 3.750em;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  nav.top-nav h1 {
-    font-size: 2.188em;
-    line-height: 3.750em;
+    font-size: 1.700em;
+    line-height: 1.700em;
   }
 }
 

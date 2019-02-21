@@ -33,9 +33,6 @@ Vue.component("navigation", {
             <li class="bold menu-item sidenav-close" v-bind:class="{ active: currentUrl=='/terms/'}"><a href="/terms" class="waves-effect waves-green">Terms</a></li>
           </ul>
         </li>
-        <div class="github-link">
-          <a href="https://github.com/tdwg/abcd">Find us on GitHub</a>
-        </div>
       </ul>
     </div>
     `

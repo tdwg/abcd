@@ -158,6 +158,20 @@ a.sidenav-trigger.top-nav .sidenav i {
   font-size: 32.000em;
 }
 
+.sidenav .github-link {
+  height: 150px;
+  margin-bottom: 50px;
+  position:relative;
+}
+
+.sidenav .github-link a {
+  position: absolute;
+  bottom: 0px;
+  margin-left: 25%;
+  text-decoration: none;
+  color: rgba(0,0,0,0.4);
+}
+
 .search-wrapper {
   position: relative;
   height: 45px;

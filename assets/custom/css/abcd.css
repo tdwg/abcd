@@ -293,11 +293,11 @@ a.sidenav-trigger.top-nav .sidenav i {
 
 @media only screen and (min-width: 600px) {
   .concept-card .card-content .card-title .concept-label {
-    width: 55%;
+    width: 70%;
   }
 
   .concept-card .card-content .concept-type {
-    width: 45%;
+    width: 30%;
   }
 }
 
@@ -371,6 +371,20 @@ a.sidenav-trigger.top-nav .sidenav i {
 
 .concept-card .concept-table tbody>tr:last-child {
   border-bottom: none;
+}
+
+.concept-card .associated-properties {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.concept-card .associated-property {
+  margin: 5px 5px 5px 5px;
+  text-transform: none;
+  background-color: white;
+  border: 1px solid;
 }
 
 .concept-card .card-action a {

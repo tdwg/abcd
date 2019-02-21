@@ -58,8 +58,8 @@ Vue.component("concept-table", {
           <td>{{ concept['rdfs:range']['@rdf:resource'] }}</td>
         </tr>
         <tr v-if="owltype=='owl:NamedIndividual'">
-          <td><strong>In Controlled Vocabulary</strong></td>
-          <td>{{ concept['abcd:inVocabulary']['@rdf:resource'] }}</td>
+          <td><strong>Instance Of</strong></td>
+          <td>{{ concept.inVocabulary }}</td>
         </tr>
         <tr>
           <td><strong>Comment</strong></td>
@@ -67,6 +67,22 @@ Vue.component("concept-table", {
         </tr>
       </tbody>
     </table>
+    `
+});
+
+
+Vue.component("associated-properties", {
+  props: ["concept"],
+  template: 
+    `
+    <div class="associated-properties">
+      <template v-if="Array.isArray(concept['ns0:associatedProperty'])">
+        <a v-for="prop in concept['ns0:associatedProperty']" class="associated-property waves-effect waves-light btn btn-flat" v-bind:href="concept['rdfs:isDefinedBy']['@rdf:resource']+prop['@rdf:resource']">{{ prop['@rdf:resource'] }}</a>
+      </template>
+      <template v-if="concept['ns0:associatedProperty'] && !Array.isArray(concept['ns0:associatedProperty'])">
+        <a class="associated-property waves-effect waves-light btn btn-flat" v-bind:href="concept['rdfs:isDefinedBy']['@rdf:resource']+concept['ns0:associatedProperty']['@rdf:resource']">{{ concept['ns0:associatedProperty']['@rdf:resource'] }}</a>
+      </template>
+    </div>
     `
 });
 
@@ -99,27 +115,18 @@ Vue.component("concept-card", {
             </li>
           </ul>
   	    </div>
+        <template v-if="owltype=='owl:Class'">
+          <p>Associated Properties:</p>
+          <keep-alive>
+            <associated-properties v-bind:concept="concept"></associated-properties>
+          </keep-alive>
+        </template>
   	  </div>
     	<div class="card-action">
-  	  	<a class="waves-effect waves-light btn green" v-bind:href="'/terms/#'+concept['@rdf:about']">2019-01-31 (Current)</a>
+  	  	<a class="waves-effect waves-light btn green" v-bind:href="concept['rdfs:isDefinedBy']['@rdf:resource']+concept['@rdf:about']">2019-01-31 (Current)</a>
     	</div>
     </div>
   	`
-});
-
-Vue.component("concept-list", {
-  props: ["classes"],
-  methods: {
-    sortArrayConceptName(array){
-      return _.orderBy(array, '@rdf:about', 'asc');
-    },
-  },
-  template: 
-    `
-    <div class="concept-list">
-      <a class="waves-effect waves-green btn-flat grey-text" v-for="concept in sortArrayConceptName(classes)" v-bind:href="'#' + concept.conceptName">{{ concept.conceptLabel }}</a>
-    </div>
-    `
 });
 
 new Vue({
@@ -196,13 +203,17 @@ new Vue({
             concept["vann:termGroup"] = json["rdf:RDF"]["propertyConceptGroups"][concept["@rdf:about"]];
             vinstance.concepts.push(concept);
           });
-          json["rdf:RDF"]["owl:NamedIndividual"].map( concept => {
-            concept.owltype = "owl:NamedIndividual";
-            concept['rdfs:label'] = {"@xml:lang": "en", "#text": concept["@rdf:about"]};
-            concept.functional = functionalProps.includes(concept["@rdf:about"]); 
-            concept["vann:termGroup"] = json["rdf:RDF"]["propertyConceptGroups"][concept["@rdf:about"]];
-            vinstance.concepts.push(concept);
-            console.log(concept);
+          _.keys(json["rdf:RDF"]).map( key => {
+            if(key.startsWith("abcd:")){
+              json["rdf:RDF"][key].map( concept => {
+                concept.owltype = "owl:NamedIndividual";
+                concept.inVocabulary = key;
+                concept['rdfs:label'] = {"@xml:lang": "en", "#text": concept["@rdf:about"]};
+                concept.functional = functionalProps.includes(concept["@rdf:about"]); 
+                concept["vann:termGroup"] = json["rdf:RDF"]["propertyConceptGroups"][concept["@rdf:about"]];
+                vinstance.concepts.push(concept);
+              });
+            }
           });
 
           vinstance.handleAnchor=true;
@@ -250,12 +261,10 @@ new Vue({
       return this.filteredConcepts.filter( concept => concept.owltype == "owl:DatatypeProperty");
     },
     controlledTerms: function() {
-      console.log("w");
       return this.filteredConcepts.filter( concept => concept.owltype == "owl:NamedIndividual");
     },
     conceptGroups: function () {
-      console.log(this.controlledTerms);
-      return _.uniq(this.filteredConcepts.map(concept => Array.isArray(concept["vann:termGroup"]) ? concept["vann:termGroup"].map(group => group["@rdf:resource"]) : concept["vann:termGroup"]["@rdf:resource"]).flat()).sort();
+      return _.uniq(this.filteredConcepts.map(concept =>Array.isArray(concept["vann:termGroup"]) ? concept["vann:termGroup"].map(elem => elem["@rdf:resource"]) : concept["vann:termGroup"]["@rdf:resource"]).flat()).sort();
     }
 	}
 });

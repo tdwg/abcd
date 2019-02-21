@@ -57,7 +57,6 @@
                 <div class="concept-group-title">
                   <h3>{{ conceptGroup }}</h3>
                 </div>
-                <!--<concept-list v-bind:concepts="getConceptGroup(conceptGroup)"></concept-list>-->
                 <concept-card v-for="concept in getConceptGroup(conceptGroup)['owl:Class']" track-by="@rdf:about" v-bind:concept="concept" v-bind:owltype="'owl:Class'"></concept-card>
                 <concept-card v-for="concept in getConceptGroup(conceptGroup)['owl:ObjectProperty']" track-by="@rdf:about" v-bind:concept="concept" v-bind:owltype="'owl:ObjectProperty'"></concept-card>
                 <concept-card v-for="concept in getConceptGroup(conceptGroup)['owl:DatatypeProperty']" track-by="@rdf:about" v-bind:concept="concept" v-bind:owltype="'owl:DatatypeProperty'"></concept-card>

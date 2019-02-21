@@ -20,6 +20,7 @@ Vue.component("navigation", {
         <li class="title"><h5 class="center-align">Access to Biological Collections Data</h5></li>
         <li class="divider"></li>
         <li class="bold menu-item sidenav-close" v-bind:class="{ active: currentUrl=='/' }"><a href="/" class="waves-effect waves-green">Home</a></li>
+        <li class="bold menu-item sidenav-close" v-bind:class="{ active: currentUrl=='/3.0/' }"><a href="/3.0" class="waves-effect waves-green">ABCD 3.0</a></li>
         <li class="bold menu-item sidenav-close" v-bind:class="{ active: currentUrl=='/xml/' }"><a href="/xml" class="waves-effect waves-green">XML</a>
           <ul class="submenu">
             <li class="bold menu-item sidenav-close" v-bind:class="{ active: currentUrl=='/xml/documentation/primer/' }"><a href="/xml/documentation/primer" class="waves-effect waves-green">Primer</a></li>

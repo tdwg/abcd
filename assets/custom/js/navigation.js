@@ -28,7 +28,8 @@ Vue.component("navigation", {
         </li>
         <li class="bold menu-item sidenav-close" v-bind:class="{ active: currentUrl=='/ontology/' }"><a href="/ontology" class="waves-effect waves-green">Ontology</a>
           <ul class="submenu">
-             <li class="bold menu-item sidenav-close" v-bind:class="{ active: currentUrl=='/terms/'}"><a href="/terms" class="waves-effect waves-green">Terms</a></li>
+            <li class="bold menu-item sidenav-close" v-bind:class="{ active: currentUrl=='/ontology/documentation/primer/' }"><a href="/ontology/documentation/primer" class="waves-effect waves-green">Primer</a></li>
+            <li class="bold menu-item sidenav-close" v-bind:class="{ active: currentUrl=='/terms/'}"><a href="/terms" class="waves-effect waves-green">Terms</a></li>
           </ul>
         </li>
       </ul>

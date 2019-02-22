@@ -129,7 +129,7 @@ Vue.component("concept-card", {
   	`
 });
 
-new Vue({
+$app = new Vue({
 	el: '#main-app',
 	created(){
     this.debouncedConceptSearch = _.debounce(this.conceptSearch, 500);
@@ -244,6 +244,7 @@ new Vue({
 		fuse: null,
 		conceptSearchInput: '',
     handleAnchor: false,
+    showTerms: false,
     concepts: [],
     filteredConcepts: [],
     objectProperties: [],
@@ -271,4 +272,5 @@ new Vue({
 
 $(document).ready(function(){
   $('.concept-info .collapsible').collapsible({accordion: false});
+  $app.showTerms = true;
 });

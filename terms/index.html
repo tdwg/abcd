@@ -49,10 +49,10 @@
                 <div class="search-wrapper"><input type="text" v-model="conceptSearchInput" placeholder="Search for Concepts"><i class="material-icons">search</i></div>
               </div>
             </div>
-            <div id="loading-section" v-if="concepts.length == 0" class="section">
+            <div id="loading-section" v-if="!showTerms" class="section">
               <h3>Loading ...</h3>
             </div>
-            <div id="concept-section" v-if="filteredConcepts.length > 0" class="section">
+            <div id="concept-section" v-if="showTerms" class="section">
               <div v-for="conceptGroup in conceptGroups"  v-bind:id="'group-'+conceptGroup.replace(/\s/g,'')" track-by="conceptGroup" class="scrollsection">
                 <div class="concept-group-title">
                   <h3>{{ conceptGroup }}</h3>
@@ -69,7 +69,7 @@
               <div class="concept-search">
                 <div class="search-wrapper"><input type="text" v-model="conceptSearchInput" placeholder="Search for Concepts"><i class="material-icons">search</i></div>
               </div>
-              <ul class="section table-of-contents">
+              <ul v-if="showTerms" class="section table-of-contents">
                 <li v-for="conceptGroup in conceptGroups"><a v-bind:href="'#group-' + conceptGroup.replace(/\s/g,'')">{{ conceptGroup }}</a></li>
               </ul>
             </div>

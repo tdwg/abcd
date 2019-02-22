@@ -1,0 +1,1206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.tdwg.org/schemas/abcd/3.0_zoology" xmlns="http://www.tdwg.org/schemas/abcd/3.0_zoology" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.8">
+  <xs:element name="DataSets">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">TDWG root element: container for one or more DataSets.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DataSet" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/DataSet">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">A dataset containing unit data and their shared metadata elements.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TechnicalContacts" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">Container element for the technical contacts responsilbe for the data set.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="TechnicalContact" type="String255" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/emailAddress">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">A technical contact normally representing the agent acting as the publisher of the dataset in the network.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ContentContacts">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">Questions and feedback about data, or restrictions on use of the data should be directed here. This contact normally represents the agent acting as the original supplier or custodian of the dataset. If a content contact is given on the unit-level, that one should be used for end-user purposes. The element is unbounded to provide for alternative contacts (vacation etc.).</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ContentContact" type="String255" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/emailAddress">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">An administrative contact usually representing the agent acting as the original supplier or custodian of the dataset.</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Description">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">Dublin Core conformant elements describing the content of the data source queried, representation in different languages possible</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Representation" type="MetadataDescriptionRepr" maxOccurs="unbounded">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">The description in a specified language. Only one representation should be delivered for each language. [ATTR: language]</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="DateModified" type="DateTimeISO" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/DateModified">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">Date or DateTime when the last modification of the dataset was made. Expressed in a variant of the W3C DateTime format (subset of ISO 8601). The formatting holds to the W3C DateTime format (https://www.w3.org/TR/NOTE-datetime) with the exception, that the time zone designator can be omitted (though it is highly recommended). If in online data sources the provider can not assess this, the current date/time may be substituted. For legacy data this may be set to the file date of imported data, or estimated. Note that experience shows that the information provided here is often unreliable, because providers tend to disregard updating this information. Maps to Dublin-Core standard element "Date.Modified".</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Owners" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">Entities having legal possession of the data collection content. Here defined for the entire data collection, not for individual units. If an owner statement is present on the unit level, it should override this dataset-level statement.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Owner" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Owner http://rs.tdwg.org/abcd/mappings/DataSet-Owner">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">Entity having legal possession of the data collection content.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="LogoURL" type="xs:anyURI" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Organization-LogoURL">
+                            <xs:annotation>
+                              <xs:documentation xml:lang="en">URL of a logo image.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="ResourceURI" type="xs:anyURI" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Contact-ResourceURI">
+                            <xs:annotation>
+                              <xs:documentation xml:lang="en">An optional, preferably resolvable URI to uniquely identify a contact.</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                          <xs:element name="Name" type="Label">
+                            <xs:annotation>
+                              <xs:documentation xml:lang="en">Full organization or corporate name in multiple languages (en: 'Botanical Garden of ...', de: 'Botanischer Garten von ...'). (vCard:Org.OrgName). The Label mechanism also supports acronyms / abbreviations (no vCard equivalent!).</xs:documentation>
+                            </xs:annotation>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="LegalStatements" type="LegalStatements" minOccurs="0">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">Container element for legal statements regarding the data set.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Units">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">A container for one or more unit data records from the gathering</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Unit" type="Unit" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Unit">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">A container for all data referring to a unit (specimen or observation record)</xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:simpleType name="String">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">normalized string required to contain at least 1 character (this removes the xml string anomaly, i. e. either element/attribute may be optional, but if they are required the content may not be an empty string)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+      <xs:minLength value="1" fixed="false"/>
+      <xs:whiteSpace value="collapse" fixed="false"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="String50">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">normalized string restricted to 1..50 character length to be used for abbreviations (the recommended length of abbreviations is usually much shorter, but 50 characters should be a good margin).</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+      <xs:minLength value="1" fixed="true"/>
+      <xs:maxLength value="50" fixed="true"/>
+      <xs:whiteSpace value="collapse" fixed="false"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="String255">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">normalized string restricted to 1..255 character length (i. e. required, may not be empty string)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+      <xs:minLength value="1" fixed="true"/>
+      <xs:maxLength value="255" fixed="true"/>
+      <xs:whiteSpace value="collapse" fixed="false"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Monomial">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A generic or higher taxon name (monomial) under the bacteriological, botanical, viral, and zoological code.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="HigherTaxonRankEnum">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A taxonomic rank designation above the rank of genus.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:Name">
+      <xs:enumeration value="regnum" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/regnum">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the kingdom (lat. regnum).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="subregnum" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/subregnum">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the subkingdom (lat. subregnum).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="superphylum" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/superphylum">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the superphylum (or Superdivision in Botany).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="phylum" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/phylum">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the Phylum (or Division in Botany).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="subphylum" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/subphylum">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the subphylum (or Subdivision in Botany).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="superclassis" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/superclassis">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the superclass (lat. superclassis).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="classis" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/classis">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the class (lat. classis).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="subclassis" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/subclassis">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the subclass (lat. subclassis).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="supercohors" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/supercohors">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the supercohort (lat. supercohors).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="cohors" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/cohors">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the outdated rank of cohort (lat. cohors).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="subcohors" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/subcohors">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the subcohort (lat. subcohors).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="superordo" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/superordo">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the superorder (lat. superordo).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ordo" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/ordo">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the order (lat. ordo).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="subordo" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/subordo">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the suborder (lat. subordo).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="superfamilia" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/superfamilia">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Abbreviation for the botanical taxonomic rank form species (lat: forma species).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="familia" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/familia">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the superfamily (lat. superfamilia).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="subfamilia" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/subfamilia">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the subfamily (lat. subfamilia).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="tribus" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/tribus">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank for the tribe (lat. tribus).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="genusgroup" xml:lang="en" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/genusgroup">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank element for Higher Taxon Names that are in an unspecified genus-group in Zoology.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="unranked" xml:lang="en" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/unranked">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Higher Taxon Rank element for Higher Taxon Names that are unranked.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SexCodeEnum">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Sex of the organism (Male, Female, Unknown, Not applicable (e.g. for a fungus in a herbarium), MiXed).</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:Name">
+      <xs:enumeration value="M" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Male"/>
+      <xs:enumeration value="F" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Female"/>
+      <xs:enumeration value="U" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/SexUnknown"/>
+      <xs:enumeration value="N" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/SexNotApplicable"/>
+      <xs:enumeration value="X" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/MixedSex"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="decimalLatitudeDataType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">from http://rs.tdwg.org/dwc/basetypes.xsd to support compatibility with DwC Spatial Extensions</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:double">
+      <xs:minInclusive value="-90"/>
+      <xs:maxInclusive value="90"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="decimalLongitudeDataType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">from http://rs.tdwg.org/dwc/basetypes.xsd to support compatibility with DwC Spatial Extensions</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:double">
+      <xs:minInclusive value="-180"/>
+      <xs:maxInclusive value="180"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="InstitutionCode">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">An abbreviated designation of an institution.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="DateTimeISO">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">The date and time expressed in a way conforming to a subset of ISO 8601</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="((1(5(8[3-9]|9\d)|[6789]\d\d))|(20\d\d))(-((0[1-9]|1[012])(-(0[1-9]|1\d|2[0-8])(T(0\d|1\d|2[0-3])(:[0-5]\d(:[0-5]\d(.\d+)?)?)?(Z|[+\-](0\d|1[12])(:[0-5]\d)?)?)?)?|(0[13-9]|1[012])-(29|30)(T(0\d|1\d|2[0-3])(:[0-5]\d(:[0-5]\d(.\d+)?)?)?(Z|[+\-](0\d|1[12])(:[0-5]\d)?)?)?|(0[13578]|1[02])-31(T(0\d|1\d|2[0-3])(:[0-5]\d(:[0-5]\d(.\d+)?)?)?(Z|[+\-](0\d|1[12])(:[0-5]\d)?)?)?))?|((15(8[48]|9[26]))|(1[6-9](0[48]|[2468][048]|[13579][26])|20(0[48]|[2468][048]|[13579][26]))|((16|20)00))-02-29(T(\d|1\d|2[0-3])(:[0-5]\d(:[0-5]\d(.\d+)?)?)?(Z|[+\-](0\d|1[12])(:[0-5]\d)?)?)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DateTime">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Temporal aspects of an event or activity.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="DateText" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/DateTime-DateText">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A text version (alphabetic mixed case and integer) of the date at which the unit identification event took place. This element is meant for use when the date is imprecise, ambiguous or not in a form that satisfies the standard structured date format. It can also be used when it is important to record the verbatim representation of the date or when dates to be recorded are not completely legible. For example the day and month may be decipherable but not the year; the use of this field will allow recording of partially interpreted information.This field can be used to record generalised date ranges and irresolvable ambiguity such as different day/month order conventions (e.g. US/Europe) or to allow for multiple dates and periods. E.g. "January 21st, 1900", "Autumn 1805", "17.05.192? (last digit indistinguishable, could be 5, 9 or 2)".</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TimeZone" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/timeZone">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The time zone to which the time-of-day data refer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ISODateTimeBegin" type="DateTimeISO" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/timeSpanBegin">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The beginning of a period or a single point in time expressed in a variant of the W3C DateTime format (subset of ISO 8601). The formatting holds to the W3C DateTime format (https://www.w3.org/TR/NOTE-datetime) with the exception, that the time zone designator can be omitted (though it is highly recommended). Dates or time spans that can not be properly mapped to this format due to potential ambiguities or missing information (e.g. indistinguishable writings) need to be mapped to DateText. To describe a single point in time, use this element and omit the ISODateTimeEnd element.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TimeOfDayBegin" type="xs:time" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/timeOfDayBegin">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The time of day in hours from midnight local time for the beginning of a period.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ISODateTimeEnd" type="DateTimeISO" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/timeSpanEnd">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The end of a period expressed in a variant of the W3C DateTime format (subset of ISO 8601). The formatting holds to the W3C DateTime format (https://www.w3.org/TR/NOTE-datetime) with the exception, that the time zone designator can be omitted (though it is highly recommended). Dates or time spans that can not be properly mapped to this format due to potential ambiguities or missing information (e.g. indistinguishable writings) need to be mapped to DateText. To describe a single point in time, omit this element and use the ISODateTimeBegin element.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TimeOfDayEnd" type="xs:time" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/timeOfDayEnd">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The time of day in hours from midnight for the end of a period.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PeriodExplicit" type="xs:boolean" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/periodExplicit">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Set to "true" if the event explicitly takes place for the entire period indicated. Set to "false" if it occurs at some point of time during the period. Not filled if unknown or no period specified (ISODateTimeEnd not used).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StringL">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">String (i. e. xs:string with minimum length=1) extended with language attribute</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="String">
+        <xs:attribute name="language" type="xs:language" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="StringP">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">String (i. e. xs:string with minimum length=1) extended with preferred attribute</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="String">
+        <xs:attribute name="preferred" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="StringP255">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">String255 (i.e. xs:string with length 1-255), extended with preferred attribute</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="String255">
+        <xs:attribute name="preferred" type="xs:boolean" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="RecordBasisEnum">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A standard designator for the nature of the object of the record. "MaterialSample" is added as "A resource describing the physical results of a sampling (or sub-sampling) event. In biological collections, the material sample is typically collected, and either preserved or destructively processed".</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:Name">
+      <xs:enumeration value="PreservedSpecimen" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/PreservedSpecimen"/>
+      <xs:enumeration value="LivingSpecimen" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/LivingSpecimen"/>
+      <xs:enumeration value="FossilSpecimen" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/FossilSpecimen"/>
+      <xs:enumeration value="MineralSpecimen" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/MineralSpecimen"/>
+      <xs:enumeration value="OtherSpecimen" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/OtherSpecimen"/>
+      <xs:enumeration value="MaterialSample" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/MaterialSample"/>
+      <xs:enumeration value="HumanObservation" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/HumanObservation"/>
+      <xs:enumeration value="MachineObservation" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/MachineObservation"/>
+      <xs:enumeration value="DrawingOrPhotograph" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/DrawingOrPhotograph"/>
+      <xs:enumeration value="MultimediaObject" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/MultimediaRecord"/>
+      <xs:enumeration value="AbsenceObservation" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/AbsenceObservation"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="MetadataDescriptionRepr">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Language-specific content metadata (title, description, etc.) with *required* language attribute added.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Title" type="String255" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/title http://rs.tdwg.org/abcd/mappings/DataSet-Title">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Source for Dublin-Core standard element "Title": A short, concise title.</xs:documentation>
+          <xs:documentation xml:lang="en">General Note on DublinCore translation: In addition to those that can be transformed from UBIF metadata, an additional DC.Type='dataset' should be added.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Details" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/notes">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Source for Dublin-Core standard element "Description": Free-form text containing a longer description of the project.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Coverage" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/coverage">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Source for Dublin-Core standard element "Coverage": Free-form text describing geographic, taxonomic, or other coverage aspects of terminology or descriptions available in the current project.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WebsiteURL" type="xs:anyURI" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/websiteURL http://rs.tdwg.org/abcd/mappings/DataSet-WebsiteURL">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">URL pointing to an online source related to the dataset, which may or may not serve an updated version of the description data.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="language" type="xs:language" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="Label">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Collection of language-specific label representations</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Representation" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Language-specific label representation [ATTR: language]
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="LabelRepr"/>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LabelRepr">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Language-specific simple label, using simple formatted text</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Text" type="String255" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Organization-Name">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Label text in a specific language.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Abbreviation" type="String50" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/abbreviation">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Restricted to 50 characters maximum length, including blanks (recommended to be shorter!). Label abbreviations are especially important when displaying information in a tabular format.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="language" type="xs:language" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="LegalStatements">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A sequence of statements related to Intellectual Property Rights, credit and acknowledgement.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Licenses" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Container element for one to several statements, normally representing different language representations of the same content.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="License" type="LegalStatement" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/License">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">To be used if data are placed under a public license (GPL, GFDL, OpenDocument). Placing data under a public license while maintaining copyright is recommended!</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Acknowledgements" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Container element for one to several statements, normally representing different language representations of the same content.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Acknowledgement" type="LegalStatement" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Acknowledgement">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">A free form text acknowledging support (e. g. grant money, help, permission to reuse published material, etc.)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SuggestedCitations" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Container element for one to several statements, normally representing different language representations of the same content.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="SuggestedCitation" type="LegalStatement" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/SuggestedCitation">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Indicates how this dataset or record should be attributed if used [OBIF 1.0]</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="OtherLegalStatements" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Container element for one to several statements, normally representing different language representations of the same content.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="OtherLegalStatement" type="LegalStatement" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/OtherLegalStatement">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">A Legal Statement that can not be classified as License, Acknowledgement or SuggestedCitation such as disclaimers and usage restrictions. Please use the InformationWithheld element to express which kind of information were withheld in the publication of the corresponding instance (e.g. removal of coordinates of threatened species).</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LegalStatement" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/LegalStatement">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Text, optional Details (both free-form text) and optional website URL and resource URI.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Text" type="String" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/LegalStatement-Text">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A concise representation of a statement, recommended to be as short as possible, but actual length is unconstrained.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ResourceURI" type="xs:anyURI" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/LegalStatement-ResourceURI">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">An optional, preferably resolvable URI to uniquely identify the legal statement.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="language" type="xs:language" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="Reference">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Published reference.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="GUID" type="xs:string" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Reference-GUID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A globally unique identifier for the publication or the specific detail (page, figure, etc.) within the publication.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Text" type="String" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Reference-Text">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Formal citation for a paper or electronic publication.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Details" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Reference-Details">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Specific page, figure or illustration number(s) within the reference.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="WebsiteURL" type="xs:anyURI" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Reference-WebsiteURL">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The URL of a web page related to the reference.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ResourceURIs" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Preferably resolvable URIs of the reference (e.g. DOI).</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence maxOccurs="unbounded">
+            <xs:element name="ResourceURI" type="xs:anyURI" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Reference-ResourceURI">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Universal Resource Identifier - Preferably resolvable.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HigherTaxon">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Taxon name used to further classify the identification result.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="HigherTaxonName" type="Monomial" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/HigherTaxonName">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A higher taxon name.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="HigherTaxonRank" type="HigherTaxonRankEnum" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/HigherTaxonRank">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Rank of associated higher taxon.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Organization">
+    <xs:sequence>
+      <xs:element name="GUID" type="xs:string" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Organization-GUID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A globally unique identifier for the Organization or Organizational unit</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="Label">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Full organization or corporate name in multiple languages (en: 'Botanical Garden of ...', de: 'Botanischer Garten von ...'). (vCard:Org.OrgName). The Label mechanism also supports acronyms / abbreviations (no vCard equivalent!).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LogoURL" type="xs:anyURI" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Organization-LogoURL">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">URL of a logo image.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Divisions" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">If the contact contains no person definition: the unit within the organization the agent represents; else a list of the various Organizational units to which a person may belong. (vCard:OrgUnit)</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Division" type="StringL" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/division">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Part of an Organization, e.g. department or section. (vCard:OrgUnit)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Permit">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Container element for information on permits related to the Gathering event</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Type" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/PermitType">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A permit is a document that allows someone to take an action that otherwise would not be allowed.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Contract" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Contract"/>
+            <xs:enumeration value="Copyright" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Copyright"/>
+            <xs:enumeration value="Data use" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/DataUse"/>
+            <xs:enumeration value="Exemption Permit" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/ExemptionPermit"/>
+            <xs:enumeration value="Export Permit" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/ExportPermit"/>
+            <xs:enumeration value="Genetically Modified Organism" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/GeneticallyModifiedOrganism"/>
+            <xs:enumeration value="Human Pathogens" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/HumanPathogens"/>
+            <xs:enumeration value="Intellectual Property Rights" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/IntellectualPropertyRights"/>
+            <xs:enumeration value="Internationally Recognized Certificate of Compliance" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/InternationallyRecognizedCertificateOfCompliance"/>
+            <xs:enumeration value="Import Permit" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/ImportPermit"/>
+            <xs:enumeration value="Collecting Permit" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/CollectingPermit"/>
+            <xs:enumeration value="Material Transfer Agreement" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/MaterialTransferAgreement"/>
+            <xs:enumeration value="Memorandum of Cooperation" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/MemorandumOfCooperation"/>
+            <xs:enumeration value="Memorandum of Understanding" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/MemorandumOfUnderstanding"/>
+            <xs:enumeration value="Patent" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Patent"/>
+            <xs:enumeration value="Phytosanitary" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Phytosanitary"/>
+            <xs:enumeration value="Salvage" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Salvage"/>
+            <xs:enumeration value="Veterinary Certificate" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/VeterinaryCertificate"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Status" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/PermitStatus">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Information about the presence, absence or other basic status of permits associated with the sample(s). Material collected after 2014-10-12 cannot be in "Unknown" permit status!</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Permit available" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/PermitAvailable"/>
+            <xs:enumeration value="Permit not required" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/PermitNotRequired"/>
+            <xs:enumeration value="Permit not available" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/PermitNotAvailable"/>
+            <xs:enumeration value="Unknown" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/PermitStatusUnknown"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Details" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Permit-Details">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Description of why a certain permit was not required or why the Permit Status is unknown. Examples: "no national requirement for a permit at date of access", "officially authorized illegal holder", "collected on private land", "pre-Nagoya"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Text" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Permit-Text">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The text of a permit related to the gathering/shipping or further details.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>  
+  <xs:complexType name="NamedArea">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">An atomized place name (an administrative or geoecological area) with possibility for hierarchical structuring.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AreaClass" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/areaClass">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Allows the recording of classification categories for the class of the gathering named area (local or national subdivision levels, geomorphological units, protected areas, etc.). E.g. "Island Group", "National Park", "District", "Mountain", "State". These classification categories are often treated as individual elements in other standards.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/NamedArea-Name">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Name of an area (a geographic, geomorphological, geoecological, or administrative area).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Identification">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">The application of a name (or concept), i.e. the data pertaining to an identification event and the result of the identification itself.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PreferredFlag" type="xs:boolean" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/preferred">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">True to designate current identification.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="HigherTaxa" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Wrapper element for multiple designations of higher taxa. These are higher-level classifications of the name identified, NOT a higher taxon as the sole identification.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="HigherTaxon" type="HigherTaxon" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/HigherTaxon">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">The scientific name of a taxon with a rank higher than Genus which is commonly used to classify the group the unit belongs to.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FullScientificName" type="String" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/fullScientificName">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Concatenated scientific name, preferably formed in accordance with a Code of Nomenclature, i. e. a monomial, binomial, or trinomial plus author(s) or author team(s) and - where relevant - year, or the name of a cultivar or cultivar group, or a hybrid formula, as fully as possible.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="References" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">References that were used by the identifier to provide the identification (e.g. by means of providing a key or a description of a taxon). It circumscribes a particular taxon concept (also referred to as a potential taxon) for a given taxonomic name. Note: this is not the citation from which and identification was taken, see under Identifier/IdentificationSource.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Reference" type="Reference" minOccurs="0" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Identification-Reference">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">A reference (e.g. an article or monograph) that was used as the base for the identifier's taxon identification (e.g. by means of providing a key or a description of the taxon). It circumscribes the taxon identified (and thus can act as a potential taxon's sec. reference). Note: this is not the citation from which and identification was taken, see IdentificationSource.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Sex" type="SexCodeEnum" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Sex">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Maps to Darwin Core 2: Sex. Refers to the entire unit, which may be mixed. Note that counts can be provided in the Unit's MeasurementsOrFacts section.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Age" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/age">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Age of the organism at the time of collection or observation. Note that counts for different age classes can be provided in the Unit's MeasurementsOrFacts section.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Notes" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Identification-Notes">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Supplementary remarks about the identification.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PhaseOrStage" type="StringL" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/phaseOrStage">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A combined element for phase (e.g. polyp and meduse of the Cnidaria) or stage (juvenile, nauplius, copepodite) of the organism(s) in the unit.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Date" type="DateTime" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Identification-Date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Date of the identification event.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Identifiers" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A container element for several identifiers for this unit.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Identifier" type="String255" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/fullName">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Record of individual, team member, or organization that made the identification.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Preparation">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Specimen preparation details.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PreparationType" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/preparationType">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Description of preparation type (specimens, tissues, DNA). Examples: for DNA: gDNA; for tissues/specimens: leaf, muscle, leg, blood.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PreparationAgents" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Person and/or institution responsible for or effecting the preparation.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="PreparationAgent" type="String255" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/fullName">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Person and/or institution responsible for or effecting the preparation.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="sequence" type="xs:int" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PreparationDate" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/PreparationDate">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The date of preparation, free text. Recommended formats: YYYY, YYYY-MM, YYYY-MM-DD.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="sequence" type="xs:int" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="Acquisition">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Acquisition date, source and type.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AcquisitionType" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/acquisitionType">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Type of acquisition. E.g. "Bequest", "Purchase", "Donation"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Date" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Acquisition-Date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Textual statement of the date of acquisition of the specimen by the institution. Recommended formats: YYYY, YYYY-MM, YYYY-MM-DD.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AcquiredFrom" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/AcquiredFrom">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Name of person and/or Organization the unit was acquired from (e.g. depositor of a strain).</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="FullName" type="String255" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/fullName">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Name of person the unit was acquired from.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Organization" type="Organization" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Organization">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Organization the unit was acquired from.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AcquisitionSourceText" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/acquisitionSourceText">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Free text field for unformatted recording of acquisition source details.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PreviousUnit">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A container for past identifiers and locations for this specimen.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PreviousSourceInstitutionID" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/PreviousSourceInstitutionID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Name or code of the institution previously holding this specimen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PreviousSourceID" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/PreviousSourceID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Name or code of collection previously holding this specimen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PreviousUnitID" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/PreviousUnitID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Identifier of specimen in previous collection.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Date" type="DateTime" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/PreviousUnit-Date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Dates that the specimen was held in previous collection.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Notes" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/PreviousUnit-Notes">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Any further information about this specimen in its previous collection.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="sequence" type="xs:int" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="Gathering">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Elements describing the event and site of collecting or observing a unit.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Date" type="DateTime" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Gathering-Date">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Date(s) and time(s) of the collecting or observation event</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GatheringAgents" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A container element for the agent(s) responsible for collecting or recording.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="GatheringAgent" type="String255" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/fullName">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">The person, or one of the persons or team(s) or organization(s) responsible for collecting or recording. Attributes: a flag indicating the primary collector, and a sequence number.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="sequence" type="xs:int" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Permits" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A container element for references to (or texts of) permits related to the gathering event.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Permit" type="Permit" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Permit">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Container element for information on permits related to the gathering event.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="LocalityText" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/localityText">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Original locality data as appearing on a label or in an original entry.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CountryName" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Country-Name">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The full current name of the country. It is recommended that the name is spelled in the way specified by the International Standards Organisation (ISO). Historical country names and water bodies outside the coastal zone should be entered as NamedArea.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NamedAreas" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Atomized place names as applied to the collection or observation site; with possibility for hierarchical structuring and categorization.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="NamedArea" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/NamedArea">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Atomized place name with possibility for hierarchical structuring. Attribute for sequence.</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:complexContent>
+                  <xs:extension base="NamedArea">
+                    <xs:attribute name="sequence" type="xs:int" use="optional"/>
+                  </xs:extension>
+                </xs:complexContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CoordinateSets" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Container for multiple sets of coordinates indicating the site of collection or observation.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="CoordinateSet" minOccurs="0" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Coordinates">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Attributes for Original data and for begin and end of sequence . Composite element to allow recording multiple coordinates or same coordinate in different systems</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="LongitudeDecimal" type="decimalLongitudeDataType" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/longitudeDecimal">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="en">The longitude of a location (east-west component), expressed in decimal degrees. The values range from -180 to 180.</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="LatitudeDecimal" type="decimalLatitudeDataType" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/latitudeDecimal">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="en">The latitude of a location (north-south component), expressed in decimal degrees. The values range from -90 to 90.</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ErrorDistanceInMeters" type="xs:decimal" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/errorDistanceInMeters">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="en">An estimate of how tightly the coordinates were specified, expressed as a distance in meters corresponding to a radius around the coordinates.</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+                <xs:attribute name="original" type="xs:boolean" use="optional"/>
+                <xs:attribute name="begin" type="xs:boolean" use="optional"/>
+                <xs:attribute name="end" type="xs:boolean" use="optional"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Altitude" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Altitude">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The altitude of the gathering site land or floor level given as distance above (positive) or below mean sea level.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="LowerValue" type="StringL" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/lowerValue">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Lower or only value or fact text.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="UpperValue" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/upperValue">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Upper value where there is a range.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Notes" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Gathering-Notes">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Further text referring to the gathering event that does not fit one of the elements specified.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Unit">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Elements for all unit-level data</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="SourceInstitutionID" type="InstitutionCode" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Unit-SourceInstitutionID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Unique identifier (code or name) of the institution holding the original data source (first part of record identifier). In specimen collections, this is normally the institution or private holder of the collection itself. For herbaria and botanical gardens, the standard abbreviations should be used.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ID" type="String" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Unit-ID">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A unique identifier for the unit record within the data source. Preferably, the ID should be stable in the database, so that it also can be used to find the same record again (e.g. for data exchange purposes). Third part of the record identifier.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="FieldNumbers" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">The numbers or other identifiers assigned to this Unit by different collectors (Gathering Agents). Commonly referred to as "Collectors Field Number".</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="FieldNumber" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/FieldNumber">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">The number or other identifier assigned to a Unit by a collector (Gathering Agent). Commonly referred to as "Collectors Field Number".</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ID" type="String" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/FieldNumber-ID">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="en">The assigned field number.</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="CollectorName" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/FieldNumber-CollectorName">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="en">The name of the collector (Gathering Agent) who assigned the field number.</xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="KindsOfUnit" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Container for several kind of unit information.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="KindOfUnit" type="StringL" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Unit-KindOfUnit">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Part(s) of organism or class of materials represented by this unit. Example(s): whole organisms, antlers, bark, blood samples, bones, bulbs, claws, cocoons, DNA, eggs, extracts, feathers, feeding remains, fruits, galls, heads, hooves, horns, leaves, mixed, nests, pellets, pollen, roots, seeds, shells, skins, spores, teeth, wood.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="RecordBasis" type="RecordBasisEnum" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/RecordBasis">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">An indication of what the unit record describes. Note that the element SourceReference provides for the case that the record is based on a publication.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DateModified" type="DateTimeISO" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Unit-DateModified">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Date or DateTime when the last modification of the unit record was made. Expressed in a variant of the W3C DateTime format (subset of ISO 8601). The formatting holds to the W3C DateTime format (https://www.w3.org/TR/NOTE-datetime) with the exception, that the time zone designator can be omitted (though it is highly recommended). If in online data sources the provider can not assess this, the current date/time may be substituted. For legacy data this may be set to the file date of imported data, or estimated. Note that experience shows that the information provided here is often unreliable, because providers tend to disregard updating this information. Maps to Dublin-Core standard element "Date.Modified".</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Notes" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Unit-Notes">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Miscellaneous notes referring to the unit that do not fit elsewhere.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Identifications" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Container element for identification events, i.e. the circumstances and result of assigning a name to the unit.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Identification" type="Identification" minOccurs="0" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Unit-Identification">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">In cases where more than one name applies to a single unit, several identifications should be formed and flagged as preferred. Relationships between differently identified sub-units of the unit can be specified by means of the IdentificationRole.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Preparations" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Specimen preparation details, possibly a sequence of preparation steps</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Preparation" type="Preparation" minOccurs="0" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Preparation">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Specimen preparation details.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="NomenclaturalTypeDesignation" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/NomenclaturalTypeDesignation">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Information on the type status of the specimen.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="TypeStatus" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/typeStatus">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Full term designating the status. E.g. "Holotype", "Isolectotype"</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="VerificationNotes" type="StringL" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/VerificationNotes">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Further information about the verification process.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Acquisitions" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>A container for Acquisitions.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Acquisition" type="Acquisition" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">Acquisition date, source and type.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PreviousUnits" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">A container element for several previous identifiers and locations for this unit.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="PreviousUnit" type="PreviousUnit" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/PreviousUnit">
+              <xs:annotation>
+                <xs:documentation xml:lang="en">A container for past identifiers and locations for this specimen.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="InformationWithheld" type="StringL" maxOccurs="unbounded" sawsdl:modelReference="http://rs.tdwg.org/abcd/mappings/Unit-InformationWithheld">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Brief descriptions of additional information that may exist, but that has not been made public. Information about obtaining the withheld information should be sought from the ContentCcontact. (=DwC.InformationWithheld). If present here, the information given should override the respective dataset-level statement.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Blocked" type="xs:boolean" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/blocked">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Sample or specimen data can not be ordered/loaned in general, but are visible via portals. Note: Records/samples/specimens not to be published should be blocked on database level. If they are available via Darwin Core or ABCD, they are visible for everyone. This element is to be used for samples/specimens that cannot be loaned.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LoanConditions" type="String" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/loanConditions">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Certain conditions for loaning this specimen or sample. E.g. "additional insurance required", "can only be loaned for a maximum of two months".</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LegalStatements" type="LegalStatements" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Container element for legal statements regarding the data set.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Gathering" type="Gathering" minOccurs="0" sawsdl:modelReference="http://rs.tdwg.org/abcd/terms/Gathering">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Elements describing the field events that created the unit and their location.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

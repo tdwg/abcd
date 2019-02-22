@@ -1,0 +1,626 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for </title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                        //--></script></head>
+   <body>
+      <h2><a id="INDEX">Table of Contents</a></h2>
+      <div class="toc">
+         <form action="none">
+            <div><span> Group by: <select id="selectTOC" onchange="selectTOCGroupBy(this.options[this.selectedIndex].value, true, 'index.indexList.html', 'index.indexListns.html', 'index.indexListcomp.html');">
+                     <option value="toc_group_by_namespace">Namespace</option>
+                     <option value="toc_group_by_location">Location</option>
+                     <option value="toc_group_by_component_type" selected="selected">Component Type</option></select></span></div>
+         </form>
+         <div class="level1" id="toc_group_by_component_type" style="display:block">
+            <div>
+               <div class="horizontalLayout">
+                  <table class="rt">
+                     <tr>
+                        <td class="rt_cornerTopLeft"></td>
+                        <td class="rt_lineTop"></td>
+                        <td class="rt_cornerTopRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_lineLeft"></td>
+                        <td class="rt_content">
+                           <table class="componentGroup">
+                              <tbody>
+                                 <tr>
+                                    <td class="componentGroup"><input id="button_Main_schema" type="image" value="-" src="img/btM.gif" onclick="switchState('Main_schema');" class="control" /></td>
+                                    <td class="componentGroup">
+                                       <div class="componentGroupTitle">Main Schema</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="componentGroup"></td>
+                                    <td class="componentGroup">
+                                       <div id="Main_schema" class="componentGroup" style="display:block">
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#ABCD_3.0_zoology.xsd" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">ABCD_3.0_zoology.xsd</a></b></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                        <td class="rt_lineRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_cornerBottomLeft"></td>
+                        <td class="rt_lineBottom"></td>
+                        <td class="rt_cornerBottomRight"></td>
+                     </tr>
+                  </table>
+               </div>
+               <div class="horizontalLayout">
+                  <table class="rt">
+                     <tr>
+                        <td class="rt_cornerTopLeft"></td>
+                        <td class="rt_lineTop"></td>
+                        <td class="rt_cornerTopRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_lineLeft"></td>
+                        <td class="rt_content">
+                           <table class="componentGroup">
+                              <tbody>
+                                 <tr>
+                                    <td class="componentGroup"><input id="button_Element" type="image" value="-" src="img/btM.gif" onclick="switchState('Element');" class="control" /></td>
+                                    <td class="componentGroup">
+                                       <div class="componentGroupTitle">Elements</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="componentGroup"></td>
+                                    <td class="componentGroup">
+                                       <div id="Element" class="componentGroup" style="display:block">
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Acquisition_AcquiredFrom" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Acquisition/AcquiredFrom</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Acquisition_Acquisition_AcquiredFrom_FullName" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Acquisition/AcquiredFrom/FullName</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Acquisition_Acquisition_AcquiredFrom_Organization" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Acquisition/AcquiredFrom/Organization</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Acquisition_AcquisitionSourceText" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Acquisition/AcquisitionSourceText</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Acquisition_AcquisitionType" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Acquisition/AcquisitionType</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Acquisition_Date" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Acquisition/Date</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSet" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_ContentContacts" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/ContentContacts</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_DataSets_DataSets_DataSet_ContentContacts_ContentContact" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/ContentContacts/ContentContact</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_DateModified" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/DateModified</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_Description" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/Description</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_DataSets_DataSets_DataSet_Description_Representation" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/Description/Representation</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_LegalStatements" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/LegalStatements</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_Owners" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/Owners</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_DataSets_DataSets_DataSet_Owners_Owner" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/Owners/Owner</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_DataSets_DataSets_DataSet_Owners_DataSets_DataSets_DataSet_DataSets_DataSets_DataSet_Owners_Owner_LogoURL" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/Owners/Owner/LogoURL</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_DataSets_DataSets_DataSet_Owners_DataSets_DataSets_DataSet_DataSets_DataSets_DataSet_Owners_Owner_Name" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/Owners/Owner/Name</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_DataSets_DataSets_DataSet_Owners_DataSets_DataSets_DataSet_DataSets_DataSets_DataSet_Owners_Owner_ResourceURI" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/Owners/Owner/ResourceURI</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_TechnicalContacts" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/TechnicalContacts</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_DataSets_DataSets_DataSet_TechnicalContacts_TechnicalContact" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/TechnicalContacts/TechnicalContact</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_Units" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/Units</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DataSets_DataSets_DataSet_DataSets_DataSets_DataSet_Units_Unit" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DataSets/DataSet/Units/Unit</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DateTime_DateText" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DateTime/DateText</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DateTime_ISODateTimeBegin" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DateTime/ISODateTimeBegin</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DateTime_ISODateTimeEnd" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DateTime/ISODateTimeEnd</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DateTime_PeriodExplicit" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DateTime/PeriodExplicit</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DateTime_TimeOfDayBegin" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DateTime/TimeOfDayBegin</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DateTime_TimeOfDayEnd" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DateTime/TimeOfDayEnd</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DateTime_TimeZone" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DateTime/TimeZone</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Altitude" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/Altitude</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_Altitude_LowerValue" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/Altitude/LowerValue</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_Altitude_UpperValue" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/Altitude/UpperValue</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_CoordinateSets" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/CoordinateSets</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_CoordinateSets_CoordinateSet" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/CoordinateSets/CoordinateSet</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_CoordinateSets_Gathering_Gathering_CoordinateSets_CoordinateSet_ErrorDistanceInMeters" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/CoordinateSets/CoordinateSet/ErrorDistanceInMeters</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_CoordinateSets_Gathering_Gathering_CoordinateSets_CoordinateSet_LatitudeDecimal" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/CoordinateSets/CoordinateSet/LatitudeDecimal</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_CoordinateSets_Gathering_Gathering_CoordinateSets_CoordinateSet_LongitudeDecimal" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/CoordinateSets/CoordinateSet/LongitudeDecimal</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_CountryName" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/CountryName</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Date" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/Date</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_GatheringAgents" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/GatheringAgents</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_GatheringAgents_GatheringAgent" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/GatheringAgents/GatheringAgent</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_LocalityText" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/LocalityText</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_NamedAreas" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/NamedAreas</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_NamedAreas_NamedArea" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/NamedAreas/NamedArea</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Notes" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/Notes</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Permits" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/Permits</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_Permits_Permit" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/Permits/Permit</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#HigherTaxon_HigherTaxonName" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">HigherTaxon/HigherTaxonName</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#HigherTaxon_HigherTaxonRank" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">HigherTaxon/HigherTaxonRank</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_Age" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/Age</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_Date" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/Date</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_FullScientificName" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/FullScientificName</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_HigherTaxa" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/HigherTaxa</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_Identification_HigherTaxa_HigherTaxon" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/HigherTaxa/HigherTaxon</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_Identifiers" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/Identifiers</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_Identification_Identifiers_Identifier" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/Identifiers/Identifier</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_Notes" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/Notes</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_PhaseOrStage" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/PhaseOrStage</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_PreferredFlag" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/PreferredFlag</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_References" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/References</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_Identification_References_Reference" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/References/Reference</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification_Sex" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification/Sex</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Label_Representation" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Label/Representation</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LabelRepr_Abbreviation" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LabelRepr/Abbreviation</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LabelRepr_Text" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LabelRepr/Text</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatement_ResourceURI" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatement/ResourceURI</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatement_Text" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatement/Text</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatements_Acknowledgements" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatements/Acknowledgements</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatements_LegalStatements_Acknowledgements_Acknowledgement" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatements/Acknowledgements/Acknowledgement</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatements_Licenses" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatements/Licenses</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatements_LegalStatements_Licenses_License" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatements/Licenses/License</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatements_OtherLegalStatements" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatements/OtherLegalStatements</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatements_LegalStatements_OtherLegalStatements_OtherLegalStatement" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatements/OtherLegalStatements/OtherLegalStatement</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatements_SuggestedCitations" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatements/SuggestedCitations</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatements_LegalStatements_SuggestedCitations_SuggestedCitation" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatements/SuggestedCitations/SuggestedCitation</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#MetadataDescriptionRepr_Coverage" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">MetadataDescriptionRepr/Coverage</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#MetadataDescriptionRepr_Details" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">MetadataDescriptionRepr/Details</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#MetadataDescriptionRepr_Title" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">MetadataDescriptionRepr/Title</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#MetadataDescriptionRepr_WebsiteURL" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">MetadataDescriptionRepr/WebsiteURL</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#NamedArea_AreaClass" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">NamedArea/AreaClass</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#NamedArea_Name" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">NamedArea/Name</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Organization_Divisions" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Organization/Divisions</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Organization_Organization_Divisions_Division" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Organization/Divisions/Division</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Organization_GUID" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Organization/GUID</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Organization_LogoURL" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Organization/LogoURL</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Organization_Name" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Organization/Name</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Permit_Details" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Permit/Details</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Permit_Status" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Permit/Status</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Permit_Text" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Permit/Text</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Permit_Type" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Permit/Type</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Preparation_PreparationAgents" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Preparation/PreparationAgents</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Preparation_Preparation_PreparationAgents_PreparationAgent" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Preparation/PreparationAgents/PreparationAgent</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Preparation_PreparationDate" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Preparation/PreparationDate</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Preparation_PreparationType" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Preparation/PreparationType</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#PreviousUnit_Date" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">PreviousUnit/Date</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#PreviousUnit_Notes" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">PreviousUnit/Notes</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#PreviousUnit_PreviousSourceID" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">PreviousUnit/PreviousSourceID</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#PreviousUnit_PreviousSourceInstitutionID" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">PreviousUnit/PreviousSourceInstitutionID</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#PreviousUnit_PreviousUnitID" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">PreviousUnit/PreviousUnitID</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Reference_Details" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Reference/Details</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Reference_GUID" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Reference/GUID</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Reference_ResourceURIs" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Reference/ResourceURIs</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Reference_Reference_ResourceURIs_ResourceURI" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Reference/ResourceURIs/ResourceURI</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Reference_Text" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Reference/Text</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Reference_WebsiteURL" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Reference/WebsiteURL</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Acquisitions" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/Acquisitions</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Unit_Acquisitions_Acquisition" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/Acquisitions/Acquisition</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Blocked" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/Blocked</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_DateModified" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/DateModified</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_FieldNumbers" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/FieldNumbers</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Unit_FieldNumbers_FieldNumber" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/FieldNumbers/FieldNumber</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Unit_FieldNumbers_Unit_Unit_FieldNumbers_FieldNumber_CollectorName" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/FieldNumbers/FieldNumber/CollectorName</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Unit_FieldNumbers_Unit_Unit_FieldNumbers_FieldNumber_ID" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/FieldNumbers/FieldNumber/ID</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Gathering" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/Gathering</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_ID" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/ID</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Identifications" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/Identifications</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Unit_Identifications_Identification" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/Identifications/Identification</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_InformationWithheld" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/InformationWithheld</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_KindsOfUnit" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/KindsOfUnit</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Unit_KindsOfUnit_KindOfUnit" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/KindsOfUnit/KindOfUnit</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_LegalStatements" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/LegalStatements</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_LoanConditions" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/LoanConditions</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_NomenclaturalTypeDesignation" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/NomenclaturalTypeDesignation</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Unit_NomenclaturalTypeDesignation_TypeStatus" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/NomenclaturalTypeDesignation/TypeStatus</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Unit_NomenclaturalTypeDesignation_VerificationNotes" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/NomenclaturalTypeDesignation/VerificationNotes</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Notes" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/Notes</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Preparations" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/Preparations</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Unit_Preparations_Preparation" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/Preparations/Preparation</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_PreviousUnits" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/PreviousUnits</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_Unit_PreviousUnits_PreviousUnit" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/PreviousUnits/PreviousUnit</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_RecordBasis" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/RecordBasis</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit_SourceInstitutionID" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit/SourceInstitutionID</a></b></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                        <td class="rt_lineRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_cornerBottomLeft"></td>
+                        <td class="rt_lineBottom"></td>
+                        <td class="rt_cornerBottomRight"></td>
+                     </tr>
+                  </table>
+               </div>
+               <div class="horizontalLayout">
+                  <table class="rt">
+                     <tr>
+                        <td class="rt_cornerTopLeft"></td>
+                        <td class="rt_lineTop"></td>
+                        <td class="rt_cornerTopRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_lineLeft"></td>
+                        <td class="rt_content">
+                           <table class="componentGroup">
+                              <tbody>
+                                 <tr>
+                                    <td class="componentGroup"><input id="button_Simple_Type" type="image" value="-" src="img/btM.gif" onclick="switchState('Simple_Type');" class="control" /></td>
+                                    <td class="componentGroup">
+                                       <div class="componentGroupTitle">Simple Types</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="componentGroup"></td>
+                                    <td class="componentGroup">
+                                       <div id="Simple_Type" class="componentGroup" style="display:block">
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DateTimeISO" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DateTimeISO</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#HigherTaxonRankEnum" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">HigherTaxonRankEnum</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#InstitutionCode" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">InstitutionCode</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Monomial" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Monomial</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#RecordBasisEnum" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">RecordBasisEnum</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#SexCodeEnum" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">SexCodeEnum</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#String" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">String</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#String255" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">String255</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#String50" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">String50</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#decimalLatitudeDataType" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">decimalLatitudeDataType</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#decimalLongitudeDataType" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">decimalLongitudeDataType</a></b></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                        <td class="rt_lineRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_cornerBottomLeft"></td>
+                        <td class="rt_lineBottom"></td>
+                        <td class="rt_cornerBottomRight"></td>
+                     </tr>
+                  </table>
+               </div>
+               <div class="horizontalLayout">
+                  <table class="rt">
+                     <tr>
+                        <td class="rt_cornerTopLeft"></td>
+                        <td class="rt_lineTop"></td>
+                        <td class="rt_cornerTopRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_lineLeft"></td>
+                        <td class="rt_content">
+                           <table class="componentGroup">
+                              <tbody>
+                                 <tr>
+                                    <td class="componentGroup"><input id="button_Complex_Type" type="image" value="-" src="img/btM.gif" onclick="switchState('Complex_Type');" class="control" /></td>
+                                    <td class="componentGroup">
+                                       <div class="componentGroupTitle">Complex Types</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="componentGroup"></td>
+                                    <td class="componentGroup">
+                                       <div id="Complex_Type" class="componentGroup" style="display:block">
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Acquisition" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Acquisition</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#DateTime" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">DateTime</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#HigherTaxon" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">HigherTaxon</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Identification" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Identification</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Label" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Label</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LabelRepr" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LabelRepr</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatement" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatement</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatements" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatements</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#MetadataDescriptionRepr" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">MetadataDescriptionRepr</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#NamedArea" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">NamedArea</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Organization" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Organization</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Permit" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Permit</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Preparation" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Preparation</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#PreviousUnit" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">PreviousUnit</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Reference" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Reference</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#StringL" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">StringL</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#StringP" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">StringP</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#StringP255" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">StringP255</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Unit" target="mainFrame" title="http://www.tdwg.org/schemas/abcd/3.0_zoology" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Unit</a></b></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                        <td class="rt_lineRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_cornerBottomLeft"></td>
+                        <td class="rt_lineBottom"></td>
+                        <td class="rt_cornerBottomRight"></td>
+                     </tr>
+                  </table>
+               </div>
+               <div class="horizontalLayout">
+                  <table class="rt">
+                     <tr>
+                        <td class="rt_cornerTopLeft"></td>
+                        <td class="rt_lineTop"></td>
+                        <td class="rt_cornerTopRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_lineLeft"></td>
+                        <td class="rt_content">
+                           <table class="componentGroup">
+                              <tbody>
+                                 <tr>
+                                    <td class="componentGroup"><input id="button_Attribute" type="image" value="-" src="img/btM.gif" onclick="switchState('Attribute');" class="control" /></td>
+                                    <td class="componentGroup">
+                                       <div class="componentGroupTitle">Attributes</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="componentGroup"></td>
+                                    <td class="componentGroup">
+                                       <div id="Attribute" class="componentGroup" style="display:block">
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_CoordinateSets_Gathering_Gathering_CoordinateSets_CoordinateSet_begin" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/CoordinateSets/CoordinateSet/@begin</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_CoordinateSets_Gathering_Gathering_CoordinateSets_CoordinateSet_end" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/CoordinateSets/CoordinateSet/@end</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_CoordinateSets_Gathering_Gathering_CoordinateSets_CoordinateSet_original" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/CoordinateSets/CoordinateSet/@original</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_GatheringAgents_sequence" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/GatheringAgents/@sequence</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Gathering_Gathering_NamedAreas_Gathering_Gathering_NamedAreas_NamedArea_sequence" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Gathering/NamedAreas/NamedArea/@sequence</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LabelRepr_language" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LabelRepr/@language</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#LegalStatement_language" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">LegalStatement/@language</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#MetadataDescriptionRepr_language" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">MetadataDescriptionRepr/@language</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Preparation_sequence" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Preparation/@sequence</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#Preparation_Preparation_PreparationAgents_sequence" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">Preparation/PreparationAgents/@sequence</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#PreviousUnit_sequence" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">PreviousUnit/@sequence</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#StringL_language" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">StringL/@language</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#StringP_preferred" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">StringP/@preferred</a></b></div>
+                                          <div><b><a href="ABCD_3_0_zoology_xsd.html#StringP255_preferred" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for ABCD_3.0_zoology.xsd')">StringP255/@preferred</a></b></div>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </td>
+                        <td class="rt_lineRight"></td>
+                     </tr>
+                     <tr>
+                        <td class="rt_cornerBottomLeft"></td>
+                        <td class="rt_lineBottom"></td>
+                        <td class="rt_cornerBottomRight"></td>
+                     </tr>
+                  </table>
+               </div>
+               <div style="clear:left"></div>
+            </div>
+         </div>
+      </div>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div>
+   </body>
+</html>

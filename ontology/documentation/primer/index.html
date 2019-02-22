@@ -45,6 +45,7 @@
                     <td><strong>Editors</strong></td>
                     <td>
                       David Fichtmüller (BGBM, Berlin) <a href="mailto:d.fichtmueller@bgbm.org">d.fichtmueller@bgbm.org</a></br>
+                      Fabian Reimeier (BGBM, Berlin) <a href="mailto:f.reimeier@bgbm.org">f.reimeier@bgbm.org</a></br>
                     </td>
                   </tr>
                   <tr>
@@ -58,41 +59,207 @@
                 </tbody>
               </table>
             </div>
+            <p>The ABCD 3.0 Ontology is modelled as an OWL Ontology. All concept in the ontology belong to one of four groups: Classes, Object Properties, Datatype Properties or Individuals.<p> 
             <div id="classes" class="section scrollsection">
               <h4>Classes</h4>
-                <p></p>
+                <p>There are 64 classes, which express the core concepts of ABCD. The most general class is “Data Set” but unlike in the XML Version, there is no implicit hierarchy of the classes.</p>
+                <p>8 of the classes are there to model controlled vocabularies containing Named Individuals for the individual controlled terms. These are to be used when expressing ABCD in RDF.</p>
             </div>
             <div id="object-properties" class="section scrollsection">
               <h4>Object Properties</h4>
-              <p></p>
+              <p>The purpose of object properties is to connect classes to each other. Object properties are named following the convention of “has&lt;Name Of Connected Class&gt;” (e.g. hasUnit, hasMultimediaObject), sometimes also “has&lt;Name Of Specific Role&gt; (e.g. hasOwner as a sub property of hasContact, see also <a href="#Inheritence">Inheritance</a>)</p>
+              <p>There are 88 object properties in total, all of which have a specified range for the class they are connecting to. Only 4 however have a specified domain, which defines the class by which an object property can be used (“has Inverse Association” which links from an Association to an Association, “has Type Specific Information” which gives additional information for a Unit class as well as “has Permit Status” and “has Permit Type” which both link to controlled vocabularies only applicable to the Permit class). For all other object properties, the implicit domain is owl:Thing, allowing flexible reuse of the object properties.</p>
             </div>
             <div id="datatype-properties" class="section scrollsection">
               <h4>Datatype Properties</h4>
-              <p></p>
+              <p>Datatype Properties are the counterpart of leaf-elements in the XML Schema. They are used to connect values of a specific type to classes. Some of the 301 Datatype Properties of the ontology are very generic so they can often be reused (e.g. notes) others are more closely related to a specific class (e.g. fullScientificName). Although we recommend which Datatype Properties should be used for specific classes, they could be connected to any class of the ontology.</p>
             </div>
             <div id="individuals" class="section scrollsection">
               <h4>Individuals</h4>
-              <p></p>
+              <p>The 79 Individuals of the ontology are each belonging to one of the 8 controlled vocabularies of the ontology. They are in fact instances of the vocabulary class and are used to express ABCD in RDF.</p>
             </div>
             <div id="metaproperties" class="section scrollsection">
               <h4>Metaproperties</h4>
-              <p></p>
-            </div>
-            <div id="functional-properties" class="section scrollsection">
-              <h4>Functional Properties</h4>
-              <p></p>
+              <p>The Metaproperties preferred and sequence are Properties that can be used to describe other properties. When e.g. a Unit Class is connected to multiple Identification Classes by several hasIdentification Object-Poperties, the metaproperty is used to indicate which of the hasIdentification Properties is preferred over the others. A sequence can be used to order identical properties connected to the same class and can e.g. be used to describe the importance of Identifiers (hasIdentifier).</p>
             </div>
             <div id="inheritance" class="section scrollsection">
               <h4>Inheritance</h4>
-              <p></p>
+
               <h5>Subclasses</h5>
-              <p></p>
+              <ul>
+                <li>
+                  Contact
+                  <ul>
+                    <li>Person</li>
+                    <li>Organization</li>
+                  </ul>
+                </li>
+                <li>
+                  Scientific Name
+                  <ul>
+                    <li>Botanical Scientific Name</li>
+                    <li>Bacterial Scientific Name</li>
+                    <li>Viral Scientific Name</li>
+                    <li>Zoological Scientific Name</li>
+                  </ul>
+                </li>
+                <li>
+                  Type Specific Information
+                  <ul>
+                    <li>Culture Collection Unit</li>
+                    <li>Plant Genetic Resources Unit</li>
+                    <li>Specimen Unit</li>
+                    <li>Observation Unit</li>
+                    <li>Mycological Unit</li>
+                    <li>Herbarium Unit</li>
+                    <li>Botanical Garden Unit</li>
+                    <li>Paleontological Unit</li>
+                    <li>Zoological Unit</li>
+                  </ul>
+                </li>
+                <li>
+                  Multimedia Object
+                  <ul>
+                    <li>Video Object</li>
+                    <li>Audio Object</li>
+                    <li>Image Object</li>
+                  </ul>
+                </li>
+              </ul>
+
               <h5>Subproperties</h5>
-              <p></p>
+              <ul>
+                <li>
+                  scope
+                  <ul>
+                    <li>geoecologicalTerm</li>
+                    <li>taxonomicTerm</li>
+                  </ul>
+                </li>
+                <li>
+                  guid
+                  <ul>
+                    <li>resourceURI</li>
+                  </ul>
+                </li>
+                <li>
+                  name
+                  <ul>
+                    <li>nearbyPlaceName</li>
+                  </ul>
+                </li>
+                <li>
+                  hasPerson
+                  <ul>
+                    <li>hasVerifier</li>
+                    <li>hasAuthor</li>
+                  </ul>
+                </li>
+                <li>
+                  hasVersion
+                  <ul>
+                    <li>hasFileFormatVersion</li>
+                  </ul>
+                </li>
+                <li>
+                  text
+                  <ul>
+                    <li>verbatimText</li>
+                    <li>localityText</li>
+                  </ul>
+                </li>
+                <li>
+                  method
+                  <ul>
+                    <li>errorMethod</li>
+                  </ul>
+                </li>
+                <li>
+                  hasReference
+                  <ul>
+                    <li>hasSuggestedCitation</li>
+                    <li>hasSourceReference</li>
+                    <li>hasUnitReference</li>
+                    <li>hasIdentificationSource</li>
+                  </ul>
+                </li>
+                <li>
+                  hasDate
+                  <ul>
+                    <li>hasAcquisitionDate</li>
+                    <li>hasVerificationDate</li>
+                    <li>hasLoanDate</li>
+                    <li>hasLoanReturnDate</li>
+                    <li>hasPlantingDate</li>
+                    <li>hasDateCreated</li>
+                    <li>hasDateModified</li>
+                    <li>hasBlockedUntilDate</li>
+                  </ul>
+                </li>
+                <li>
+                  hasScientificName
+                  <ul>
+                    <li>hasTypifiedName</li>
+                    <li>hasTaxonInBackground</li>
+                  </ul>
+                </li>
+                <li>
+                  hasContact
+                  <ul>
+                    <li>hasOrganization</li>
+                    <li>hasOwner</li>
+                    <li>hasTechnicalContact</li>
+                    <li>hasContentContact</li>
+                    <li>hasPreparationAgent</li>
+                    <li>hasCreator</li>
+                    <li>hasMeasuringAgent</li>
+                    <li>hasSequencingAgent</li>
+                    <li>hasAnnotator</li>
+                    <li>hasGatheringAgent</li>
+                    <li>hasLastEditor</li>
+                  </ul>
+                </li>
+                <li>
+                  id
+                  <ul>
+                    <li>sourceID</li>
+                    <li>sourceInstitutionID</li>
+                    <li>physicalObjectID</li>
+                  </ul>
+                </li>
+                <li>
+                  unformattedValue
+                  <ul>
+                    <li>stratigraphy</li>
+                    <li>longitudeText</li>
+                    <li>latitudeText</li>
+                  </ul>
+                </li>
+                <li>
+                  focalLength
+                  <ul>
+                    <li>focalLengthIn35mmFilm</li>
+                  </ul>
+                </li>
+                <li>
+                  websiteURL
+                  <ul>
+                    <li>wmsURL</li>
+                  </ul>
+                </li>
+                <li>
+                  hasStratigraphicTerm
+                  <ul>
+                    <li>hasChronostratigraphicTerm</li>
+                    <li>hasBiostratigraphicTerm</li>
+                    <li>hasLithostratigraphicTerm</li>
+                  </ul>
+                </li>
+              </ul>
             </div>
             <div id="relation-to-external-terminologies" class="section scrollsection">
               <h4>Relation to External Terminologies</h4>
-              <p></p>
+              <p>Some terms in the ABCD Ontology have exact or related matches to terms in other terminologies. These relationships are as well documented in the RDF.</p>
             </div>
           </div>
           <div class="col show-on-large xl3">
@@ -103,7 +270,6 @@
                 <li><a href="#datatype-properties">Datatype Properties</a></li>
                 <li><a href="#individuals">Individuals</a></li>
                 <li><a href="#metaproperties">Metaproperties</a></li>
-                <li><a href="#functional-properties">Functional Properties</a></li>
                 <li><a href="#inheritance">Inheritance</a></li>
                 <li><a href="#relation-to-external-terminologies">Relation to External Terminologies</a></li>
               </ul>

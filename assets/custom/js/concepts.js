@@ -77,10 +77,10 @@ Vue.component("associated-properties", {
     `
     <div class="associated-properties">
       <template v-if="Array.isArray(concept['ns0:associatedProperty'])">
-        <a v-for="prop in concept['ns0:associatedProperty']" class="associated-property waves-effect waves-light btn btn-flat" v-bind:href="concept['rdfs:isDefinedBy']['@rdf:resource']+prop['@rdf:resource']">{{ prop['@rdf:resource'] }}</a>
+        <a v-for="prop in concept['ns0:associatedProperty']" class="associated-property waves-effect waves-light btn btn-flat" v-bind:href="'#'+prop['@rdf:resource']">{{ prop['@rdf:resource'] }}</a>
       </template>
       <template v-if="concept['ns0:associatedProperty'] && !Array.isArray(concept['ns0:associatedProperty'])">
-        <a class="associated-property waves-effect waves-light btn btn-flat" v-bind:href="concept['rdfs:isDefinedBy']['@rdf:resource']+concept['ns0:associatedProperty']['@rdf:resource']">{{ concept['ns0:associatedProperty']['@rdf:resource'] }}</a>
+        <a class="associated-property waves-effect waves-light btn btn-flat" v-bind:href="'#'+concept['ns0:associatedProperty']['@rdf:resource']">{{ concept['ns0:associatedProperty']['@rdf:resource'] }}</a>
       </template>
     </div>
     `

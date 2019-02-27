@@ -305,7 +305,7 @@
             console.log(this.mappings[0]);
         },
         methods: {
-          getMappings() {
+          getMappings: function() {
             var vinstance = this;
             $.getJSON('/xml/documentation/changes/ABCD2to3Mapping.json', function(json){
               $.each(json.mappings, function(key, value){
@@ -313,7 +313,7 @@
               });
             });
           },
-          mappingSearch(){
+          mappingSearch: function(){
             if (this.mappingSearchInput.trim() === '')
               this.filteredMappings = this.mappings;
             else

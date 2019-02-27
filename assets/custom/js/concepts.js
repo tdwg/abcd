@@ -172,7 +172,7 @@ $app = new Vue({
 		}
 	},
 	methods: {
-    getConcepts() {
+    getConcepts: function() {
       var vinstance = this;
       /*$.getJSON('/terms/abcdTerms.json', function(json){
         json.forEach(function(concept){ vinstance.concepts.push(concept) });
@@ -220,7 +220,7 @@ $app = new Vue({
         }
       });
     },
-    getConceptGroup(conceptGroup){
+    getConceptGroup: function(conceptGroup){
       groupConcepts = {};
       var filter = function(concept){
         if(Array.isArray(concept["vann:termGroup"])) 
@@ -233,7 +233,7 @@ $app = new Vue({
       groupConcepts["owl:NamedIndividual"] = _.sortBy(this.controlledTerms.filter(filter), '@rdf:about');;
       return groupConcepts;
     },
-		conceptSearch(){
+		conceptSearch: function(){
 			if (this.conceptSearchInput.trim() === '')
 				this.filteredConcepts = this.concepts;
 			else

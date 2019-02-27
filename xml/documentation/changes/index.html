@@ -275,11 +275,11 @@
     <script>
       new Vue({
         el: '#main-app',
-        created(){
+        created: function(){
           this.debouncedMappingSearch = _.debounce(this.mappingSearch, 500);
           this.getMappings(); 
         },
-        mounted() { 
+        mounted: function() { 
           var options = {
             shouldSort: true,
             threshold: 0.6,
@@ -301,7 +301,7 @@
             this.debouncedMappingSearch()
           }
         },
-        updated(){
+        updated: function(){
             console.log(this.mappings[0]);
         },
         methods: {

@@ -131,11 +131,11 @@ Vue.component("concept-card", {
 
 $app = new Vue({
 	el: '#main-app',
-	created(){
+	created: function(){
     this.debouncedConceptSearch = _.debounce(this.conceptSearch, 500);
     this.getConcepts(); 
   },
-	mounted() {	
+	mounted: function() {	
 		var options = {
 			shouldSort: true,
 			threshold: 0.2,
@@ -152,7 +152,7 @@ $app = new Vue({
 		this.fuse = new Fuse(this.concepts, options);
 		this.filteredConcepts = this.concepts;
 	},
-	updated() {
+	updated: function() {
 		$('.collapsible').collapsible({accordion: false});
 		$('.collapsible').collapsible('close');
     if(this.handleAnchor){

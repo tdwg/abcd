@@ -307,7 +307,7 @@
         methods: {
           getMappings() {
             var vinstance = this;
-            $.getJSON('/xml/documentation/changes/ABCD2to3Mapping.json', (json) => {
+            $.getJSON('/xml/documentation/changes/ABCD2to3Mapping.json', function(json){
               $.each(json.mappings, function(key, value){
                   vinstance.mappings.push(value);
               });

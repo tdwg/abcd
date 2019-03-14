@@ -23,7 +23,7 @@ Vue.component("navigation", {
         <li class=\"bold menu-item sidenav-close\" v-bind:class=\"{ active: currentUrl=='/3.0/' }\"><a href=\"/3.0\" class=\"waves-effect waves-green\">ABCD 3.0</a></li>\
         <li class=\"bold menu-item sidenav-close\" v-bind:class=\"{ active: currentUrl=='/xml/' }\"><a href=\"/xml\" class=\"waves-effect waves-green\">XML</a>\
           <ul class=\"submenu\">\
-            <li class=\"bold menu-item sidenav-close\" v-bind:class=\"{ active: currentUrl=='/xml/documentation/primer/' }\"><a href=\"/xml/documentation/primer\" class=\"waves-effect waves-green\">Primer</a></li>\
+            <li class=\"bold menu-item sidenav-close\" v-bind:class=\"{ active: currentUrl=='/xml/documentation/primer/2.06/' }\"><a href=\"/xml/documentation/primer/2.06\" class=\"waves-effect waves-green\">ABCD 2.06 Primer</a></li>\
             <li class=\"bold menu-item sidenav-close\" v-bind:class=\"{ active: currentUrl=='/xml/documentation/changes/' }\"><a href=\"/xml/documentation/changes\" class=\"waves-effect waves-green\">ABCD 3.0 Changes</a></li>\
           </ul>\
         </li>\

@@ -141,8 +141,8 @@ $app = new Vue({
 			threshold: 0.2,
 			location: 0,
 			distance: 100,
-			maxPatternLength: 32,
-			minMatchCharLength: 2,
+			maxPatternLength: 100,
+			minMatchCharLength: 1,
 			keys: [
 				"@rdf:about",
 				"rdfs:label.#text"

@@ -36,12 +36,13 @@
             <div id="documentation-section" class="section">
               <div id="simplification" class="scrollsection">
                 <h3>Simplification</h3>
-                <p>Usage of common types, e.g. for Contacts or Dates. While this increases the number of possible elements in the XML tree it reduces the different elements and makes to usage more consistent.</p>
+                <p>Usage of common types, e.g. for Contacts or Dates. While this increases the number of possible elements in the XML tree it reduces the different elements and makes their usage more consistent.</p>
               </div>
 
               <div id="renamed" class="scrollsection">
                 <h3>Elements renamed</h3>
-                <p>More consistent naming of elements. Many elements used to repeat the name of the parent element. This has been heavily reduced to make the element names more concise. The same goes for repeatable elements, which are now more closer to convention of ElementInPlural/ElementInSigular. There are however still exceptions to these conventions.</p>
+                <p>More consistent naming of elements. Many elements used to repeat the name of the parent element. This has been heavily reduced to make the element names more concise. The same goes for repeatable elements, which are now closer to the convention of ElementInPlural/ElementInSigular. There are, however, still exceptions to these conventions.</p>
+                <p>Examples for name changes:</p>
                 <ul class="collection">
                   <li class="collection-item">ID, e.g. UnitID and DatsSetID</li>
                   <li class="collection-item">GUID, e.g. UnitGUID and DataSetGUID</li>
@@ -49,10 +50,6 @@
                   <li class="collection-item">Unit/Assemblages/UnitAssemblage was renamed to Unit/Assemblages/Assemblage</li>
                   <li class="collection-item">Comments to Notes</li>
                 </ul>
-              </div>
-
-              <div id="common" class="scrollsection">
-                <h3>Commonly used elements</h3>
               </div>
 
               <div id="spelling" class="scrollsection">
@@ -81,32 +78,32 @@
 
               <div id="legal" class="scrollsection">
                 <h3>LegalStatements (previously known as IPRStatements)</h3>
-                <p>One of the complaints about the previous ABCD version was the IRP (Intelectual Property Rights) block. It contained the subelements Acknowledgements, Citation, Copyrights, Disclaimers, IPRDeclarations, License and TermsOfUseStements. Even for experience users of ABCD it was difficult du distinguish between these kinds of statements.</p>
+                <p>One of the complaints about the previous ABCD version was the IPR (Intelectual Property Rights) block. It contained the subelements Acknowledgements, Citation, Copyrights, Disclaimers, IPRDeclarations, License and TermsOfUseStements. Even for experienced users of ABCD it was difficult to distinguish between these kinds of statements.</p>
                 <ul class="collection"> 
                   <li class="collection-item">The entire block was therefore simplified, starting by renaming IPRStatements to LegalStatements.</li>
-                  <li class="collection-item">The elements Acknowledgements (referencing other works the current element is based upon or that were helpful in its creation or processing) and License remain unchanged.</li>
-                  <li class="collection-item">Citations was renamed to SuggestedCitations, to make it clear that this should contain the way the current dataset or image should be cited by other publications or datasets that build upon it (as such a citation is usually subject to the citation guidelines of journals etc, the person citing it might now have full control over how it is cited, hence this is only a suggestion on which information to include.)</li>
+                  <li class="collection-item">The elements Acknowledgements (referencing other works the referenced element is based upon or that were helpful in its creation or processing) and License remain unchanged.</li>
+                  <li class="collection-item">Citations was renamed to SuggestedCitations, to make it clear that this should contain the way the current dataset or image should be cited by other publications or datasets that build upon it (as such a citation is usually subject to the citation guidelines of journals etc., this is only a suggestion on which information to include.)</li>
               </div>
 
               <div id="urli" class="scrollsection">
                 <h3>Differentiation between URI and URL</h3>
                 <ul class="collection">
-                  <li class="collection-item">In ABCD 2.06 a lot of element names had a URI at the end (e.g. MultiMediaObject/FileURI) even when it was clearly meant to be an URL. So with Version 3.0 there is a clear distinction between URIs for the purpose of identifying a concept and URLs which are links leading to the desired content. Quite often it is desired that URIs are also resolvable, however the main focus is for identification purposes.</li>
-                  <li class="collection-item">Many elements now have the repeatable elements ReferenceURIs/ReferenceURI primarily meant for identifiers and many also have addition an addition WebsiteURL which to be presented as a clickable element to a human reader to get more information about this. Other Elements with URL at the end are used to indicate a distinct purpose, like DirectAccessURL (for downloading a dataset) , FileURL and ThumbnailURL (both for Multimedia elements), ProductURL (the website where a multimedia object is presented, with additional metadata and possibly an interactive viewer), LogoURL(Link to the Logo of the organization) etc. </li>
+                  <li class="collection-item">In ABCD 2.06 many element names ended with "URI" (e.g. MultiMediaObject/FileURI) even when it was clearly meant to be an URL. So with Version 3.0 there is a clear distinction between URIs for the purpose of identifying a concept and URLs which are links leading to the desired content. Quite often URIs may also be resolvable, however the main focus is for identification purposes.</li>
+                  <li class="collection-item">Many elements now do include the repeatable element ReferenceURIs/ReferenceURI. This is primarily meant for identifiers. Often, in addition a WebsiteURL can be given, which can be presented as a clickable element to a human reader. Other elements names ending with "URL" are used to indicate a distinct purpose, like DirectAccessURL (for downloading a dataset) , FileURL and ThumbnailURL (both for multimedia elements), ProductURL (the website where a multimedia object is presented, with additional metadata and possibly an interactive viewer), LogoURL (link to the Logo of the organization) etc. </li>
                 </ul>
               </div>
               
               <div id="date" class="scrollsection">
                 <h3>Date</h3>
                 <ul class="collection">
-                  <li class="collection-item">The elements DayNumberBegin and DayNumberEnd for Date elements have been removed. The elements were to mark dates in the Julian calendar, however they only had limited usability for automatically converting Julian dates to Gregorian dates. The recommendation is now to use the DateText element to note dates in the Julien Calendar.</li>
+                  <li class="collection-item">The elements DayNumberBegin and DayNumberEnd for Date elements have been removed. The elements were to mark dates in the Julian calendar, however they only had limited usability for automatically converting Julian dates to Gregorian dates. The recommendation is now to use the DateText element to note dates in the Julian Calendar.</li>
                 </ul>
               </div>
 
               <div id="multimedia" class="scrollsection">
                 <h3>MultimediaObject</h3>
                 <ul class="collection">
-                  <li class="collection-item">A lot of new elements have been introduced to the MultimediaObject in ABCD 2.1 which have been further refined for 3.0. The MultimediaObject now contains subelements for Audio, Image and Video for several specific information depending on the type of the media, as well as several other generic elements. It is now possible to note Taxa in the Background of an image and give references to the source of the image. </li>
+                  <li class="collection-item">ABCD version 2.1 had already introduced a number of new elements for the MultimediaObject. These have been further refined in version 3.0. The MultimediaObject now contains subelements for Audio, Image and Video for several specific information depending on the type of the media, as well as several other generic elements. It is now possible to note Taxa in the Background of an image and give references to the source of the image. </li>
                   <li class="collection-item">The previous element ImageColourSpace has been simplified. Instad of a container with Profile_Ref and Profile_Name the color space can now be noted just as Image/ColorSpace</li>
                 </ul>
               </div>
@@ -118,17 +115,17 @@
                   <li class="collection-item">The element Reference/ReferenceGUID was renamed to Reference/GUID</li>
                   <li class="collection-item">The element Reference/DOI was removed. DOIs are external identifiers (that are resolvable) and should therefore be mapped as Reference/ResourceURIs/ResourceURI</li>
                   <li class="collection-item">The element Reference/TitleCitation was renamed to Reference/Text</li>
-                  <li class="collection-item">The element Reference/URI was renamed to Reference/WebsiteURL . Though documentation of the previous URI element stated that it was meant as a URL for the reference, it is possible that it has been used to actually note an external identifier of the reference (other than the DOI which had its own element), so in cases it might be required to map the content to  Reference/ResourceURIs/ResourceURI instead of Reference/WebsiteURL</li>
+                  <li class="collection-item">The element Reference/URI was renamed to Reference/WebsiteURL. Though documentation of the element stated that it was meant as a URL for the reference, it is possible that it has been used to actually denote an external identifier of the reference (other than the DOI which had its own element). In such cases it is required to map the content to Reference/ResourceURIs/ResourceURI instead of Reference/WebsiteURL</li>
                 </ul>
               </div>
 
               <div id="unit" class="scrollsection">
                 <h3>Unit</h3>
                 <ul class="collection">
-                  <li class="collection-item">A new element FieldNoteReferences was created to add References that were used during field notes. </li>
+                  <li class="collection-item">A new element FieldNoteReferences was created to add References that were used when taking field notes. </li>
                   <li class="collection-item">CollectorsFieldNumber has proved to be problematic, as two collectors could have different field numbers for the same unit that they collected together. To solve this issue, a new element FieldNumbers was introduced which can contain multiple FieldNumber elements each of which has an ID (the field number itself) and a CollectorName which is supposed to be the Full Name of one of the collectors mentioned as Gathering/GatheringAgents</li>
-                  <li class="collection-item">HerbariumUnit/LoadIdentifier has been renamed to HerbariumUnit/LoanID </li>
-                  <li class="collection-item">HerbariumUnit/LoadSequenceNo has been renamed to HerbariumUnit/LoanSequenceNumber</li>
+                  <li class="collection-item">HerbariumUnit/LoanIdentifier has been renamed to HerbariumUnit/LoanID </li>
+                  <li class="collection-item">HerbariumUnit/LoanSequenceNo has been renamed to HerbariumUnit/LoanSequenceNumber</li>
                   <li class="collection-item">Unit/LastEditor is now a full contact</li>
                   <li class="collection-item">Unit/MultiMediaObjects/MultiMediaObject has been renamed to Unit/MultimediaObjects/MultimediaObject</li>
                   <li class="collection-item">Unit/UnitIDNumeric has been renamed to UnitI/NumericID</li>
@@ -147,10 +144,10 @@
                 <h3>Identification</h3>
                 <ul class="collection">
                   <li class="collection-item">The text element Unit/Identifications/IdentificationHistory has been moved out of the container for the repeatable Identification and sits now at Unit/ IdentificationHistory (after the Identifications element)</li>
-                  <li class="collection-item">The Element Unit/Identifications/Identification/Identifiers/IdentifierRole has been moved out of the Identifiers container for the repeatable element Identifier and sits now at Unit/Identifications/Identification/IdentifierRole</li>
+                  <li class="collection-item">The element Unit/Identifications/Identification/Identifiers/IdentifierRole has been moved out of the Identifiers container for the repeatable element Identifier and sits now at Unit/Identifications/Identification/IdentifierRole</li>
                   <li class="collection-item">Identifier is now a full contact instead of just a combination of PersonName and Organisation, which now allows for Addresses, EmailAddresses, TelephoneNumbers, Roles and ResourceURIs for the Identifier to be specified.</li>
                   <li class="collection-item">Identification/NonFlag has been renamed to Identification/NegativeIdentificationFlag</li>
-                  <li class="collection-item">TaxonIdentified/InformatlNameString and TaxonIdentified/FullScientificNameString have been renamed to TaxonIdentified/InformatlName and TaxonIdentified/FullScientificName respectively. </li>
+                  <li class="collection-item">TaxonIdentified/InformalNameString and TaxonIdentified/FullScientificNameString have been renamed to TaxonIdentified/InformalName and TaxonIdentified/FullScientificName respectively. </li>
                 </ul>
               </div>
 
@@ -165,7 +162,7 @@
                   <li class="collection-item">AreaDetail has been renamed to Detail</li>
                   <li class="collection-item">Gathering/Agents/GatheringAgent has been renamed to Gathering/GatheringAgents/GatheringAgent</li>
                   <li class="collection-item">The attribute primarycollector for GatheringAgent has been removed. To mark the primary collector, the gathering agent should have the attribute sequence (which already existed) with the value 1.</li>
-                  <li class="collection-item">The element Gathering/Agents/GatheringAgentsText was moved to Gathering/ GatheringAgentsText , to have container for the repeatable element GatheringAgent only . This element is to express the gathering agents if they are only available in an concatenated format and it is not possible to separate them into individual collectors. </li>
+                  <li class="collection-item">The element Gathering/Agents/GatheringAgentsText was moved to Gathering/GatheringAgentsText, to have a container for the repeatable element GatheringAgent only. This element is to express the gathering agents if they are only available in an concatenated format and it is not possible to separate them into individual collectors. </li>
                   <li class="collection-item">Gathering/Code has been renamed to Gathering/ID</li>
                   <li class="collection-item">Gathering/SiteImages/SiteImage has been renamed to Gathering/MultimediaObject/MultimediaObject</li>
                   <li class="collection-item">The element Gathering/NamedAreas/NamedArea/DataSource has now been replaced with a full reference element.</li>
@@ -181,7 +178,7 @@
                 <ul class="collection">
                   <li class="collection-item">Unit/SpecimenUnit/LoanRestrictions/BlockedAsReferenceOnly has been removed. Such cases should be documented using Unit/SpecimenUnit/LoanRestrictions/LoanConditions</li>
                   <li class="collection-item">Unit/SpecimenUnit/Preparations/Preparation/PreparationProcess has been renamed to Unit/SpecimenUnit/Preparations/Preparation/PreparationMethod</li>
-                  <li class="collection-item">Preparation now has additional elements for References, SampleDesignations,SampleSize and Sieving. </li>
+                  <li class="collection-item">Preparation now has additional elements for References, SampleDesignations, SampleSize and Sieving.</li>
                   <li class="collection-item">Unit/SpecimenUnit/Preparations/PreparationsText has been moved out of the container for the repeatable element to Unit/SpecimenUnit/PreparationsText</li>
                   <li class="collection-item">The element Unit/SpecimenUnit/History has been removed, all containing elements are now part of SpecimenUnit: Unit/SpecimenUnit/PreviousUnits and Unit/SpecimenUnit/PreviousUnitsText</li>
                   <li class="collection-item">Unit/SpecimenUnit now has an element SpecimenMeasurementsOrFacts</li>
@@ -244,7 +241,6 @@
               <ul class="section table-of-contents">
                 <li><a href="#simplification">Simplification</a></li>
                 <li><a href="#renamed">Elements Renamed</a></li>
-                <li><a href="#common">Commonly used Elements</a></li>
                 <li><a href="#spelling">Spelling</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#legal">LegalStatements</a></li>
@@ -282,11 +278,11 @@
         mounted: function() { 
           var options = {
             shouldSort: true,
-            threshold: 0.6,
+            threshold: 0.5,
             location: 0,
-            distance: 100,
-            maxPatternLength: 32,
-            minMatchCharLength: 3,
+            distance: 500,
+            maxPatternLength: 500,
+            minMatchCharLength: 1,
             keys: [
               "abcd2",
               "abcd3"

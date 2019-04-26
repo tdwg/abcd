@@ -76,6 +76,23 @@ nav.top-nav h1 {
   word-wrap: break-word;
 }
 
+#menu {
+  height: 100%;
+}
+
+
+#menu .imprint-link {
+  margin-top: 150px;
+  bottom: 0px;
+  text-align: center;
+  width:100%;
+}
+
+.imprint-link > a {
+  text-decoration: none;
+  color: rgba(178, 181, 186, 0.8);
+}
+
 .sidenav {
   box-shadow: none;
   border-right: 1px solid rgba(0,0,0,0.14);
@@ -106,6 +123,10 @@ nav.top-nav h1 {
 
 .sidenav li>a {
   color: #000;
+}
+
+.sidenav .sidenav-fixed {
+  height: 100%;
 }
 
 .sidenav ul.submenu li a {

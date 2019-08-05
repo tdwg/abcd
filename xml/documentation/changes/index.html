@@ -78,7 +78,7 @@
 
               <div id="legal" class="scrollsection">
                 <h3>LegalStatements (previously known as IPRStatements)</h3>
-                <p>One of the complaints about the previous ABCD version was the IPR (Intelectual Property Rights) block. It contained the subelements Acknowledgements, Citation, Copyrights, Disclaimers, IPRDeclarations, License and TermsOfUseStements. Even for experienced users of ABCD it was difficult to distinguish between these kinds of statements.</p>
+                <p>One of the complaints about the previous ABCD version was the IPR (Intellectual Property Rights) block. It contained the subelements Acknowledgements, Citation, Copyrights, Disclaimers, IPRDeclarations, License and TermsOfUseStements. Even for experienced users of ABCD it was difficult to distinguish between these kinds of statements.</p>
                 <ul class="collection"> 
                   <li class="collection-item">The entire block was therefore simplified, starting by renaming IPRStatements to LegalStatements.</li>
                   <li class="collection-item">The elements Acknowledgements (referencing other works the referenced element is based upon or that were helpful in its creation or processing) and License remain unchanged.</li>
@@ -104,7 +104,7 @@
                 <h3>MultimediaObject</h3>
                 <ul class="collection">
                   <li class="collection-item">ABCD version 2.1 had already introduced a number of new elements for the MultimediaObject. These have been further refined in version 3.0. The MultimediaObject now contains subelements for Audio, Image and Video for several specific information depending on the type of the media, as well as several other generic elements. It is now possible to note Taxa in the Background of an image and give references to the source of the image. </li>
-                  <li class="collection-item">The previous element ImageColourSpace has been simplified. Instad of a container with Profile_Ref and Profile_Name the color space can now be noted just as Image/ColorSpace</li>
+                  <li class="collection-item">The previous element ImageColourSpace has been simplified. Instead of a container with Profile_Ref and Profile_Name the color space can now be noted just as Image/ColorSpace</li>
                 </ul>
               </div>
 
@@ -164,7 +164,7 @@
                   <li class="collection-item">The attribute primarycollector for GatheringAgent has been removed. To mark the primary collector, the gathering agent should have the attribute sequence (which already existed) with the value 1.</li>
                   <li class="collection-item">The element Gathering/Agents/GatheringAgentsText was moved to Gathering/GatheringAgentsText, to have a container for the repeatable element GatheringAgent only. This element is to express the gathering agents if they are only available in an concatenated format and it is not possible to separate them into individual collectors. </li>
                   <li class="collection-item">Gathering/Code has been renamed to Gathering/ID</li>
-                  <li class="collection-item">Gathering/SiteImages/SiteImage has been renamed to Gathering/MultimediaObject/MultimediaObject</li>
+                  <li class="collection-item">Gathering/SiteImages/SiteImage has been renamed to Gathering/MultimediaObjects/MultimediaObject</li>
                   <li class="collection-item">The element Gathering/NamedAreas/NamedArea/DataSource has now been replaced with a full reference element.</li>
                   <li class="collection-item">The element Gathering/NearNamedPlaces/NamedPlaceRelation has now been renamed to Gathering/NamedPlaceRelations/NamedPlaceRelation</li>
                   <li class="collection-item">The element Gathering/SiteMeasurementsOrFacts/SiteMeasurementOrFact has been renamed Gathering/OtherMeasurementsOrFacts/OtherMeasurementOrFact to express that the more commonly used Altitude, Aspect, Depth and Height are also MeasurementsOrFacts</li>
@@ -230,7 +230,7 @@
                     <tr><td></td><td>ABCD 2.06</td><td>ABCD 3.0</td></tr>
                   </thead>    
                   <tbody>
-                    <tr v-for="mapping in filteredMappings"><td width="11%"><span class="new badge" v-bind:class="(mapping.status == 'added') ? 'green darken-3' : (mapping.status == 'removed') ? 'red darken-3' : (mapping.status == 'renamed') ? 'yellow darken-3' : 'grey'" v-bind:data-badge-caption="mapping.status"></span></td><td width="43.5%">{{ mapping.abcd2 }}</td><td width="43.5%">{{ mapping.abcd3 }}</td></tr>
+                    <tr v-for="mapping in filteredMappings"><td width="11%" style="min-width:80px;"><span class="new badge" v-bind:class="(mapping.status == 'added') ? 'green darken-3' : (mapping.status == 'removed') ? 'red darken-3' : (mapping.status == 'renamed') ? 'yellow darken-3' : 'grey'" v-bind:data-badge-caption="mapping.status"></span></td><td width="43.5%">{{ mapping.abcd2 }}</td><td width="43.5%">{{ mapping.abcd3 }}</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -285,7 +285,8 @@
             minMatchCharLength: 1,
             keys: [
               "abcd2",
-              "abcd3"
+              "abcd3",
+              "status"
             ]
           };
 

@@ -18,7 +18,7 @@ Vue.component("navigation", {
       <div id=\"menu\" class=\"sidenav sidenav-fixed show-on-large\">\
         <ul>\
           <li class=\"title\"><h3 class=\"center-align\">ABCD</h3></li>\
-          <li class=\"title\"><h5 class=\"center-align\">Access to Biological Collections Data</h5></li>\
+          <li class=\"title\"><h5 class=\"center-align\">Access to Biological Collection Data</h5></li>\
           <li class=\"divider\"></li>\
           <li class=\"bold menu-item sidenav-close\" v-bind:class=\"{ active: currentUrl=='/' }\"><a href=\"/\" class=\"waves-effect waves-green\">Home</a></li>\
           <li class=\"bold menu-item sidenav-close\" v-bind:class=\"{ active: currentUrl=='/3.0/' }\"><a href=\"/3.0\" class=\"waves-effect waves-green\">ABCD 3.0</a></li>\

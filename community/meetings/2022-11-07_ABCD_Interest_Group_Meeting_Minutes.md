@@ -97,7 +97,7 @@ Video of the recording: <https://www.youtube.com/watch?v=F0i6CeaMa_g>
 
         cp. <https://docs.google.com/spreadsheets/d/1xUUDNd6XdH0g4QlfOQ7K-BpFcUffAB4PSOfMXOuKB4I/edit?usp=sharing> ?
 
-    - Anton: It might be worth taking a look at the biosize data model, as many of the initial concepts from ABCD are stamming from there. 
+    - Anton: It might be worth taking a look at the [BioCISE data model](https://www.bgbm.org/biodivinf/docs/CollectionModel/), as many of the initial concepts from ABCD are stamming from there. 
 
 7. Review of current Github issues: <https://github.com/tdwg/abcd/issues> 
 

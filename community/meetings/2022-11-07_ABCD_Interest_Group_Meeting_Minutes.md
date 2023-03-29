@@ -2,8 +2,6 @@
 
 2022-11-07 15:00 UTC (During TDWG Working Sessions week)
 
-Short-Link to this document: <https://tinyurl.com/ABCD-IG2022> 
-
 Video of the recording: <https://www.youtube.com/watch?v=F0i6CeaMa_g> 
 
 

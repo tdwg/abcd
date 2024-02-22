@@ -1,6 +1,6 @@
-<table align="center">
+<table align="center" style="border-width:0">
     <tr>
-        <td align="center">![TDWG Logo](/community/media/tdwg_logo.png) </td>
+        <td align="center"><img src="/community/media/tdwg_logo.png" alt="TDWG Logo" /></td>
         <td align="center">Biodiversity Information Standards<br/>(TDWG)<br/>http://www.tdwg.org/</td>
     </tr>
 </table>

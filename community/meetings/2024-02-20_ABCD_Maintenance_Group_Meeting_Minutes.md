@@ -2,7 +2,7 @@
 
 2024-02-22 15:00 UTC (During TDWG Working Sessions week)
 
-Video of the recording: <TBD>
+Video of the recording: https://www.youtube.com/watch?v=MPLDT41pCKk
 
 
 ## Attendees 
@@ -76,7 +76,7 @@ Video of the recording: <TBD>
       - Unit/CultureCollectionUnit/Hazard
 		- New Definition: *The hazard level posed by this unit, i.e. the biosafety level required by the facility handling it and the reference or definition of the level.***
 
-        *Definitions for CultureCollectionUnit were based on term mappings done by colleagues from the DSMZ. A search for the terms from https://wfcc.info/ or https://www.mirri.org didn't find up any useful hits.*
+        *Definitions for CultureCollectionUnit were based on term mappings done by colleagues from the DSMZ. A search for the terms from https://wfcc.info/ or https://www.mirri.org didn't return any useful matches that could be used here.*
 
       - Unit/MycologicalUnit/MycologicalSexualStageazard
 		- New Definition: *The reproductive stage that the fungi specimen is in, such as "teleomorph", "anamorph" or  "holomorph".*

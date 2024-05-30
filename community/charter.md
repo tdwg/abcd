@@ -8,9 +8,6 @@
 
 # ABCD Maintenance Group Charter
 
-> [!NOTE]
-> This is the preliminary charter agreed upon by the ABCD Maintenance Group during their [February 2024 meeting](meetings/2024-02-20_ABCD_Maintenance_Group_Meeting_Minutes.md). It is still pending approval from the TDWG Executive Committee.
-
 ## **Convenor**
 
 David Fichtmueller
